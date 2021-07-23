@@ -8,6 +8,8 @@ import re
 app = Flask(__name__)
 
 LTRBXD_RSS = "https://letterboxd.com/dsmaugy/rss"
+LTRBXD_NS = {"letterboxd": "https://letterboxd.com"}
+
 
 def get_last_movie():
     # TODO do caching here
@@ -16,18 +18,16 @@ def get_last_movie():
     movies_root = ET.fromstring(movies.content)
 
     first_movie = movies_root[0].findall('item')[0]
-    movie_fulltitle = first_movie.find('title').text
-    splitter = re.search(", [0-9]*", movie_fulltitle).group()
-    movie_title = movie_fulltitle[0:movie_fulltitle.index(splitter)]
 
-    movie_year = splitter.strip(', ')
-
-    movie_stars = movie_fulltitle[len(movie_title + splitter):].strip(' -')
-    movie_rating = len(movie_stars) - (0.5 * (movie_stars[-1] == '½'))
-
+    movie_title = first_movie.find("letterboxd:filmTitle", LTRBXD_NS).text
+    movie_year = first_movie.find("letterboxd:filmYear", LTRBXD_NS).text
+    movie_rating = first_movie.find("letterboxd:memberRating", LTRBXD_NS).text
     movie_portrait = re.search("https://.*\.jpg", first_movie.find("description").text).group()
+    movie_verb = "watched" if first_movie.find("letterboxd:rewatch", LTRBXD_NS).text == 'No' else "rewatched"
 
-    return {'title': movie_title, 'year': movie_year, 'rating': movie_rating, 'portrait': movie_portrait}
+    latest_movie = {'title': movie_title, 'year': movie_year, 'rating': movie_rating, 'portrait': movie_portrait, 'verb': movie_verb}
+
+    return latest_movie
 
 @app.route('/movies')
 def testing():
