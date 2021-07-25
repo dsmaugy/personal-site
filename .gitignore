@@ -2,3 +2,6 @@ ps-venv/
 __pycache__/
 testing/
 .vscode/
+.env
+
+.cache
