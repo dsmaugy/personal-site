@@ -1,20 +1,18 @@
 from flask import Flask, request, jsonify, render_template
-from spotipy.oauth2 import SpotifyOAuth
+from flask_caching import Cache
+from spotifywrap import SpotifyWrap
 
 import defusedxml.ElementTree as ET
 import requests
 import re
-import os
-import spotipy
 import random
 
 
 app = Flask(__name__)
+spotify = SpotifyWrap()
 
 LTRBXD_RSS = "https://letterboxd.com/dsmaugy/rss"
 LTRBXD_NS = {"letterboxd": "https://letterboxd.com"}
-
-SPOTIFY_SCOPE = "user-top-read"
 
 # TODO add logic if query fails. Define latest_movie with null values and overwrite them.
 def get_last_movie():
@@ -41,8 +39,8 @@ def get_top_song():
 
     # token = spotipy.util.prompt_for_user_token(os.environ['SPOTIFY_USERNAME'], SPOTIFY_SCOPE)
     # spotify = spotipy.Spotify(auth=token)
-    spotify = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=SPOTIFY_SCOPE))
-    top_tracks = spotify.current_user_top_tracks(limit=5, time_range="short_term")
+    # spotify = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=SPOTIFY_SCOPE))
+    top_tracks = spotify.get_spotify().current_user_top_tracks(limit=5, time_range="short_term")
 
     selector = random.randint(0, len(top_tracks['items'])-1)
     
@@ -54,7 +52,7 @@ def get_top_song():
 
     
 
-@app.route('/movies')
+@app.route('/movie')
 def last_movie_view():
     return get_last_movie()
 
@@ -68,12 +66,13 @@ def html_test():
 
 @app.route('/spotify_callback')
 def spotify_callback():
+    print("hello1")
     return "Ok"
-
 
 @app.route('/')
 def index():
     return "<h1>Under Construction!</h1>"
+
 
 if __name__ == '__main__':
     app.run("0.0.0.0", port=5000)
