@@ -9,6 +9,10 @@ import random
 
 
 app = Flask(__name__)
+
+# for testing, remove later TODO
+# app.config['TEMPLATES_AUTO_RELOAD'] = True
+
 spotify = SpotifyWrap()
 
 LTRBXD_RSS = "https://letterboxd.com/dsmaugy/rss"
@@ -29,7 +33,7 @@ def get_last_movie():
     movie_portrait = re.search("https://.*\.jpg", first_movie.find("description").text).group()
     movie_verb = "watched" if first_movie.find("letterboxd:rewatch", LTRBXD_NS).text == 'No' else "rewatched"
 
-    latest_movie = {'title': movie_title, 'year': movie_year, 'rating': movie_rating, 'portrait': movie_portrait, 'verb': movie_verb}
+    latest_movie = {'title': movie_title, 'year': movie_year, 'rating': movie_rating, 'preview_image': movie_portrait, 'verb': movie_verb}
 
     return latest_movie
 
@@ -62,7 +66,10 @@ def last_songs_view():
 
 @app.route('/html')
 def html_test():
-    return render_template("index.html")
+    movie = get_last_movie()
+    song = get_top_song()
+
+    return render_template("index.html", movie_dict=movie, song_dict=song)
 
 @app.route('/spotify_callback')
 def spotify_callback():

@@ -8,19 +8,49 @@
 <body>
     <img src="{{ movie_avatar }}">
 
-    <div class="leftbar">
-        <p>this game sucks</p>
-        <p>this is why i hate apex legends</p>
-    </div>
+    <div class="container">
+        <div class="header-header">
+            <div class="name-header">
+                <h1>Darwin Do</h1>
+                <h2>Computer Science Student at Yale University</h2>
 
-    <div class="main">
-        <p>this is why lebron is the best basketballplayer of all time</p>
-        <p>it's true</p>
-    </div>
+            </div>
 
-    <div class="rightbar">
-        <p>full stop</p>
-        <p>sploingus</p>
+            <div class="image-header">
+                <img src="{{ url_for('static', filename='images/darwin.jpg') }}">
+            </div>
+        </div>
+
+        <div class="body">
+            <div class="links">
+                <a>Yep</a>
+            </div>
+            <p>Hello! I'm a sophomore studying computer science at Yale University (Class of '23+1) with a prospective certificate in Statistics & Data Science. I enjoy playing games with friends, creating Spotify playlists, and all things tech.
+            </p>
+
+            <p>Recently, I've been listening to a lot of:</p>
+            <div class="song-bar">
+                <img src="{{ song_dict['preview_image'] }}">
+
+                <div class="song-bar-desc">
+                    <h1>{{ song_dict['name'] }}</h1>
+                    <p>By</p>
+                    <h2>{{ song_dict['artist'] }}</h2>
+                </div>
+
+            </div>
+
+            <p style="text-align: right;">And the last movie I saw was:</p>
+            <div class="movie-bar">
+                <img src="{{ movie_dict['preview_image'] }}">
+
+                <div class="movie-bar-desc">
+                    <h1>{{ movie_dict['title'] }} ({{ movie_dict['year'] }})</h1>
+                    <p>I rated it {{ movie_dict['rating'] }}/5</p>
+                </div>
+
+            </div>
+        </div>
     </div>
 
 </body>
