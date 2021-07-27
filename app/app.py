@@ -31,9 +31,10 @@ def get_last_movie():
     movie_year = first_movie.find("letterboxd:filmYear", LTRBXD_NS).text
     movie_rating = first_movie.find("letterboxd:memberRating", LTRBXD_NS).text
     movie_portrait = re.search("https://.*\.jpg", first_movie.find("description").text).group()
+    movie_link = first_movie.find("link").text
     movie_verb = "watched" if first_movie.find("letterboxd:rewatch", LTRBXD_NS).text == 'No' else "rewatched"
 
-    latest_movie = {'title': movie_title, 'year': movie_year, 'rating': movie_rating, 'preview_image': movie_portrait, 'verb': movie_verb}
+    latest_movie = {'title': movie_title, 'year': movie_year, 'rating': movie_rating, 'preview_image': movie_portrait, 'verb': movie_verb, 'link': movie_link}
 
     return latest_movie
 
