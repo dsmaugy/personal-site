@@ -40,20 +40,25 @@ def get_last_movie():
 
 def get_top_song():
     # TODO do caching here
-    latest_song = {'name': 'N/A', 'artist': 'N/A', 'preview_image': 'N/A'}
+    top_tracks_list = []
+    print("Token status before context: ", spotify.is_expired())
+    spotify_ctx = spotify.get_spotify()
+    print("Token status after context: ", spotify.is_expired())
+    top_tracks = spotify_ctx.current_user_top_tracks(limit=5, time_range="short_term")
 
-    # token = spotipy.util.prompt_for_user_token(os.environ['SPOTIFY_USERNAME'], SPOTIFY_SCOPE)
-    # spotify = spotipy.Spotify(auth=token)
-    # spotify = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=SPOTIFY_SCOPE))
-    top_tracks = spotify.get_spotify().current_user_top_tracks(limit=5, time_range="short_term")
+    for i in range(0, 5):
+        latest_song = {'name': 'N/A', 'artist': 'N/A', 'preview_image': 'N/A'}
+        latest_song['name'] = top_tracks['items'][i]['name']
+        latest_song['artist'] = top_tracks['items'][i]['artists'][0]['name']
+        latest_song['preview_image'] = top_tracks['items'][i]['album']['images'][1]['url']
 
-    selector = random.randint(0, len(top_tracks['items'])-1)
+        top_tracks_list.append(latest_song)
     
-    latest_song['name'] = top_tracks['items'][selector]['name']  
-    latest_song['artist'] = top_tracks['items'][selector]['artists'][0]['name'] # TODO add support for multiple artists?
-    latest_song['preview_image'] = top_tracks['items'][selector]['album']['images'][1]['url']
+    # latest_song['name'] = top_tracks['items'][selector]['name']
+    # latest_song['artist'] = top_tracks['items'][selector]['artists'][0]['name'] # TODO add support for multiple artists?
+    # latest_song['preview_image'] = top_tracks['items'][selector]['album']['images'][1]['url']
 
-    return latest_song
+    return top_tracks_list
 
     
 
@@ -67,10 +72,10 @@ def last_songs_view():
 
 @app.route('/html')
 def html_test():
-    movie = get_last_movie()
-    song = get_top_song()
+    movies = get_last_movie()
+    songs = get_top_song()
 
-    return render_template("index.html", movie_dict=movie, song_dict=song)
+    return render_template("index.html", movie_dict=movies, songs_dict=songs)
 
 @app.route('/spotify_callback')
 def spotify_callback():
