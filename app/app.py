@@ -24,33 +24,38 @@ def get_last_movie():
     movies = requests.get(LTRBXD_RSS)
 
     movies_root = ET.fromstring(movies.content)
+    movies_list = movies_root[0].findall('item')
+    latest_movies = []
 
-    first_movie = movies_root[0].findall('item')[0]
+    for i in range(0, 5):
+        latest_movie = {'name': 'NA', 'year': 'NA', 'rating': 'NA', 'preview_image': 'NA', 'verb': 'NA', 'link': 'NA'}
 
-    movie_title = first_movie.find("letterboxd:filmTitle", LTRBXD_NS).text
-    movie_year = first_movie.find("letterboxd:filmYear", LTRBXD_NS).text
-    movie_rating = first_movie.find("letterboxd:memberRating", LTRBXD_NS).text
-    movie_portrait = re.search("https://.*\.jpg", first_movie.find("description").text).group()
-    movie_link = first_movie.find("link").text
-    movie_verb = "watched" if first_movie.find("letterboxd:rewatch", LTRBXD_NS).text == 'No' else "rewatched"
+        latest_movie['name'] = movies_list[i].find("letterboxd:filmTitle", LTRBXD_NS).text
+        latest_movie['year'] = movies_list[i].find("letterboxd:filmYear", LTRBXD_NS).text
+        latest_movie['rating'] = movies_list[i].find("letterboxd:memberRating", LTRBXD_NS).text
+        latest_movie['preview_image'] = re.search("https://.*\.jpg", movies_list[i].find("description").text).group()
+        latest_movie['link'] = movies_list[i].find("link").text
+        latest_movie['verb'] = "watched" if movies_list[i].find("letterboxd:rewatch", LTRBXD_NS).text == 'No' else "rewatched"
 
-    latest_movie = {'title': movie_title, 'year': movie_year, 'rating': movie_rating, 'preview_image': movie_portrait, 'verb': movie_verb, 'link': movie_link}
+        latest_movies.append(latest_movie)
 
-    return latest_movie
+    return latest_movies
 
 def get_top_song():
     # TODO do caching here
     top_tracks_list = []
-    print("Token status before context: ", spotify.is_expired())
+    
     spotify_ctx = spotify.get_spotify()
-    print("Token status after context: ", spotify.is_expired())
     top_tracks = spotify_ctx.current_user_top_tracks(limit=5, time_range="short_term")
 
     for i in range(0, 5):
-        latest_song = {'name': 'N/A', 'artist': 'N/A', 'preview_image': 'N/A'}
+        latest_song = {'name': 'N/A', 'artist': 'N/A', 'preview_image': 'N/A', 'preview_sound': 'N/A'}
         latest_song['name'] = top_tracks['items'][i]['name']
         latest_song['artist'] = top_tracks['items'][i]['artists'][0]['name']
         latest_song['preview_image'] = top_tracks['items'][i]['album']['images'][1]['url']
+        latest_song['preview_sound'] = top_tracks['items'][i]['preview_url']
+
+        print(top_tracks['items'][i])
 
         top_tracks_list.append(latest_song)
     
@@ -75,7 +80,7 @@ def html_test():
     movies = get_last_movie()
     songs = get_top_song()
 
-    return render_template("index.html", movie_dict=movies, songs_dict=songs)
+    return render_template("index.html", movies_dict=movies, songs_dict=songs)
 
 @app.route('/spotify_callback')
 def spotify_callback():

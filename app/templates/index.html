@@ -3,7 +3,10 @@
 <head>
     <title>Darwin Do</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/sound.js') }}"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 
 
@@ -25,6 +28,7 @@
         </div>
 
         <div class="body">
+
             <div class="links" class="container">
                 <div class="row">
                     <div class="col">
@@ -56,8 +60,21 @@
                 </div> -->
                 <div class="row">
                     {% for item in songs_dict %}
-                        <div class="col">
-                            <img data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ item['name'] }} by {{ item['artist'] }}" src="{{ item['preview_image'] }}">
+                        <div class="col d-flex justify-content-center">
+                            <div>
+                                <button class="btn btn-default" onclick="playAudio('{{ item.preview_sound }}')">
+                                    
+                                    <img data-bs-toggle="tooltip" data-bs-placement="bottom" 
+                                    title="{{ item['name'] }} by {{ item['artist'] }}" 
+                                    src="{{ item['preview_image'] }}">
+                                </button>
+
+
+                            </div>
+
+
+   
+
                         </div>
                     {% endfor %}
                 </div>
@@ -69,13 +86,23 @@
 
 
             <div class="movie-bar">
-                <p>And I just recently {{ movie_dict['verb'] }}:</p>
-                <img src="{{ movie_dict['preview_image'] }}">
-
-                <div class="movie-bar-desc">
-                    <h1>{{ movie_dict['title'] }} ({{ movie_dict['year'] }})</h1>
-                    <a href="{{ movie_dict['link'] }}">I rated it {{ movie_dict['rating'] }}/5</a>
+                <p>And I've recently seen:</p>
+                <!-- <img src="movie_dict['preview_image']"> -->
+                <div class="row">
+                    {% for item in movies_dict %}
+                        <div class="col d-flex justify-content-center">
+                            <a href="{{ item['link'] }}" target="_blank">
+                                <img data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                                title="{{ item['name'] }} ({{ item['year'] }}) <br> Rating: {{ item['rating'] }}/5" src="{{ item['preview_image'] }}">
+                            </a>
+                        </div>
+                    {% endfor %}
                 </div>
+
+                <!-- <div class="movie-bar-desc"> -->
+                    <!-- <h1>movie_dict['title'] ( movie_dict['year'] )</h1> -->
+                    <!-- <a href="movie_dict['link'] ">I rated it  movie_dict['rating'] /5</a> -->
+                <!-- </div> -->
 
             </div>
 
