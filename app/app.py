@@ -44,7 +44,7 @@ def get_last_movie():
 def get_top_song():
     # TODO do caching here
     top_tracks_list = []
-    
+
     spotify_ctx = spotify.get_spotify()
     top_tracks = spotify_ctx.current_user_top_tracks(limit=5, time_range="short_term")
 
@@ -55,7 +55,7 @@ def get_top_song():
         latest_song['preview_image'] = top_tracks['items'][i]['album']['images'][1]['url']
         latest_song['preview_sound'] = top_tracks['items'][i]['preview_url']
 
-        print(top_tracks['items'][i])
+        # print(top_tracks['items'][i])
 
         top_tracks_list.append(latest_song)
     
