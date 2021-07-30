@@ -54,11 +54,7 @@
             
             <div class="song-bar">
                 <p>Recently, I've been listening to a lot of:</p>
-                <!-- <div class="song-bar-desc">
-                    <h1>song_dict['name']</h1>
-                    <p>by</p>
-                    <h2>song_dict['artist']</h2>
-                </div> -->
+
                 <div class="row">
                     {% for item in songs_dict %}
                         <div class="col d-flex justify-content-center">
@@ -69,26 +65,16 @@
                                     title="{{ item['name'] }} by {{ item['artist'] }}" 
                                     src="{{ item['preview_image'] }}">
                                 </button>
-
-
                             </div>
-
-
-   
-
                         </div>
                     {% endfor %}
                 </div>
-
-                <!-- <img src="song_dict['preview_image']"> -->
-
             </div>
             
 
 
             <div class="movie-bar">
                 <p>And I've recently seen:</p>
-                <!-- <img src="movie_dict['preview_image']"> -->
                 <div class="row">
                     {% for item in movies_dict %}
                         <div class="col d-flex justify-content-center">
@@ -99,12 +85,6 @@
                         </div>
                     {% endfor %}
                 </div>
-
-                <!-- <div class="movie-bar-desc"> -->
-                    <!-- <h1>movie_dict['title'] ( movie_dict['year'] )</h1> -->
-                    <!-- <a href="movie_dict['link'] ">I rated it  movie_dict['rating'] /5</a> -->
-                <!-- </div> -->
-
             </div>
 
         <script>
