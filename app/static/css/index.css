@@ -53,7 +53,7 @@ a:visited {
 
 .image-header img {
     border-radius: 50%;
-    height: 30%;
+    height: 200px;
 }
 
 .body p {
@@ -77,7 +77,7 @@ a:visited {
 
 .song-bar {
     width: 100%;
-    overflow: auto;
+    /* overflow: auto; */
     text-align: center;
     margin-top: 50px;
 }
