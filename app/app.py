@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, render_template, redirect
 from flask_caching import Cache
 from spotifywrap import SpotifyWrap
 
@@ -6,6 +6,7 @@ import defusedxml.ElementTree as ET
 import requests
 import re
 import random
+import os
 
 
 app = Flask(__name__)
@@ -70,6 +71,15 @@ def index():
     songs = get_top_songs()
 
     return render_template("index.html", movies_dict=movies, songs_dict=songs)
+
+@app.before_request
+def before_request():
+    if os.environ['FLASK_ENV'] == 'production':
+        if not request.is_secure:
+            url = request.url.replace('http://', 'https://', 1)
+            code = 301
+            return redirect(url, code=code)
+    
 
 if __name__ == '__main__':
     app.run("0.0.0.0", port=5000)
