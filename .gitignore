@@ -1,7 +1,9 @@
 ps-venv/
 __pycache__/
+.flask_cache/
 testing/
 .vscode/
 .env
 
 .cache
+

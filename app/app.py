@@ -10,19 +10,24 @@ import random
 
 app = Flask(__name__)
 
-# for testing, remove later TODO
-# app.config['TEMPLATES_AUTO_RELOAD'] = True
+CACHE_CONFIG = {
+    "CACHE_TYPE": "FileSystemCache",
+    "CACHE_DIR": ".flask_cache/",
+    "CACHE_DEFAULT_TIMEOUT": 60
+}
 
 spotify = SpotifyWrap()
+cache = Cache(config=CACHE_CONFIG)
+
+cache.init_app(app)
 
 LTRBXD_RSS = "https://letterboxd.com/dsmaugy/rss"
 LTRBXD_NS = {"letterboxd": "https://letterboxd.com"}
 
-# TODO add logic if query fails. Define latest_movie with null values and overwrite them.
-def get_last_movie():
-    # TODO do caching here
+@cache.cached(key_prefix='last_movies')
+def get_last_movies():
     movies = requests.get(LTRBXD_RSS)
-
+    
     movies_root = ET.fromstring(movies.content)
     movies_list = movies_root[0].findall('item')
     latest_movies = []
@@ -41,8 +46,8 @@ def get_last_movie():
 
     return latest_movies
 
-def get_top_song():
-    # TODO do caching here
+@cache.cached(key_prefix='last_songs')
+def get_top_songs():
     top_tracks_list = []
 
     spotify_ctx = spotify.get_spotify()
@@ -55,42 +60,16 @@ def get_top_song():
         latest_song['preview_image'] = top_tracks['items'][i]['album']['images'][1]['url']
         latest_song['preview_sound'] = top_tracks['items'][i]['preview_url']
 
-        # print(top_tracks['items'][i])
-
         top_tracks_list.append(latest_song)
     
-    # latest_song['name'] = top_tracks['items'][selector]['name']
-    # latest_song['artist'] = top_tracks['items'][selector]['artists'][0]['name'] # TODO add support for multiple artists?
-    # latest_song['preview_image'] = top_tracks['items'][selector]['album']['images'][1]['url']
-
     return top_tracks_list
-
-    
-
-@app.route('/movie')
-def last_movie_view():
-    return get_last_movie()
-
-@app.route('/song')
-def last_songs_view():
-    return get_top_song()
-
-@app.route('/html')
-def html_test():
-    movies = get_last_movie()
-    songs = get_top_song()
-
-    return render_template("index.html", movies_dict=movies, songs_dict=songs)
-
-@app.route('/spotify_callback')
-def spotify_callback():
-    print("hello1")
-    return "Ok"
 
 @app.route('/')
 def index():
-    return "<h1>Under Construction!</h1>"
+    movies = get_last_movies()
+    songs = get_top_songs()
 
+    return render_template("index.html", movies_dict=movies, songs_dict=songs)
 
 if __name__ == '__main__':
     app.run("0.0.0.0", port=5000)
