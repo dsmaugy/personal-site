@@ -11,9 +11,6 @@ class SpotifyWrap():
         self.auth = SpotifyOAuth(scope=SpotifyWrap.SPOTIFY_SCOPE)
         self.auth_token_info = None
 
-    # def is_expired(self):
-    #     return self.auth.is_token_expired(self.auth.get_access_token())
-
     def get_spotify(self):
         if self.auth:
             if not self.auth_token_info:
