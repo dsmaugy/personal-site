@@ -1,5 +1,6 @@
 html {
     background-color: #fffaed;
+    /* height: 100%; */
 }
 
 body {
@@ -84,6 +85,10 @@ a:visited {
     display: inline;
     float: left;
     border-radius: 50%;
+}
+
+.tooltip.top {
+    bottom: 50em;
 }
 
 .song-bar img:hover {
