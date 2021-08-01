@@ -83,25 +83,40 @@ a:visited {
     height: 90px;
     display: inline;
     float: left;
-
     border-radius: 50%;
 }
+
+.song-bar img:hover {
+    filter: brightness(50%)
+}
+
+.spotify-image-overlay {
+    display: inline-block;
+    position: relative;
+}
+
+.play-toggle {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    padding: 33px;
+    font-size: 1.5em;
+    opacity: 0;
+
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #1ED05E;
+}
+
+.play-toggle:hover {
+    opacity: 1;
+}
+
 
 .img-container {
     position: relative;
     display: block;
-}
-
-.play-overlay {
-    color: rgb(159, 22, 22);
-    font-size: 10px;
-    /* position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-top: 25%;
-    margin-left: 25%; */
-    transform: translate(0, 180%);
-    z-index: 1000;
 }
   
 .movie-bar img {

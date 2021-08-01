@@ -59,11 +59,14 @@
                     {% for item in songs_dict %}
                         <div class="col d-flex justify-content-center">
                             <div>
-                                <button class="btn btn-default" onclick="playAudio('{{ item.preview_sound }}')">
-                                    
-                                    <img data-bs-toggle="tooltip" data-bs-placement="bottom" 
-                                    title="{{ item['name'] }} by {{ item['artist'] }}" 
-                                    src="{{ item['preview_image'] }}">
+                                <button class="btn btn-default" onclick="artistButtonPress('{{ item.preview_sound }}', {{ loop.index0 }})">
+                                    <div class="spotify-image-overlay">
+                                        <i class="bi bi-play-circle-fill play-toggle" id="play-toggle-{{ loop.index0 }}"></i>
+                                        <img data-bs-toggle="tooltip" data-bs-placement="bottom" 
+                                        title="{{ item['name'] }} by {{ item['artist'] }}" 
+                                        src="{{ item['preview_image'] }}">
+                                    </div>
+
                                 </button>
                             </div>
                         </div>

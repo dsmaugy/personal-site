@@ -1,28 +1,40 @@
-var soundHash = {};
-var nowPlaying;
+const PLAY_ICON = "bi bi-play-circle-fill play-toggle"
+const PAUSE_ICON = "bi bi-pause-circle-fill play-toggle"
 
-function playAudio(source) {
+var soundHash = [];
+var nowPlayingID;
+
+function artistButtonPress(source, songID) {
     let sound;
 
-    if (source in soundHash) {
-        sound = soundHash[source]
+    if (soundHash[songID] != null) {
+        sound = soundHash[songID]
     } else {
         sound = new Audio(source)
-        soundHash[source] = sound
+        soundHash[songID] = sound
+        sound.onended = songEnded
     }
 
     let pauseCurrent = false
-    if (nowPlaying) {
-        soundHash[nowPlaying].pause()
+    if (nowPlayingID != null) {
+        soundHash[nowPlayingID].pause()
+        document.getElementById("play-toggle-" + nowPlayingID).className = PLAY_ICON
         pauseCurrent = true
     }
 
-    if (nowPlaying != source) {
+    if (nowPlayingID != songID) {
         sound.currentTime = 0
-        nowPlaying = source
+        nowPlayingID = songID
+
+        document.getElementById("play-toggle-" + nowPlayingID).className = PAUSE_ICON
         sound.play()
     } else if (pauseCurrent) {
-        nowPlaying = null
+        nowPlayingID = null
     }
 
+}
+
+function songEnded() {
+    document.getElementById("play-toggle-" + nowPlayingID).className = PLAY_ICON
+    nowPlayingID = null
 }
