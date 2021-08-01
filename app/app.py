@@ -5,7 +5,6 @@ from spotifywrap import SpotifyWrap
 import defusedxml.ElementTree as ET
 import requests
 import re
-import random
 import os
 
 
@@ -70,7 +69,7 @@ def index():
     movies = get_last_movies()
     songs = get_top_songs()
 
-    return render_template("index.html", movies_dict=movies, songs_dict=songs)
+    return render_template("index.html.j2", movies_dict=movies, songs_dict=songs)
 
 @app.before_request
 def before_request():
