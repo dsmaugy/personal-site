@@ -11,6 +11,9 @@ class SpotifyWrap():
         self.auth = SpotifyOAuth(scope=SpotifyWrap.SPOTIFY_SCOPE)
         self.auth_token_info = None
 
+    def get_recent_top_tracks(self, limit=25, time_range="short_term"):
+        return self.get_spotify().current_user_top_tracks(limit=limit, time_range=time_range)
+
     def get_spotify(self):
         if self.auth:
             if not self.auth_token_info:

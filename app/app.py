@@ -1,6 +1,8 @@
 from flask import Flask, request, render_template, redirect
 from flask_caching import Cache
 from spotifywrap import SpotifyWrap
+from logging.config import dictConfig
+
 
 import defusedxml.ElementTree as ET
 import requests
@@ -8,16 +10,34 @@ import re
 import os
 
 
+dictConfig({
+    'version': 1,
+    'formatters': {'default': {
+        'format': '[%(asctime)s] [%(levelname)s] [%(funcName)s] %(message)s',
+    }},
+    'handlers': {'wsgi': {
+        'class': 'logging.StreamHandler',
+        'stream': 'ext://flask.logging.wsgi_errors_stream',
+        'formatter': 'default'
+    }},
+    'root': {
+        'level': 'INFO',
+        'handlers': ['wsgi']
+    }
+})
+
+
 app = Flask(__name__)
 
 CACHE_CONFIG = {
     "CACHE_TYPE": "FileSystemCache",
-    "CACHE_DIR": ".flask_cache/",
+    "CACHE_DIR": ".flask_cache/app",
     "CACHE_DEFAULT_TIMEOUT": 60
 }
 
-spotify = SpotifyWrap()
 cache = Cache(config=CACHE_CONFIG)
+spotify = SpotifyWrap()
+
 
 cache.init_app(app)
 
@@ -46,12 +66,17 @@ def get_last_movies():
 
     return latest_movies
 
-@cache.cached(key_prefix='last_songs')
+# @cache.cached(key_prefix='last_songs')
 def get_top_songs():
     top_tracks_list = []
 
-    spotify_ctx = spotify.get_spotify()
-    top_tracks = spotify_ctx.current_user_top_tracks(limit=5, time_range="short_term")
+    top_tracks = cache.get("toptracks")
+    if not top_tracks:
+        top_tracks = spotify.get_recent_top_tracks()
+        cache.set("toptracks", top_tracks)
+        app.logger.info("Spotify results cached")
+    else:
+        app.logger.info("Spotify results read from cache")
 
     for i in range(0, 5):
         latest_song = {'name': 'N/A', 'artist': 'N/A', 'preview_image': 'N/A', 'preview_sound': 'N/A'}
