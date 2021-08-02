@@ -1,5 +1,6 @@
 html {
     background-color: #fffaed;
+    /* Tooltip top position is glitchy */
     /* height: 100%; */
 }
 
@@ -8,7 +9,7 @@ body {
 }
 
 a:link {
-    color: #5FE88D;
+    color: #4392F7;
 }
 
 a:visited {
@@ -29,30 +30,34 @@ a:visited {
 }
 
 .name-header h1 {
-    font-size: 3em;
+    font-size: 2.5em;
     font-weight: 600;
     font-family: 'Noto Sans JP', sans-serif;
 }
 
 .name-header h2 {
     font-weight: 200;
-    font-size: 2.5em;
+    font-size: 2em;
     font-family: 'Noto Sans JP', sans-serif;
 }
 
 .image-header img {
     border-radius: 50%;
-    height: 200px;
+    height: 170px;
 }
 
 .body p {
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: 200;
     font-family: 'Noto Sans JP', sans-serif;
 }
 
 .body .links {
     margin: 30px auto;
+    font-size: 0.7em;
+    /* font-style: italic; */
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 300;
 }
 
 .body .links .row .col {
