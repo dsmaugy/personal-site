@@ -39,7 +39,7 @@ CACHE_CONFIG = {
     "CACHE_DEFAULT_TIMEOUT": 60,
     'CACHE_OPTIONS': { 'behaviors': {
                         # Faster IO
-                        'tcp_nodelay': True,
+                        'tcp_nodelay': False,
                         # Keep connection alive
                         'tcp_keepalive': True,
                         # Timeout for set/get requests
@@ -47,7 +47,8 @@ CACHE_CONFIG = {
                         'send_timeout': 750 * 1000, # us
                         'receive_timeout': 750 * 1000, # us
                         '_poll_timeout': 2000, # ms
-        }}
+                        # No failover
+                        'ketama': False}}
 }
 
 cache = Cache(config=CACHE_CONFIG)
