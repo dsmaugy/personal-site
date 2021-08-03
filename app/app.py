@@ -35,6 +35,7 @@ CACHE_CONFIG = {
     "CACHE_MEMCACHED_SERVERS": [os.environ['MEMCACHIER_SERVERS']],
     "CACHE_MEMCACHED_USERNAME": os.environ['MEMCACHIER_USERNAME'],
     "CACHE_MEMCACHED_PASSWORD": os.environ['MEMCACHIER_PASSWORD'],
+    "CACHE_KEY_PREFIX": os.environ['MEMCACHIER_PREFIX'],
     "CACHE_DEFAULT_TIMEOUT": 60,
     'CACHE_OPTIONS': { 'behaviors': {
                         # Faster IO
