@@ -47,11 +47,7 @@ CACHE_CONFIG = {
                         'send_timeout': 750 * 1000, # us
                         'receive_timeout': 750 * 1000, # us
                         '_poll_timeout': 2000, # ms
-                        # Better failover
-                        'ketama': True,
-                        'remove_failed': 1,
-                        'retry_timeout': 2,
-                        'dead_timeout': 30}}
+        }}
 }
 
 cache = Cache(config=CACHE_CONFIG)
