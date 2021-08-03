@@ -31,8 +31,10 @@ dictConfig({
 app = Flask(__name__)
 
 CACHE_CONFIG = {
-    "CACHE_TYPE": "FileSystemCache",
-    "CACHE_DIR": ".flask_cache/app",
+    "CACHE_TYPE": "SASLMemcachedCache",
+    "CACHE_MEMCACHED_SERVERS": [os.environ['MEMCACHIER_SERVERS']],
+    "CACHE_MEMCACHED_USERNAME": os.environ['MEMCACHIER_USERNAME'],
+    "CACHE_MEMCACHED_PASSWORD": os.environ['MEMCACHIER_PASSWORD'],
     "CACHE_DEFAULT_TIMEOUT": 60
 }
 
@@ -67,7 +69,6 @@ def get_last_movies():
 
     return latest_movies
 
-# @cache.cached(key_prefix='last_songs')
 def get_top_songs():
     top_tracks_list = []
 
