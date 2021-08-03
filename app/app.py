@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, redirect
 from flask_caching import Cache
 from spotifywrap import SpotifyWrap
 from logging.config import dictConfig
+from random import sample
 
 
 import defusedxml.ElementTree as ET
@@ -78,7 +79,7 @@ def get_top_songs():
     else:
         app.logger.info("Spotify results read from cache")
 
-    for i in range(0, 5):
+    for i in sample(range(0, 25), 5):
         latest_song = {'name': 'N/A', 'artist': 'N/A', 'preview_image': 'N/A', 'preview_sound': 'N/A'}
         latest_song['name'] = top_tracks['items'][i]['name']
         latest_song['artist'] = top_tracks['items'][i]['artists'][0]['name']
