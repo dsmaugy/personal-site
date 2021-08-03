@@ -35,7 +35,22 @@ CACHE_CONFIG = {
     "CACHE_MEMCACHED_SERVERS": [os.environ['MEMCACHIER_SERVERS']],
     "CACHE_MEMCACHED_USERNAME": os.environ['MEMCACHIER_USERNAME'],
     "CACHE_MEMCACHED_PASSWORD": os.environ['MEMCACHIER_PASSWORD'],
-    "CACHE_DEFAULT_TIMEOUT": 60
+    "CACHE_DEFAULT_TIMEOUT": 60,
+    'CACHE_OPTIONS': { 'behaviors': {
+                        # Faster IO
+                        'tcp_nodelay': True,
+                        # Keep connection alive
+                        'tcp_keepalive': True,
+                        # Timeout for set/get requests
+                        'connect_timeout': 2000, # ms
+                        'send_timeout': 750 * 1000, # us
+                        'receive_timeout': 750 * 1000, # us
+                        '_poll_timeout': 2000, # ms
+                        # Better failover
+                        'ketama': True,
+                        'remove_failed': 1,
+                        'retry_timeout': 2,
+                        'dead_timeout': 30}}
 }
 
 cache = Cache(config=CACHE_CONFIG)
