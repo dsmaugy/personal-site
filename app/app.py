@@ -88,7 +88,7 @@ def get_top_songs():
     top_tracks = cache.get("toptracks")
     if not top_tracks:
         top_tracks = spotify.get_recent_top_tracks()
-        cache.set("toptracks", top_tracks)
+        cache.set("toptracks", top_tracks, timeout=3600) # cache timeout can be SUUUPER long
         app.logger.info("Spotify results cached")
     else:
         app.logger.info("Spotify results read from cache")

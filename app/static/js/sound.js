@@ -11,6 +11,7 @@ function artistButtonPress(source, songID) {
         sound = soundHash[songID]
     } else {
         sound = new Audio(source)
+        sound.volume = 0.15
         soundHash[songID] = sound
         sound.onended = songEnded
     }

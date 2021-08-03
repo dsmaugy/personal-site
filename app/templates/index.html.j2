@@ -63,7 +63,9 @@
             </p>
             
             <div class="song-bar">
-                <p>Some of my recent top tracks on Spotify are:</p>
+                <p>Some of my <u data-bs-toggle="tooltip" 
+                                data-bs-placement="bottom" 
+                                title="Random sample of top tracks this month as returned by Spotify API">recent</u><sup>*</sup> top tracks on Spotify are:</p>
 
                 <div class="row">
                     {% for item in songs_dict %}
