@@ -1,0 +1,9 @@
+html {
+    background-color: #fffaed;
+    /* Tooltip top position is glitchy */
+    /* height: 100%; */
+}
+
+body {
+    background-color: #fffaed;
+}

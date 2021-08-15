@@ -9,7 +9,7 @@ import defusedxml.ElementTree as ET
 import requests
 import re
 import os
-
+import discogs_client
 
 dictConfig({
     'version': 1,
@@ -53,6 +53,8 @@ CACHE_CONFIG = {
 
 cache = Cache(config=CACHE_CONFIG)
 spotify = SpotifyWrap()
+discogs = discogs_client.Client('dsmaugy-personal-site', user_token=os.environ['DISCOGS_TOKEN'])
+
 
 
 cache.init_app(app)
@@ -104,12 +106,33 @@ def get_top_songs():
     
     return top_tracks_list
 
+# @cache.cached(key_prefix='vinyl')
+def get_vinyl_collection():
+    collection = []
+    discog_prof = discogs.user("dsmaugy")
+
+    for record in discog_prof.collection_folders[0].releases:
+        collection.append(
+            {'title': record.release.title, 
+            'year': record.release.year, 
+            'preview_image': record.release.images[0]['resource_url'],
+            'artist': record.release.artists[0].name}
+            )
+
+    return collection
+
+
 @app.route('/')
 def index():
     movies = get_last_movies()
     songs = get_top_songs()
 
     return render_template("index.html.j2", movies_dict=movies, songs_dict=songs)
+
+@app.route('/vinyl_collection')
+def vinyl_collection():
+    return str(get_vinyl_collection())
+    # return render_template("vinyl_collection.html.j2")
 
 @app.before_request
 def before_request():
