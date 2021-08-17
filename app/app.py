@@ -3,13 +3,13 @@ from flask_caching import Cache
 from spotifywrap import SpotifyWrap
 from logging.config import dictConfig
 from random import sample
+from discogs import Discogs
 
 
 import defusedxml.ElementTree as ET
 import requests
 import re
 import os
-import discogs_client
 
 dictConfig({
     'version': 1,
@@ -53,8 +53,7 @@ CACHE_CONFIG = {
 
 cache = Cache(config=CACHE_CONFIG)
 spotify = SpotifyWrap()
-discogs = discogs_client.Client('dsmaugy-personal-site', user_token=os.environ['DISCOGS_TOKEN'])
-
+discogs = Discogs(user_token=os.environ['DISCOGS_TOKEN'])
 
 
 cache.init_app(app)
@@ -106,21 +105,37 @@ def get_top_songs():
     
     return top_tracks_list
 
-# @cache.cached(key_prefix='vinyl')
-def get_vinyl_collection():
-    collection = []
-    discog_prof = discogs.user("dsmaugy")
+# @cache.memoize(timeout=1200)
+# def get_vinyl_collection(username):
+#     print("in vinyl function")
+#     collection = []
+#     discog_prof = discogs.user(username)
 
-    for record in discog_prof.collection_folders[0].releases:
-        collection.append(
-            {'title': record.release.title, 
-            'year': record.release.year, 
-            'preview_image': record.release.images[0]['resource_url'],
-            'artist': record.release.artists[0].name}
-            )
+#     for record in discog_prof.collection_folders[0].releases:
+#         collection.append(
+#             {'title': record.release.title, 
+#             'year': record.release.year, 
+#             'preview_image': record.release.images[0]['resource_url'],
+#             'artist': record.release.artists[0].name}
+#             )
 
-    return collection
+#     return collection
 
+def inflate_vinyl_list(collection, records_per_row):
+    collection_rows = []
+    for i in range(0, len(collection), records_per_row):
+        c_row = []
+        if i + records_per_row <= len(collection):
+            for j in range(0, records_per_row):
+                c_row.append(collection[i+j])
+            collection_rows.append(c_row)
+        else:
+            remaining_records = len(collection) % records_per_row
+            for j in range(0, remaining_records):
+                c_row.append(collection[-remaining_records+j])
+            collection_rows.append(c_row)
+
+    return collection_rows
 
 @app.route('/')
 def index():
@@ -131,8 +146,17 @@ def index():
 
 @app.route('/vinyl_collection')
 def vinyl_collection():
-    return str(get_vinyl_collection())
-    # return render_template("vinyl_collection.html.j2")
+    collection_list_sorted = inflate_vinyl_list(discogs.get_user_collection('dsmaugy'), records_per_row=3)
+    return render_template("vinyl_collection.html.j2", collection_rows=collection_list_sorted)
+
+@app.route('/serena_collection')
+# @cache.cached(timeout=600)
+def serena_vinyl():
+    collection_list_sorted = inflate_vinyl_list(discogs.get_user_collection('serenado'), records_per_row=6)
+    return render_template("vinyl_collection.html.j2", collection_rows=collection_list_sorted)
+
+    # pTdhfHNqZCdLYoLISrdodXBuyDHnTHRDreEzWbHH
+
 
 @app.before_request
 def before_request():
