@@ -1,0 +1,23 @@
+html {
+    background-color: #fffaed;
+    /* Tooltip top position is glitchy */
+    /* height: 100%; */
+}
+
+body {
+    background-color: #fffaed;
+    /* height: 100%; */
+}
+
+#main-container {
+    max-width: 80%;
+    text-align: center;
+}
+
+
+/* h1 {
+    position: absolute;
+    margin: 0;
+    top: 50%;
+    transform: translateY(-50%);
+} */

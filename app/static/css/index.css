@@ -68,6 +68,9 @@ a:visited {
     font-size: 1.5em;
 }
 
+#fun-bar {
+    margin-top: 20px;
+}
 
 .song-bar {
     width: 100%;
@@ -109,11 +112,10 @@ a:visited {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     padding: 33px;
     font-size: 1.5em;
     opacity: 0;
-
     border-radius: 50%;
     background-color: rgba(0, 0, 0, 0.5);
     color: #1ED05E;
@@ -123,12 +125,11 @@ a:visited {
     opacity: 1;
 }
 
-
 .img-container {
     position: relative;
     display: block;
 }
-  
+
 .movie-bar img {
     float: left;
     width: 100px;

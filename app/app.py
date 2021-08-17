@@ -132,18 +132,17 @@ def index():
 @cache.cached(timeout=60, query_string=True)
 def vinyl_collection(username):
     per_row = request.args.get('perrow')
-    print(per_row)
-    collection_list_sorted = inflate_vinyl_list(discogs.get_user_collection(username), records_per_row=3)
+    
+    if not per_row or not per_row.isdigit() or int(per_row) < 1:
+        per_row = 3
+    else:
+        per_row = int(per_row)
+
+    collection_list_sorted = inflate_vinyl_list(discogs.get_user_collection(username), records_per_row=per_row)
     if len(collection_list_sorted) == 0:
-        return "User does not have a public collection, has an empty collection, or does not exist"
+        return render_template("vinyl_no_user.html.j2")
     else:
         return render_template("vinyl_collection.html.j2", collection_rows=collection_list_sorted)
-
-# @app.route('/serena_collection')
-# @cache.cached(timeout=60)
-# def serena_collection():
-#     collection_list_sorted = inflate_vinyl_list(discogs.get_user_collection('serenado'), records_per_row=6)
-#     return render_template("vinyl_collection.html.j2", collection_rows=collection_list_sorted)
 
 @app.before_request
 def before_request():
