@@ -105,22 +105,6 @@ def get_top_songs():
     
     return top_tracks_list
 
-# @cache.memoize(timeout=1200)
-# def get_vinyl_collection(username):
-#     print("in vinyl function")
-#     collection = []
-#     discog_prof = discogs.user(username)
-
-#     for record in discog_prof.collection_folders[0].releases:
-#         collection.append(
-#             {'title': record.release.title, 
-#             'year': record.release.year, 
-#             'preview_image': record.release.images[0]['resource_url'],
-#             'artist': record.release.artists[0].name}
-#             )
-
-#     return collection
-
 def inflate_vinyl_list(collection, records_per_row):
     collection_rows = []
     for i in range(0, len(collection), records_per_row):
@@ -144,19 +128,22 @@ def index():
 
     return render_template("index.html.j2", movies_dict=movies, songs_dict=songs)
 
-@app.route('/vinyl_collection')
-def vinyl_collection():
-    collection_list_sorted = inflate_vinyl_list(discogs.get_user_collection('dsmaugy'), records_per_row=3)
-    return render_template("vinyl_collection.html.j2", collection_rows=collection_list_sorted)
+@app.route('/vinyl_collection/<username>')
+@cache.cached(timeout=60, query_string=True)
+def vinyl_collection(username):
+    per_row = request.args.get('perrow')
+    print(per_row)
+    collection_list_sorted = inflate_vinyl_list(discogs.get_user_collection(username), records_per_row=3)
+    if len(collection_list_sorted) == 0:
+        return "User does not have a public collection, has an empty collection, or does not exist"
+    else:
+        return render_template("vinyl_collection.html.j2", collection_rows=collection_list_sorted)
 
-@app.route('/serena_collection')
-# @cache.cached(timeout=600)
-def serena_vinyl():
-    collection_list_sorted = inflate_vinyl_list(discogs.get_user_collection('serenado'), records_per_row=6)
-    return render_template("vinyl_collection.html.j2", collection_rows=collection_list_sorted)
-
-    # pTdhfHNqZCdLYoLISrdodXBuyDHnTHRDreEzWbHH
-
+# @app.route('/serena_collection')
+# @cache.cached(timeout=60)
+# def serena_collection():
+#     collection_list_sorted = inflate_vinyl_list(discogs.get_user_collection('serenado'), records_per_row=6)
+#     return render_template("vinyl_collection.html.j2", collection_rows=collection_list_sorted)
 
 @app.before_request
 def before_request():

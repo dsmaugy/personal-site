@@ -1,5 +1,6 @@
 import json
 import requests
+import logging
 
 
 DISCOGS_EP = "https://api.discogs.com/"
@@ -29,7 +30,9 @@ class Discogs():
         all_collection = []
 
         first_request = requests.get("{}users/{}/collection/folders/0/releases?page=1&per_page=50".format(DISCOGS_EP, username), headers=self._header)
-        Discogs._check_valid_response(first_request)
+        if not Discogs._check_valid_response(first_request):
+            logging.error("Error finding Discogs user")
+            return all_collection
 
         q_json = Discogs._get_json(first_request)
         
