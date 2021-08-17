@@ -1,0 +1,27 @@
+html {
+    background-color: #fffaed;
+    /* Tooltip top position is glitchy */
+    /* height: 100%; */
+}
+
+body {
+    background-color: #fffaed;
+}
+
+#main-container {
+    max-width: 80%;
+    margin: 50px auto;
+}
+
+.vinyl-preview {
+    height: 55%;
+}
+
+p {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.record-col {
+    text-align: center;
+}

@@ -3,13 +3,13 @@ from flask_caching import Cache
 from spotifywrap import SpotifyWrap
 from logging.config import dictConfig
 from random import sample
+from discogs import Discogs
 
 
 import defusedxml.ElementTree as ET
 import requests
 import re
 import os
-
 
 dictConfig({
     'version': 1,
@@ -53,6 +53,7 @@ CACHE_CONFIG = {
 
 cache = Cache(config=CACHE_CONFIG)
 spotify = SpotifyWrap()
+discogs = Discogs(user_token=os.environ['DISCOGS_TOKEN'])
 
 
 cache.init_app(app)
@@ -104,12 +105,44 @@ def get_top_songs():
     
     return top_tracks_list
 
+def inflate_vinyl_list(collection, records_per_row):
+    collection_rows = []
+    for i in range(0, len(collection), records_per_row):
+        c_row = []
+        if i + records_per_row <= len(collection):
+            for j in range(0, records_per_row):
+                c_row.append(collection[i+j])
+            collection_rows.append(c_row)
+        else:
+            remaining_records = len(collection) % records_per_row
+            for j in range(0, remaining_records):
+                c_row.append(collection[-remaining_records+j])
+            collection_rows.append(c_row)
+
+    return collection_rows
+
 @app.route('/')
 def index():
     movies = get_last_movies()
     songs = get_top_songs()
 
     return render_template("index.html.j2", movies_dict=movies, songs_dict=songs)
+
+@app.route('/vinyl_collection/<username>')
+@cache.cached(timeout=60, query_string=True)
+def vinyl_collection(username):
+    per_row = request.args.get('perrow')
+    
+    if not per_row or not per_row.isdigit() or int(per_row) < 1:
+        per_row = 3
+    else:
+        per_row = int(per_row)
+
+    collection_list_sorted = inflate_vinyl_list(discogs.get_user_collection(username), records_per_row=per_row)
+    if len(collection_list_sorted) == 0:
+        return render_template("vinyl_no_user.html.j2")
+    else:
+        return render_template("vinyl_collection.html.j2", collection_rows=collection_list_sorted)
 
 @app.before_request
 def before_request():
