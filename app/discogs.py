@@ -40,7 +40,7 @@ class Discogs():
 
         total_pages = q_json['pagination']['pages']
 
-        for x in range(2, total_pages):
+        for x in range(2, total_pages+1):
             next_request = requests.get("{}users/{}/collection/folders/0/releases?page={}&per_page=50".format(DISCOGS_EP, username, x), headers=self._header)
             Discogs._check_valid_response(next_request)
             q_json = Discogs._get_json(next_request)
