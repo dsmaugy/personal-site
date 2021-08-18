@@ -22,7 +22,7 @@ class Discogs():
     def _clean_release_dict(release_dict):
         return {'title': release_dict['basic_information']['title'],
                 'year': release_dict['basic_information']['year'],
-                'preview_image': release_dict['basic_information']['cover_image'], # 'thumb' or 'cover_image'
+                'preview_image': release_dict['basic_information']['thumb'], # 'thumb' or 'cover_image'
                 'artist': release_dict['basic_information']['artists'][0]['name']
         }
 
