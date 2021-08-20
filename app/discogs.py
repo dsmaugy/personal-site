@@ -31,7 +31,7 @@ class Discogs():
 
         first_request = requests.get("{}users/{}/collection/folders/0/releases?page=1&per_page=50".format(DISCOGS_EP, username), headers=self._header)
         if not Discogs._check_valid_response(first_request):
-            logging.error("Error finding Discogs user")
+            logging.error("Error finding Discogs user", first_request.content)
             return all_collection
 
         q_json = Discogs._get_json(first_request)

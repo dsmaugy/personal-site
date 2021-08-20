@@ -129,7 +129,7 @@ def index():
     return render_template("index.html.j2", movies_dict=movies, songs_dict=songs)
 
 @app.route('/vinyl_collection/<username>')
-@cache.cached(timeout=60, query_string=True)
+# @cache.cached(timeout=60, query_string=True)
 def vinyl_collection(username):
     per_row = request.args.get('perrow')
     
@@ -138,7 +138,15 @@ def vinyl_collection(username):
     else:
         per_row = int(per_row)
 
-    collection_list_sorted = inflate_vinyl_list(discogs.get_user_collection(username), records_per_row=per_row)
+    user_collection = cache.get("vinyl/" + username)
+    if not user_collection:
+        user_collection = discogs.get_user_collection(username)
+        cache.set("vinyl/" + username, user_collection, timeout=60) 
+        app.logger.info("Discogs results cached for user " + username)
+    else:
+        app.logger.info("Discogs results read from cache for user " + username)
+
+    collection_list_sorted = inflate_vinyl_list(user_collection, records_per_row=per_row)
     if len(collection_list_sorted) == 0:
         return render_template("vinyl_no_user.html.j2")
     else:
