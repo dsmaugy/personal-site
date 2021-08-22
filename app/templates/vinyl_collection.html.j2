@@ -33,7 +33,9 @@
             <div class="row">
                 {% for record in c_row %}
                     <div class="col record-col">
-                        <img class="img-thumbnail img-fluid" src="{{ record.preview_image }}">
+                        <a href="{{ record.url }}"> 
+                            <img class="img-thumbnail img-fluid" src="{{ record.preview_image }}">
+                        </a>
                         <p>{{ record.artist }} - {{ record.title }} ({{ record.year }})</p>
                     </div>
                 {% endfor %}

@@ -50,6 +50,7 @@ CACHE_CONFIG = {
                         # No failover
                         'ketama': False}}
 }
+DISCOGS_USERNAME = "dsmaugy"
 
 cache = Cache(config=CACHE_CONFIG)
 spotify = SpotifyWrap()
@@ -143,13 +144,24 @@ def vinyl_collection(username):
     else:
         per_row = int(per_row)
 
-    user_collection = cache.get("vinyl/" + username)
-    if not user_collection:
-        user_collection = discogs.get_user_collection(username)
-        cache.set("vinyl/" + username, user_collection, timeout=60) 
-        app.logger.info("Discogs results cached for user " + username)
+    # extra_info=True returns the master date and the URLs
+    # The API is heavily rate limited so this is restricted to select people (me ;))
+    if username == DISCOGS_USERNAME and 'sorted' in request.args:
+        user_collection = cache.get("vinyl/" + username + "?sorted")
+        if not user_collection:
+            user_collection = discogs.get_user_collection(username, extra_info=True)
+            cache.set("vinyl/" + username + "?sorted", user_collection)
+            app.logger.info("[!!Extra!!] Discogs results cached for user " + username)
+        else:
+            app.logger.info("[!!Extra!!] Discogs results read from cache for user " + username)
     else:
-        app.logger.info("Discogs results read from cache for user " + username)
+        user_collection = cache.get("vinyl/" + username)
+        if not user_collection:
+            user_collection = discogs.get_user_collection(username)
+            cache.set("vinyl/" + username, user_collection) 
+            app.logger.info("Discogs results cached for user " + username)
+        else:
+            app.logger.info("Discogs results read from cache for user " + username)
 
     collection_list_sorted = inflate_vinyl_list(user_collection, records_per_row=per_row)
     if len(collection_list_sorted) == 0:
