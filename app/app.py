@@ -67,6 +67,8 @@ def get_last_movies():
     
     movies_root = ET.fromstring(movies.content)
     movies_list = movies_root[0].findall('item')
+    movies_list = [x for x in movies_list[:] if x.find("letterboxd:watchedDate", LTRBXD_NS) != None]
+    movies_list = sorted(movies_list, key=lambda x: x.find("letterboxd:watchedDate", LTRBXD_NS).text, reverse=True)
     latest_movies = []
 
     for i in range(0, 5):
@@ -74,10 +76,14 @@ def get_last_movies():
 
         latest_movie['name'] = movies_list[i].find("letterboxd:filmTitle", LTRBXD_NS).text
         latest_movie['year'] = movies_list[i].find("letterboxd:filmYear", LTRBXD_NS).text
-        latest_movie['rating'] = movies_list[i].find("letterboxd:memberRating", LTRBXD_NS).text
         latest_movie['preview_image'] = re.search("https://.*\.jpg", movies_list[i].find("description").text).group()
         latest_movie['link'] = movies_list[i].find("link").text
         latest_movie['verb'] = "watched" if movies_list[i].find("letterboxd:rewatch", LTRBXD_NS).text == 'No' else "rewatched"
+
+        try:
+            latest_movie['rating'] = movies_list[i].find("letterboxd:memberRating", LTRBXD_NS).text
+        except AttributeError:
+            print("No rating found for this movie")
 
         latest_movies.append(latest_movie)
 
@@ -129,7 +135,6 @@ def index():
     return render_template("index.html.j2", movies_dict=movies, songs_dict=songs)
 
 @app.route('/vinyl_collection/<username>')
-# @cache.cached(timeout=60, query_string=True)
 def vinyl_collection(username):
     per_row = request.args.get('perrow')
     
