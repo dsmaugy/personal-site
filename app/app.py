@@ -90,6 +90,9 @@ def get_last_movies():
 
     return latest_movies
 
+def sanitize_string(str):
+    return str.replace('"', '&quot;')
+
 def get_top_songs():
     top_tracks_list = []
 
@@ -103,8 +106,8 @@ def get_top_songs():
 
     for i in sample(range(0, 25), 5):
         latest_song = {'name': 'N/A', 'artist': 'N/A', 'preview_image': 'N/A', 'preview_sound': 'N/A'}
-        latest_song['name'] = top_tracks['items'][i]['name']
-        latest_song['artist'] = top_tracks['items'][i]['artists'][0]['name']
+        latest_song['name'] = sanitize_string(top_tracks['items'][i]['name'])
+        latest_song['artist'] = sanitize_string(top_tracks['items'][i]['artists'][0]['name'])
         latest_song['preview_image'] = top_tracks['items'][i]['album']['images'][1]['url']
         latest_song['preview_sound'] = top_tracks['items'][i]['preview_url']
 
