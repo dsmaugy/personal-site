@@ -103,7 +103,7 @@
                         <div class="col d-flex justify-content-center">
                             <a href="{{ item['link'] }}" target="_blank">
                                 <img data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
-                                title="{{ item['name'] }} ({{ item['year'] }}) <br> Rating: {{ item['rating'] }}/5" src="{{ item['preview_image'] }}">
+                                title="{{ item['name'] }} ({{ item['year'] }}) <br> Rating: {{ item['rating'] }}/5.0 {% if item['verb'] == 'rewatched' %}<br>(Rewatch){% endif %}" src="{{ item['preview_image'] }}">
                             </a>
                         </div>
                     {% endfor %}
