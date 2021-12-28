@@ -1,8 +1,3 @@
-#main-container {
-    max-width: 50%;
-    margin: auto;
-}
-
 .header-header {
     margin-top: 45px;
 }
@@ -11,47 +6,17 @@
     text-align: right;
 }
 
-.name-header h1 {
-    font-size: 2.5em;
-    font-weight: 600;
-    font-family: 'Noto Sans JP', sans-serif;
-}
-
-.name-header h2 {
-    font-weight: 200;
-    font-size: 2em;
-    font-family: 'Noto Sans JP', sans-serif;
-}
-
 .image-header img {
     border-radius: 50%;
     height: 170px;
 }
 
-.body p {
-    font-size: 1.5em;
-    font-weight: 200;
-    font-family: 'Noto Sans JP', sans-serif;
-}
-
 .body .links {
     margin: 30px auto;
-    font-size: 0.7em;
-    /* font-style: italic; */
-    font-family: 'Roboto Mono', monospace;
-    font-weight: 300;
 }
 
 .body .links .row .col {
     text-align: center;
-}
-
-.links a {
-    font-size: 1.5em;
-}
-
-#fun-bar {
-    margin-top: 20px;
 }
 
 .song-bar {

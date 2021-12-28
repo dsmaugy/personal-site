@@ -6,10 +6,44 @@ body {
     background-color: #fffaed;
 }
 
+a {
+    font-size: 1.5em;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 300;
+}
+
 a:link {
     color: #4392F7;
 }
 
 a:visited {
     color: #DB5E4F;
+}
+
+p {
+    font-size: 1.5rem;
+    font-weight: 200;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+h1 {
+    font-size: 2.5em;
+    font-weight: 600;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+h2 {
+    font-weight: 200;
+    font-size: 2em;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+#main-container {
+    margin: auto;
+}
+
+@media (min-width: 992px) {
+    #main-container {
+        max-width: 50%;
+    }
 }
