@@ -170,7 +170,10 @@ def vinyl_collection(username):
     if len(collection_list_sorted) == 0:
         return render_template("vinyl_no_user.html.j2")
     else:
-        return render_template("vinyl_collection.html.j2", collection_rows=collection_list_sorted)
+        return render_template("vinyl_collection.html.j2", 
+            collection_rows=collection_list_sorted, 
+            discogs_name=username, 
+            collection_url=discogs._get_collection_url(username))
 
 @app.route("/projects")
 def projects():

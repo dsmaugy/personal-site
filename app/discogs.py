@@ -37,6 +37,13 @@ class Discogs():
 
         return sorted_list_flattened
 
+    '''
+    Returns the discogs URL for a user's collection. Does not require authentication.
+    '''
+    @staticmethod
+    def _get_collection_url(username):
+        return "https://www.discogs.com/user/" + username + "/collection"
+
 
     def _clean_release_dict(self, release_dict, extra_info=False):
         return_dict =  {'title': release_dict['basic_information']['title'],

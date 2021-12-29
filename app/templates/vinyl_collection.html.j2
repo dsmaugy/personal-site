@@ -4,8 +4,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/vinyl.css') }}"> 
 {% endblock %}
 
-{% block body %}
+{% block header_header%} 
+    <div class="header-title">
+        <a href="{{ collection_url }}" target="_blank">
+            <h2>{{ discogs_name }}'s Vinyl Collection</h2>
+        </a>
+    </div>
+{% endblock %}
 
+{% block body %}
     <div class="container" id="main-container">
         {% for c_row in collection_rows %}
             <div class="row">

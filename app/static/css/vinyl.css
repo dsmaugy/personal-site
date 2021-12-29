@@ -10,3 +10,8 @@ p {
 .record-col {
     text-align: center;
 }
+
+.header-title {
+    text-align: center;
+    margin: 2.5rem;
+}

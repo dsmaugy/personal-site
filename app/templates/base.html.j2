@@ -37,6 +37,19 @@
 </head>
 
 <body>
+
+<div class="container" id="header-container">
+    <div class="header-header">
+        <div class="name-header">
+            <a href="{{ url_for('index') }}"> 
+                <h1>Darwin Do</h1>
+                <h2>Computer Science at <br> Yale University</h2>
+            </a>
+        </div>
+        {% block header_header %} {% endblock %}
+    </div>
+</div>
+
 {% block body %}{% endblock %}
 </body>
 

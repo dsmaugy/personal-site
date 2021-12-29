@@ -14,11 +14,21 @@ a {
 }
 
 a:link {
-    color: #4392F7;
+    color: #DB5E4F;
 }
 
 a:visited {
     color: #DB5E4F;
+    /* color: #4392F7; */
+}
+
+a:hover {
+    color: #4392F7;
+}
+
+.name-header a {
+    text-decoration: none;
+    font-size: inherit;
 }
 
 p {
@@ -39,6 +49,10 @@ h2 {
     font-family: 'Noto Sans JP', sans-serif;
 }
 
+#header-container {
+    margin-bottom: 5rem;
+}
+
 #main-container {
     margin: auto;
 }
@@ -47,4 +61,16 @@ h2 {
     #main-container {
         max-width: 50%;
     }
+    #header-container {
+        max-width: 50%;
+    }
+}
+
+.name-header {
+    text-align: right;
+}
+
+.image-header img {
+    border-radius: 50%;
+    height: 170px;
 }

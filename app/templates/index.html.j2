@@ -1,23 +1,16 @@
 {% extends "base.html.j2" %}
-{% block title %} Index - {% endblock %}
+{% block title %} Home - {% endblock %}
 {% block head %} 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"> 
+{% endblock %}
+{% block header_header%}
+    <div class="image-header">
+        <img src="{{ url_for('static', filename='images/darwin.jpg') }}">
+    </div>
 {% endblock %}
 
 {% block body %}
     <div class="container" id="main-container">
-        <div class="header-header">
-            <div class="name-header">
-                <h1>Darwin Do</h1>
-                <h2>Computer Science at <br> Yale University</h2>
-
-            </div>
-
-            <div class="image-header">
-                <img src="{{ url_for('static', filename='images/darwin.jpg') }}">
-            </div>
-        </div>
-
         <div class="body">
 
             <div class="links" class="container">
