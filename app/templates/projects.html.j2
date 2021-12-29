@@ -5,12 +5,19 @@
 {% endblock %}
 
 {% block body %}
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="https://d2ru2mvuh5wx24.cloudfront.net/blog_bootstrap/4347/what_in_the_world_is_a_shoebill_6_new_stateman.jpg" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="container"> 
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <div class="card text-white bg-secondary" style="width: 24rem;">
+                    <img class="card-img-top" src="{{ url_for('static', filename='images/justin_site.jpg') }}" alt="Card image cap">
+                    <div class="card-header">The Committee to Elect Justin Tseng</div>
+                    <div class="card-body">
+                        <p class="card-text">I created the campaign site for the City of Medford's first Asian-American councilor, Justin Tseng.
+                        The site was one of our core methods of community outreach and displaying our platform.</p>
+                        <a href="https://www.justin4medford.com/en/" class="btn btn-light" target="_blank">To site</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

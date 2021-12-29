@@ -131,14 +131,14 @@ def inflate_vinyl_list(collection, records_per_row):
 
     return collection_rows
 
-@app.route('/')
+@app.route("/")
 def index():
     movies = get_last_movies()
     songs = get_top_songs()
 
     return render_template("index.html.j2", movies_dict=movies, songs_dict=songs)
 
-@app.route('/vinyl_collection/<username>')
+@app.route("/vinyl_collection/<username>")
 def vinyl_collection(username):
     per_row = request.args.get('perrow')
     
@@ -171,6 +171,10 @@ def vinyl_collection(username):
         return render_template("vinyl_no_user.html.j2")
     else:
         return render_template("vinyl_collection.html.j2", collection_rows=collection_list_sorted)
+
+@app.route("/projects")
+def projects():
+    return render_template("projects.html.j2")
 
 @app.before_request
 def before_request():

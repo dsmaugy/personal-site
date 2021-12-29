@@ -4,7 +4,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"> 
 {% endblock %}
 
-
 {% block body %}
     <div class="container" id="main-container">
         <div class="header-header">
@@ -31,6 +30,9 @@
                     </div>
                     <div class="col">
                         <a href="https://github.com/dsmaugy" target="_blank">github</a>
+                    </div>
+                    <div class="col">
+                        <a href="{{ url_for('projects') }}">projects</a>
                     </div>
                     <div class="col">
                         <a href="https://drive.google.com/file/d/1YAk03v9I4wXVoFazskZWve8AXpABvDzD/view?usp=sharing" target="_blank">resume</a>
@@ -66,8 +68,6 @@
                     {% endfor %}
                 </div>
             </div>
-            
-
 
             <div class="movie-bar">
                 <p>And I've recently seen:</p>
