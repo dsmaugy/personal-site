@@ -9,14 +9,14 @@
 
 .song-bar {
     width: 100%;
-    text-align: center;
+    /* text-align: center; */
     margin-top: 50px;
     overflow: hidden;
 }
 
 .movie-bar {
     width: 100%;
-    text-align: center;
+    /* text-align: center; */
     margin-top: 50px;
     /* margin-bottom: 80px; */
     overflow: hidden;
@@ -76,4 +76,9 @@
 #recent-info {
     font-size: 0.3em;
     vertical-align: top;
+}
+
+p a {
+    font-size: inherit;
+    font-family: inherit;
 }
