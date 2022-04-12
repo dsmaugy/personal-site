@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, jsonify
 from flask_caching import Cache
 from spotifywrap import SpotifyWrap
 from logging.config import dictConfig
@@ -10,6 +10,8 @@ import defusedxml.ElementTree as ET
 import requests
 import re
 import os
+import codecs
+import csv
 
 dictConfig({
     'version': 1,
@@ -50,17 +52,17 @@ CACHE_CONFIG = {
                         # No failover
                         'ketama': False}}
 }
+
 DISCOGS_USERNAME = "dsmaugy"
+LTRBXD_RSS = "https://letterboxd.com/dsmaugy/rss"
+LTRBXD_NS = {"letterboxd": "https://letterboxd.com"}
+CROSSWORD_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTG3b_CTnI--LysPPQT6XCtnGv2LINih8TUPenajCQuRuPpP0pJjkWBMWt-ML35VUrFLEHgCsTWggCY/pub?gid=0&single=true&output=csv"
 
 cache = Cache(config=CACHE_CONFIG)
 spotify = SpotifyWrap()
 discogs = Discogs(user_token=os.environ['DISCOGS_TOKEN'])
 
-
 cache.init_app(app)
-
-LTRBXD_RSS = "https://letterboxd.com/dsmaugy/rss"
-LTRBXD_NS = {"letterboxd": "https://letterboxd.com"}
 
 @cache.cached(key_prefix='last_movies')
 def get_last_movies():
@@ -131,13 +133,6 @@ def inflate_vinyl_list(collection, records_per_row):
 
     return collection_rows
 
-@app.route("/")
-def index():
-    movies = get_last_movies()
-    songs = get_top_songs()
-
-    return render_template("index.html.j2", movies_dict=movies, songs_dict=songs)
-
 @app.route("/vinyl_collection/<username>")
 def vinyl_collection(username):
     per_row = request.args.get('perrow')
@@ -178,6 +173,30 @@ def vinyl_collection(username):
 @app.route("/projects")
 def projects():
     return render_template("projects.html.j2")
+
+@cache.cached(key_prefix='crossword_data')
+@app.route("/crossword_data")
+def crossword_data():
+    r = requests.get(CROSSWORD_CSV)
+    reader = csv.reader(codecs.iterdecode(r.iter_lines(), 'utf-8'))
+    next(reader) # skip the header
+
+    data = []
+    for row in reader:
+        data_dict = {}
+        data_dict['date'] = row[0]
+        data_dict['name'] = row[1]
+        data_dict['time'] = row[2]
+        data.append(data_dict)
+
+    return jsonify(data)
+
+@app.route("/")
+def index():
+    movies = get_last_movies()
+    songs = get_top_songs()
+
+    return render_template("index.html.j2", movies_dict=movies, songs_dict=songs)
 
 @app.before_request
 def before_request():
