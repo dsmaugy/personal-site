@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+import logging
 import os
 import gspread
 import pytz
@@ -45,7 +46,7 @@ def is_weekend(date: datetime) -> bool:
 class NYTCrossword():
 
     @staticmethod
-    def update_crossword_scores(logging):
+    def update_crossword_scores():
         s = doc.worksheets()[0]
 
         # set up selenium

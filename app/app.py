@@ -68,7 +68,7 @@ cache.init_app(app)
 
 # schedule any recurring tasks
 from tasks.crossword import NYTCrossword
-scheduler.add_job(func=NYTCrossword.update_crossword_scores, id='update-crossword', trigger='interval', minutes=30, args=[app.logger])
+scheduler.add_job(func=NYTCrossword.update_crossword_scores, id='update-crossword', trigger='cron', minute=55)
 scheduler.start()
 
 @cache.cached(key_prefix='last_movies')
