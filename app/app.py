@@ -1,10 +1,10 @@
 from flask import Flask, request, render_template, redirect, jsonify
 from flask_caching import Cache
+from flask_apscheduler import APScheduler
 from spotifywrap import SpotifyWrap
 from logging.config import dictConfig
 from random import sample
 from discogs import Discogs
-
 
 import defusedxml.ElementTree as ET
 import requests
@@ -61,8 +61,15 @@ CROSSWORD_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTG3b_CTnI--Lys
 cache = Cache(config=CACHE_CONFIG)
 spotify = SpotifyWrap()
 discogs = Discogs(user_token=os.environ['DISCOGS_TOKEN'])
+scheduler = APScheduler()
 
+scheduler.init_app(app)
 cache.init_app(app)
+
+# schedule any recurring tasks
+from tasks.crossword import NYTCrossword
+scheduler.add_job(func=NYTCrossword.update_crossword_scores, id='update-crossword', trigger='interval', minutes=30, args=[app.logger])
+scheduler.start()
 
 @cache.cached(key_prefix='last_movies')
 def get_last_movies():
@@ -203,8 +210,7 @@ def before_request():
     if os.environ['FLASK_ENV'] == 'production':
         if not request.is_secure:
             url = request.url.replace('http://', 'https://', 1)
-            code = 301
-            return redirect(url, code=code)
+            return redirect(url, code=301)
     
 
 if __name__ == '__main__':
