@@ -1,5 +1,5 @@
 .body .links {
-    margin-bottom: 30px;
+    margin-bottom: 65px;
     margin-top: -30px;
 }
 
@@ -71,6 +71,12 @@
     height: 150px;
     display: inline;
     margin-top: 20px;
+}
+
+.blurb {
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-size: 2rem;
 }
 
 #recent-info {
