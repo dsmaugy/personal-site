@@ -1,0 +1,32 @@
+{% extends "base.html.j2" %}
+{% block title %} Projects - {% endblock %}
+{% block head %} 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/crossword.css') }}"> 
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+{% endblock %}
+
+{% block header_header%} 
+    <div class="header-title">
+        <h1>Crossword History</h1>
+        <h2>A timeline for our crosswords ;)</h2>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="container"> 
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <p>Bruh</p>
+                <script>
+                    d3.json("/crossword_data").then(
+                        (data) => {
+                            for (var i = 0; i < data.length; i++) {
+                                console.log(data[i]);
+                            }
+                        }
+                    )
+                </script>
+            </div>
+        </div>
+    </div>
+{% endblock %}
