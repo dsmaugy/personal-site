@@ -35,13 +35,16 @@
                     </div>
                 </div>
             </div>
-            <p>Hello! I'm a sophomore studying computer science at Yale University (Class of '23+1) with a prospective certificate in Statistics & Data Science. I enjoy playing games with friends, creating Spotify playlists, and all things tech.
+            <p class="blurb">
+            <i> 
+            I like music and tech and playing games with friends
+            </i>
             </p>
             
             <div class="song-bar">
-                <p>Some of my <u data-bs-toggle="tooltip" 
+                <p><u data-bs-toggle="tooltip" 
                                 data-bs-placement="bottom" 
-                                title="Random sample of top tracks this month as returned by Spotify API">recent</u><sup>*</sup> top tracks on Spotify are:</p>
+                                title="top tracks this month">some songs:</u></p>
 
                 <div class="row">
                     {% for item in songs_dict %}
@@ -63,7 +66,7 @@
             </div>
 
             <div class="movie-bar">
-                <p>And here are the movies I've most recently seen as taken from <a class="inline" href="https://letterboxd.com/dsmaugy/" target="_blank">Letterboxd</a>:</p>
+                <p><a class="inline" href="https://letterboxd.com/dsmaugy/" target="_blank">some movies:</a></p>
                 <div class="row">
                     {% for item in movies_dict %}
                         <div class="col d-flex justify-content-center">
