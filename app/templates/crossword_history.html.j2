@@ -21,9 +21,17 @@
                     
                 </div>
                 <script>
+                    var LGmargin = {top: 80, right: 140, bottom: 50, left: 50},
+                        LGwidth = 636 - LGmargin.left - LGmargin.right,
+                        LGheight = 436 - LGmargin.top - LGmargin.bottom;
+
                     d3.json("/crossword_data").then(
                         (data) => {
-                            console.log(data[0].time)
+                            data.forEach(
+                                (elem) => {
+                                    console.log(elem);
+                                }
+                            )
                         }
                     )
                 </script>
