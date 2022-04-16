@@ -17,24 +17,10 @@
         <div class="row">
             <div class="col d-flex justify-content-center">
 
-                <div class="gengraph">
+                <div class="linegraph">
                     
                 </div>
-                <script>
-                    var LGmargin = {top: 80, right: 140, bottom: 50, left: 50},
-                        LGwidth = 636 - LGmargin.left - LGmargin.right,
-                        LGheight = 436 - LGmargin.top - LGmargin.bottom;
-
-                    d3.json("/crossword_data").then(
-                        (data) => {
-                            data.forEach(
-                                (elem) => {
-                                    console.log(elem);
-                                }
-                            )
-                        }
-                    )
-                </script>
+                <script src="{{ url_for('static', filename='js/crossword_viz.js') }}"> </script>
             </div>
         </div>
     </div>
