@@ -84,6 +84,10 @@
     vertical-align: top;
 }
 
+#song-bar-title {
+    color: #DB5E4F;
+}
+
 p a {
     font-size: inherit;
     font-family: inherit;
