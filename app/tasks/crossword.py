@@ -11,6 +11,7 @@ import gspread
 import pytz
 import json
 import base64
+import re
 
 # leaderboard constants
 LBOARD_PAGE_URL = "https://www.nytimes.com/puzzles/leaderboards"
@@ -104,15 +105,24 @@ class NYTCrossword():
                 if name[-5:] == "(you)":
                     name = name[0:-6] # remove the (you) classifier
 
+                # if I haven't done it yet
+                if len(entry.find_elements_by_class_name("lbd-score__time")) == 0:
+                    logging.info("Skipping myself because I haven't done it yet!")
+                    continue
+                
                 time = entry.find_element_by_class_name("lbd-score__time").text
                 
                 # skip if they haven't finished it yet
                 if time == "--":
                     logging.info(f"Skipping user: {name} - (not complete)")
                     continue
-
+                
+                time_min_str = re.match('[0-9]*', time).group()
+                time_sec = int(time[len(time_min_str)+1:])
+                
+                total_sec = int(time_min_str) * 60 + time_sec
                 # format the row to be entered in google sheets
-                row_entry = [row_date, name, time]
+                row_entry = [row_date, name, total_sec]
                 
                 start_cell = None
                 
