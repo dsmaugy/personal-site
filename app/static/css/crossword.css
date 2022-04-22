@@ -1,0 +1,16 @@
+#tooltip {
+    position: absolute;
+    opacity: 0;
+    text-align: center;
+    width: 120px;
+    height: 33px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+
+/* TODO: find final color for tooltip */
