@@ -33,10 +33,14 @@
     ry: 5px;
 }
 
-.legend-lable {
+.label-txt {
     text-anchor: left;
     text-align: center;
     font-size: 1em;
+}
+
+.label-bg {
+    fill: #736D55;
 }
 
 
