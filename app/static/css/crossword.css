@@ -12,5 +12,32 @@
     pointer-events: none;
 }
 
+.form-group {
+    text-align: center;
+}
+
+.form-group h3 {
+    text-align: center;
+    display: inline;
+}
+
+.form-group select {
+    display: inline;
+    width: 6rem;
+    text-align: center;
+}
+
+.lg-legend {
+    fill: #FCE06F;
+    rx: 5px;
+    ry: 5px;
+}
+
+.legend-lable {
+    text-anchor: left;
+    text-align: center;
+    font-size: 1em;
+}
+
 
 /* TODO: find final color for tooltip */

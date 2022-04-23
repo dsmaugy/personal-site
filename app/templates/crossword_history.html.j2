@@ -15,8 +15,22 @@
 {% block body %}
     <div class="container"> 
         <div class="row">
-            <div class="col d-flex justify-content-center">
+            <div class="col justify-content-center">
+              <div class="form-group form-inline">
+                <h3>looking at data from: </h3>
+                <select class="form-control" id="input-lg" onchange="onLGForm()">
+                    <option value="all">all time</option>
+                    <option value="3day">3 days</option>
+                    <option value="1week">1 week</option>
+                    <option value="2week">2 weeks</option>
+                    <option value="1month">1 month</option>
+                </select>
+            </div>
+        </div>
+        </div>
+        <div class="row">
 
+            <div class="col d-flex justify-content-center">
                 <div class="linegraph">
                     
                 </div>

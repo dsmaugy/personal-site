@@ -1,26 +1,33 @@
-const COLORS = ["#388EA6", "#F2AD6B", "#7796F2", "#F29983", "#F283A7"];
-const SYMBOLS = ["circle", "diamond", "square", "triangle-up", "triangle-down", "cross"];
+const COLORS = ["#388EA6", "#F2AD6B", "#7796F2", "#F29983", "#F283A7", "#96967E"];
 const POINT_STROKE = "1.5";
 const POINT_STROKE_HIGHLIGHT = "5";
 const LINE_STROKE = "0.5";
 const LINE_STROKE_HIGHLIGHT = "1.5";
+const LINE_STROKE_LEG = "2";
+const LINE_STROKE_HIGHLIGHT_LEG = "5";
+const POINT_SIZE = 100;
+const POINT_SIZE_LEG = 80;
 
 
 const parseTime = d3.timeParse("%M:%S");
 const parseDate = d3.timeParse("%m/%d/%Y");
 
+var minTime;
+
 // global var to hold data
 var cwdata;
 var people = [];
+var selectedPeople = [];
 
 // global graph vars
 var LGsvg;
 var LGxg;
 var LGxy;
 var LGdataG;
+var LGlegend;
 
-var LGmargin = { top: 80, right: 140, bottom: 50, left: 50 },
-    LGwidth = 936 - LGmargin.left - LGmargin.right,
+var LGmargin = { top: 80, right: 340, bottom: 50, left: 50 },
+    LGwidth = 1236 - LGmargin.left - LGmargin.right,
     LGheight = 636 - LGmargin.top - LGmargin.bottom;
 
 var LGxScale = d3.scaleTime()
@@ -37,8 +44,8 @@ var LGyAxis = d3.axisLeft(LGyScale)
 
 function highlightData() {
     var person = this.className.baseVal.split(" ")[0];
-    var allLines = LGsvg.selectAll("." + person + ".data-line");
-    var allPoints = LGsvg.selectAll("." + person + ".data-point");
+    var allLines = d3.selectAll("." + person + ".data-line.data");
+    var allPoints = d3.selectAll("." + person + ".data-point.data");
 
     allLines.attr("stroke-width", LINE_STROKE_HIGHLIGHT);
     allPoints.attr("stroke-width", POINT_STROKE_HIGHLIGHT);
@@ -46,12 +53,38 @@ function highlightData() {
 
 function unhighlightData() {
     var person = this.className.baseVal.split(" ")[0];
-    var allLines = LGsvg.selectAll("." + person + ".data-line");
-    var allPoints = LGsvg.selectAll("." + person + ".data-point");
+    var allLines = d3.selectAll("." + person + ".data-line.data");
+    var allPoints = d3.selectAll("." + person + ".data-point.data");
+
 
     allLines.attr("stroke-width", LINE_STROKE);
     allPoints.attr("stroke-width", POINT_STROKE);
 }
+
+function highlightDataLegend(event, d) {
+    var person = this.className.baseVal.split(" ")[0];
+    var allLines = d3.selectAll("." + person + ".data-line.legend");
+    var allPoints = d3.selectAll("." + person + ".data-point.legend");
+    var choosenLabel = d3.selectAll("." + person + ".legend-lable");
+
+    allLines.attr("stroke-width", LINE_STROKE_HIGHLIGHT_LEG);
+    allPoints.attr("stroke-width", POINT_STROKE_HIGHLIGHT);
+    choosenLabel.attr("font-weight", "bold");
+}
+
+function unhighlightDataLegend(event, d) {
+    var person = this.className.baseVal.split(" ")[0];
+    var allLines = d3.selectAll("." + person + ".data-line.legend");
+    var allPoints = d3.selectAll("." + person + ".data-point.legend");
+    var choosenLabel = d3.selectAll("." + person + ".legend-lable");
+
+
+    allLines.attr("stroke-width", LINE_STROKE_LEG);
+    allPoints.attr("stroke-width", POINT_STROKE);
+    choosenLabel.attr("font-weight", "normal");
+
+}
+
 
 function showTooltip(event, d) {
     var tooltip = d3.select("#tooltip");
@@ -95,11 +128,13 @@ function updateLG(data) {
             .on("mouseover.tt", showTooltip)
             .on("mouseleave.hl", unhighlightData)
             .on("mouseleave.tt", hideTooltip)
+            .on("mouseover.leg", highlightDataLegend)
+            .on("mouseleave.leg", unhighlightDataLegend)
             .transition(T)
             .attr("d", d =>
                 d3.symbol()
                 .type(d3.symbols[people.indexOf(d.name) % d3.symbols.length])
-                .size(100)()
+                .size(POINT_SIZE)()
             )
             .attr("stroke", d => COLORS[people.indexOf(d.name) % COLORS.length])
             .attr("stroke-width", POINT_STROKE)
@@ -108,7 +143,7 @@ function updateLG(data) {
                 LGxScale(d.date) +
                 ", " +
                 LGyScale(d.time) + ")")
-            .attr("class", d => d.name + " data-point"),
+            .attr("class", d => d.name + " data-point data"),
 
             update => update
             .transition(T)
@@ -133,15 +168,17 @@ function updateLG(data) {
         .data(d3.group(data, d => d.name), ([n, ]) => n)
         .join(
             enter => enter.append("path")
-            .on("mouseover", highlightData)
-            .on("mouseleave", unhighlightData)
+            .on("mouseover.hl", highlightData)
+            .on("mouseleave.hl", unhighlightData)
+            .on("mouseover.leg", highlightDataLegend)
+            .on("mouseleave.leg", unhighlightDataLegend)
             .attr("stroke-width", "0")
             .transition(T)
             .attr("d", ([, d]) => LGline(d))
             .attr("stroke", ([n, ]) => COLORS[people.indexOf(n) % COLORS.length])
             .attr("stroke-width", LINE_STROKE)
             .attr("fill", "none")
-            .attr("class", ([n, ]) => n + " data-line"),
+            .attr("class", ([n, ]) => n + " data-line data"),
 
             update => update
             .transition(T)
@@ -154,6 +191,25 @@ function updateLG(data) {
         )
 }
 
+// updates the date range for the visualization
+function onLGForm() {
+    var timeSelection = document.getElementById("input-lg").value;
+    if (timeSelection == "1week") {
+        minTime = d3.timeWeek.offset(new Date(), -1);
+    } else if (timeSelection == "2week") {
+        minTime = d3.timeWeek.offset(new Date(), -2);
+    } else if (timeSelection == "1month") {
+        minTime = d3.timeMonth.offset(new Date(), -1);
+    } else if (timeSelection == "3day") {
+        minTime = d3.timeDay.offset(new Date(), -3);
+    } else if (timeSelection == "all") {
+        minTime = d3.extent(cwdata, d => d.date)[0];
+    }
+
+    filteredData = cwdata.filter(d => d.date >= minTime && selectedPeople.indexOf(d.name) >= 0);
+    updateLG(filteredData);
+}
+
 d3.json("/crossword_data").then(
     (data) => {
         data.forEach(
@@ -163,6 +219,7 @@ d3.json("/crossword_data").then(
 
                 if (!people.includes(elem.name)) {
                     people.push(elem.name);
+                    selectedPeople.push(elem.name);
                 }
             }
         );
@@ -195,8 +252,67 @@ d3.json("/crossword_data").then(
         LGdataG.append("g")
             .attr("class", "points")
 
+        // set up legend
+        LGlegend = d3.select(".linegraph")
+            .select("svg")
+            .append("g")
+            .attr("class", "full_legendg")
+            .attr("width", LGmargin.right - 64)
+            .attr("height", LGheight - (LGheight * 0.55))
+            .attr("transform", "translate(" + (LGmargin.left + LGwidth + 64) + "," + LGmargin.top + ")")
+
+        LGlegend.append("rect")
+            .attr("class", "lg-legend")
+            .attr("width", LGmargin.right - 64)
+            .attr("height", LGheight - (LGheight * 0.55))
+
+        people.forEach(
+            (elem, i) => {
+                LGlegend.append("text")
+                    .on("mouseover.hl", highlightData)
+                    .on("mouseleave.hl", unhighlightData)
+                    .on("mouseover.leg", highlightDataLegend)
+                    .on("mouseleave.leg", unhighlightDataLegend)
+                    .attr("transform", "translate(" + ((LGmargin.right - 104) / 2) + ", " + ((i * 25) + 25) + ")")
+                    .attr("class", elem + " " + "legend-lable")
+                    .text(elem)
+
+                LGlegend.append("path")
+                    .on("mouseover.hl", highlightData)
+                    .on("mouseleave.hl", unhighlightData)
+                    .on("mouseover.leg", highlightDataLegend)
+                    .on("mouseleave.leg", unhighlightDataLegend)
+                    .attr("d", d3.symbol()
+                        .type(d3.symbols[people.indexOf(elem) % d3.symbols.length])
+                        .size(POINT_SIZE)()
+                    )
+                    .attr("stroke", COLORS[people.indexOf(elem) % COLORS.length])
+                    .attr("stroke-width", POINT_STROKE)
+                    .attr("fill", COLORS[people.indexOf(elem) % COLORS.length])
+                    .attr("transform", "translate(" + ((LGmargin.right - 156) / 2) + ", " + ((i * 25) + 20.5) + ")")
+                    .attr("class", elem + " data-point legend")
+
+
+                LGlegend.append("line")
+                    .on("mouseover.hl", highlightData)
+                    .on("mouseleave.hl", unhighlightData)
+                    .on("mouseover.leg", highlightDataLegend)
+                    .on("mouseleave.leg", unhighlightDataLegend)
+                    .attr("stroke", COLORS[people.indexOf(elem) % COLORS.length])
+                    .attr("stroke-width", 2)
+                    .attr("x1", 40)
+                    .attr("x2", 50)
+                    .attr("y1", (i * 25) + 20.5)
+                    .attr("y2", (i * 25) + 20.5)
+                    .attr("class", elem + " data-line legend")
+                    // TODO: rectangle thing here
+            })
+
+
+
 
         cwdata = data;
-        updateLG(cwdata);
+        timeRange =
+            updateLG(cwdata);
     }
 )
