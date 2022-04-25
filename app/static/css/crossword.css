@@ -43,5 +43,15 @@
     fill: #736D55;
 }
 
+.lglabel {
+    fill: black;
+    font-size: large;
+}
+
+.lg-ylabel {
+    transform: rotate(-90deg);
+    text-anchor: middle;
+}
+
 
 /* TODO: find final color for tooltip */

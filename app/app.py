@@ -13,6 +13,9 @@ import os
 import codecs
 import csv
 
+import dotenv
+dotenv.load_dotenv()
+
 dictConfig({
     'version': 1,
     'formatters': {'default': {
@@ -67,9 +70,10 @@ scheduler.init_app(app)
 cache.init_app(app)
 
 # schedule any recurring tasks
-from tasks.crossword import NYTCrossword
-scheduler.add_job(func=NYTCrossword.update_crossword_scores, id='update-crossword', trigger='cron', minute=55)
-scheduler.start()
+if os.environ['FLASK_ENV'] == 'production':
+    from tasks.crossword import NYTCrossword
+    scheduler.add_job(func=NYTCrossword.update_crossword_scores, id='update-crossword', trigger='cron', minute=55)
+    scheduler.start()
 
 @cache.cached(key_prefix='last_movies')
 def get_last_movies():
@@ -181,7 +185,7 @@ def vinyl_collection(username):
 def projects():
     return render_template("projects.html.j2")
 
-@cache.cached(key_prefix='crossword_data')
+@cache.cached()
 @app.route("/crossword_data")
 def crossword_data():
     r = requests.get(CROSSWORD_CSV)
@@ -197,6 +201,10 @@ def crossword_data():
         data.append(data_dict)
 
     return jsonify(data)
+
+@app.route("/crossword_history")
+def crossword_history():
+    return render_template("crossword_history.html.j2")
 
 @app.route("/")
 def index():

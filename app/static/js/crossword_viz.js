@@ -28,7 +28,7 @@ var LGxy;
 var LGdataG;
 var LGlegend;
 
-var LGmargin = { top: 80, right: 340, bottom: 50, left: 50 },
+var LGmargin = { top: 80, right: 340, bottom: 50, left: 90 },
     LGwidth = 1236 - LGmargin.left - LGmargin.right,
     LGheight = 636 - LGmargin.top - LGmargin.bottom;
 
@@ -143,9 +143,8 @@ function updateLG(data) {
     const T = d3.transition().duration(750);
 
     // we update the scale every time update is called
-    // TODO: update y-axis to have a threshold below/after max/min
     LGxScale.domain(d3.extent(data, d => d.date));
-    LGyScale.domain(d3.extent(data, d => d.time));
+    LGyScale.domain([d3.timeSecond.offset(d3.extent(data, d => d.time)[0], -10), d3.timeSecond.offset(d3.extent(data, d => d.time)[1], 10)]);
 
     LGxg.transition(T)
         .call(LGxAxis.ticks(d3.timeDay));
@@ -273,17 +272,28 @@ d3.json("/crossword_data").then(
             .attr("height", LGheight + LGmargin.top + LGmargin.bottom)
             .append("g")
             .attr("transform", "translate(" + LGmargin.left +
-                "," + LGmargin.top + ")");
+                "," + LGmargin.top + ")")
+            .attr("width", LGwidth)
+            .attr("height", LGheight)
 
         // set up axes
         LGxg = LGsvg.append("g")
             .attr("transform", "translate(0," + LGheight + ")")
         LGyg = LGsvg.append("g")
+
         LGxg.append("text")
-            .text("Date")
-            .attr("x", LGmargin.left + (LGwidth - LGmargin.left - LGmargin.right) / 2)
+            .attr("class", "lglabel lg-xlabel")
+            .attr("x", LGwidth / 2)
             .attr("y", "50")
-            .attr("fill", "black"); // TODO: make fill a CSS attribute
+            .text("Date")
+
+
+        LGyg.append("text")
+            .attr("class", "lglabel lg-ylabel")
+            .attr("x", LGheight / -2)
+            .attr("y", -50)
+            .text("Completion Time")
+
 
         // set up data svg group
         LGdataG
@@ -371,7 +381,14 @@ d3.json("/crossword_data").then(
             })
 
 
-
+        // set up infobox
+        infobox = d3.select(".linegraph")
+            .select("svg")
+            .append("g")
+            .attr("class", "full_legendg")
+            .attr("width", LGmargin.right - 64)
+            .attr("height", LGheight - (LGheight * 0.55))
+            .attr("transform", "translate(" + (LGmargin.left + LGwidth + 64) + "," + LGmargin.top + (LGheight - (LGheight * 0.55)) + ")")
 
         cwdata = data;
         minTime = d3.extent(cwdata, d => d.date)[0];
