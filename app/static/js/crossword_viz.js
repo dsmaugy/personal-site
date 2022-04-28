@@ -47,7 +47,7 @@ var LGyAxis = d3.axisLeft(LGyScale)
 
 // all person vars are obtained from first word of class name
 function highlightData() {
-    var person = this.className.baseVal.split(" ")[0];
+    var person = this.className.baseVal.split(" data")[0].replace(" ", ".");
     var allLines = d3.selectAll("." + person + ".data-line.data");
     var allPoints = d3.selectAll("." + person + ".data-point.data");
 
@@ -56,7 +56,7 @@ function highlightData() {
 }
 
 function unhighlightData() {
-    var person = this.className.baseVal.split(" ")[0];
+    var person = this.className.baseVal.split(" data")[0].replace(" ", ".");
     var allLines = d3.selectAll("." + person + ".data-line.data");
     var allPoints = d3.selectAll("." + person + ".data-point.data");
 
@@ -66,11 +66,11 @@ function unhighlightData() {
 }
 
 function highlightDataLegend(event, d) {
-    var person = this.className.baseVal.split(" ")[0];
+    var person = this.className.baseVal.split(" data")[0].replace(" ", ".");
     var allLines = d3.selectAll("." + person + ".data-line.legend");
     var allPoints = d3.selectAll("." + person + ".data-point.legend");
-    var choosenLabel = d3.selectAll("." + person + ".legend-lable");
-    var labelBG = d3.selectAll("." + person + ".label-bg");
+    var choosenLabel = d3.selectAll("." + person + ".data-data.label-txt");
+    var labelBG = d3.selectAll("." + person + ".data-data.label-bg");
 
     allLines.attr("stroke-width", LINE_STROKE_HIGHLIGHT_LEG)
         .style("cursor", "pointer");
@@ -81,11 +81,11 @@ function highlightDataLegend(event, d) {
 }
 
 function unhighlightDataLegend(event, d) {
-    var person = this.className.baseVal.split(" ")[0];
+    var person = this.className.baseVal.split(" data")[0].replace(" ", ".");
     var allLines = d3.selectAll("." + person + ".data-line.legend");
     var allPoints = d3.selectAll("." + person + ".data-point.legend");
-    var choosenLabel = d3.selectAll("." + person + ".legend-lable");
-    var labelBG = d3.selectAll("." + person + ".label-bg");
+    var choosenLabel = d3.selectAll("." + person + ".data-data.label-txt");
+    var labelBG = d3.selectAll("." + person + ".data-data.label-bg");
 
 
     allLines.attr("stroke-width", LINE_STROKE_LEG);
@@ -95,26 +95,27 @@ function unhighlightDataLegend(event, d) {
 }
 
 function toggleName(event, d) {
-    var person = this.className.baseVal.split(" ")[0];
+    var person = this.className.baseVal.split(" data")[0];
+    var personClassName = person.replace(" ", ".");
     var legend = d3.select(".full_legendg");
-
+    console.log(this.className)
     if (peopleStatus[person] == 1) {
         // person already selected
         console.log("unselecting " + person);
-        legend.selectAll("." + person + ".label-bg")
+        legend.selectAll("." + personClassName + ".data-data.label-bg")
             .style("fill", "#DB5E4F")
 
-        legend.selectAll("." + person + ".label-txt")
+        legend.selectAll("." + personClassName + ".data-data.label-txt")
             .style("fill", "grey")
 
         peopleStatus[person] = 0;
     } else {
         // person already deselected
         console.log("selecting " + person);
-        legend.selectAll("." + person + ".label-bg")
+        legend.selectAll("." + personClassName + ".data-data.label-bg")
             .style("fill", "#736D55")
 
-        legend.selectAll("." + person + ".label-txt")
+        legend.selectAll("." + personClassName + ".data-data.label-txt")
             .style("fill", "black")
         peopleStatus[person] = 1;
     }
@@ -317,7 +318,7 @@ d3.json("/crossword_data").then(
         LGlegend.append("rect")
             .attr("class", "lg-legend")
             .attr("width", LGmargin.right - 64)
-            .attr("height", LGheight - (LGheight * 0.55))
+            .attr("height", LGheight - (LGheight * (4.6 / people.length)))
 
         people.forEach(
             (elem, i) => {
@@ -327,7 +328,7 @@ d3.json("/crossword_data").then(
                     .on("mouseover.leg", highlightDataLegend)
                     .on("mouseleave.leg", unhighlightDataLegend)
                     .on("click", toggleName)
-                    .attr("class", elem + " label-bg")
+                    .attr("class", elem + " data-data label-bg")
                     .attr("width", LGmargin.right - 94)
                     .attr("height", 13)
                     .attr("opacity", LABEL_OPACITY)
@@ -341,7 +342,7 @@ d3.json("/crossword_data").then(
                     .on("mouseleave.leg", unhighlightDataLegend)
                     .on("click", toggleName)
                     .attr("transform", "translate(" + ((LGmargin.right - 104) / 2) + ", " + ((i * 25) + 25) + ")")
-                    .attr("class", elem + " " + "label-txt")
+                    .attr("class", elem + " " + "data-data label-txt")
                     .style("cursor", "pointer")
                     .text(elem)
 
