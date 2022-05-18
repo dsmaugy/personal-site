@@ -147,8 +147,14 @@ function updateLG(data) {
     LGxScale.domain(d3.extent(data, d => d.date));
     LGyScale.domain([d3.timeSecond.offset(d3.extent(data, d => d.time)[0], -10), d3.timeSecond.offset(d3.extent(data, d => d.time)[1], 10)]);
 
-    LGxg.transition(T)
-        .call(LGxAxis.ticks(d3.timeDay));
+    // show every tick on the x axis if the day scale is small enough (10 days)
+    if (d3.timeDay.count(LGxScale.domain()[0], LGxScale.domain()[1]) < 10) {
+        LGxg.transition(T)
+            .call(LGxAxis.ticks(d3.timeDay));
+    } else {
+        LGxg.transition(T)
+            .call(LGxAxis.ticks(15)); // I think this number can be arbitrary??
+    }
 
     LGyg.transition(T)
         .call(LGyAxis);
@@ -253,6 +259,7 @@ function onLGForm() {
     updateLG(filteredData);
 }
 
+// load the data and initialize graph
 d3.json("/crossword_data").then(
     (data) => {
         data.forEach(
