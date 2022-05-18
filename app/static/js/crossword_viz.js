@@ -30,7 +30,7 @@ var LGlegend;
 
 var LGmargin = { top: 80, right: 340, bottom: 50, left: 90 },
     LGwidth = 1236 - LGmargin.left - LGmargin.right,
-    LGheight = 636 - LGmargin.top - LGmargin.bottom;
+    LGheight = 736 - LGmargin.top - LGmargin.bottom;
 
 var LGxScale = d3.scaleTime()
     .range([0, LGwidth]);
@@ -45,32 +45,41 @@ var LGyAxis = d3.axisLeft(LGyScale)
     .tickFormat(d3.timeFormat("%M:%S"));
 
 
-// all person vars are obtained from first word of class name
 function highlightData() {
-    var person = this.className.baseVal.split(" data")[0].replace(" ", ".");
-    var allLines = d3.selectAll("." + person + ".data-line.data");
-    var allPoints = d3.selectAll("." + person + ".data-point.data");
+    var person = this.getAttribute("data-name");
+    var allLines = d3.selectAll(".data-line.data[data-name='" + person + "']");
+    var allPoints = d3.selectAll(".data-point.data[data-name='" + person + "']");
 
     allLines.attr("stroke-width", LINE_STROKE_HIGHLIGHT);
     allPoints.attr("stroke-width", POINT_STROKE_HIGHLIGHT);
+
+    // update the infobox only if we're hovering over a datapoint
+    if (this.getAttribute("data-date")) {
+        var dayPoints = cwdata.filter(d => d.date == this.getAttribute("data-date"));
+        updateDayInfo(dayPoints);
+    }
 }
 
 function unhighlightData() {
-    var person = this.className.baseVal.split(" data")[0].replace(" ", ".");
-    var allLines = d3.selectAll("." + person + ".data-line.data");
-    var allPoints = d3.selectAll("." + person + ".data-point.data");
+    var person = this.getAttribute("data-name");
+    var allLines = d3.selectAll(".data-line.data[data-name='" + person + "']");
+    var allPoints = d3.selectAll(".data-point.data[data-name='" + person + "']");
 
 
     allLines.attr("stroke-width", LINE_STROKE);
     allPoints.attr("stroke-width", POINT_STROKE);
+
+    if (this.getAttribute("data-date")) {
+        updateDayInfo([]);
+    }
 }
 
 function highlightDataLegend(event, d) {
-    var person = this.className.baseVal.split(" data")[0].replace(" ", ".");
-    var allLines = d3.selectAll("." + person + ".data-line.legend");
-    var allPoints = d3.selectAll("." + person + ".data-point.legend");
-    var choosenLabel = d3.selectAll("." + person + ".data-data.label-txt");
-    var labelBG = d3.selectAll("." + person + ".data-data.label-bg");
+    var person = this.getAttribute("data-name");
+    var allLines = d3.selectAll(".data-line.legend[data-name='" + person + "']");
+    var allPoints = d3.selectAll(".data-point.legend[data-name='" + person + "']");
+    var choosenLabel = d3.selectAll(".data-data.label-txt[data-name='" + person + "']");
+    var labelBG = d3.selectAll(".data-data.label-bg[data-name='" + person + "']");
 
     allLines.attr("stroke-width", LINE_STROKE_HIGHLIGHT_LEG)
         .style("cursor", "pointer");
@@ -81,11 +90,11 @@ function highlightDataLegend(event, d) {
 }
 
 function unhighlightDataLegend(event, d) {
-    var person = this.className.baseVal.split(" data")[0].replace(" ", ".");
-    var allLines = d3.selectAll("." + person + ".data-line.legend");
-    var allPoints = d3.selectAll("." + person + ".data-point.legend");
-    var choosenLabel = d3.selectAll("." + person + ".data-data.label-txt");
-    var labelBG = d3.selectAll("." + person + ".data-data.label-bg");
+    var person = this.getAttribute("data-name");
+    var allLines = d3.selectAll(".data-line.legend[data-name='" + person + "']");
+    var allPoints = d3.selectAll(".data-point.legend[data-name='" + person + "']");
+    var choosenLabel = d3.selectAll(".data-data.label-txt[data-name='" + person + "']");
+    var labelBG = d3.selectAll(".data-data.label-bg[data-name='" + person + "']");
 
 
     allLines.attr("stroke-width", LINE_STROKE_LEG);
@@ -95,35 +104,32 @@ function unhighlightDataLegend(event, d) {
 }
 
 function toggleName(event, d) {
-    var person = this.className.baseVal.split(" data")[0];
-    var personClassName = person.replace(" ", ".");
+    var person = this.getAttribute("data-name");
     var legend = d3.select(".full_legendg");
-    console.log(this.className)
     if (peopleStatus[person] == 1) {
         // person already selected
         console.log("unselecting " + person);
-        legend.selectAll("." + personClassName + ".data-data.label-bg")
+        legend.selectAll(".data-data.label-bg[data-name='" + person + "']")
             .style("fill", "#DB5E4F")
 
-        legend.selectAll("." + personClassName + ".data-data.label-txt")
+        legend.selectAll(".data-data.label-txt[data-name='" + person + "']")
             .style("fill", "grey")
 
         peopleStatus[person] = 0;
     } else {
         // person already deselected
         console.log("selecting " + person);
-        legend.selectAll("." + personClassName + ".data-data.label-bg")
+        legend.selectAll(".data-data.label-bg[data-name='" + person + "']")
             .style("fill", "#736D55")
 
-        legend.selectAll("." + personClassName + ".data-data.label-txt")
+        legend.selectAll(".data-data.label-txt[data-name='" + person + "']")
             .style("fill", "black")
         peopleStatus[person] = 1;
     }
 
-    var filteredData = cwdata.filter(d => d.date >= minTime && peopleStatus[d.name] == 1);
+    var filteredData = getFilteredData();
     updateLG(filteredData);
 }
-
 
 function showTooltip(event, d) {
     var tooltip = d3.select("#tooltip");
@@ -190,7 +196,9 @@ function updateLG(data) {
                 LGxScale(d.date) +
                 ", " +
                 LGyScale(d.time) + ")")
-            .attr("class", d => d.name + " data-point data"),
+            .attr("data-name", d => d.name)
+            .attr("data-date", d => d.date)
+            .attr("class", "data-point data"),
 
             update => update
             .transition(T)
@@ -227,7 +235,8 @@ function updateLG(data) {
             .attr("stroke", ([n, ]) => COLORS[people.indexOf(n) % COLORS.length])
             .attr("stroke-width", LINE_STROKE)
             .attr("fill", "none")
-            .attr("class", ([n, ]) => n + " data-line data"),
+            .attr("data-name", ([n, ]) => n)
+            .attr("class", "data-line data"),
 
             update => update
             .transition(T)
@@ -255,8 +264,17 @@ function onLGForm() {
         minTime = d3.extent(cwdata, d => d.date)[0];
     }
 
-    filteredData = cwdata.filter(d => d.date >= minTime && peopleStatus[d.name] == 1);
+    filteredData = getFilteredData();
     updateLG(filteredData);
+}
+
+// updates the infobox below the legend that shows times for that day on hover
+function updateDayInfo(data) {
+    console.log("ok")
+}
+
+function getFilteredData() {
+    return cwdata.filter(d => d.date >= minTime && peopleStatus[d.name] == 1);
 }
 
 // load the data and initialize graph
@@ -314,18 +332,24 @@ d3.json("/crossword_data").then(
             .attr("class", "points")
 
         // set up legend
+        var legendWidth = LGmargin.right - 64;
+        var legendHeight = LGheight - (LGheight * (5.6 / people.length));
+        console.log("Legend Height: " + legendHeight);
+        console.log("Legend Width: " + legendWidth);
+
         LGlegend = d3.select(".linegraph")
             .select("svg")
             .append("g")
             .attr("class", "full_legendg")
-            .attr("width", LGmargin.right - 64)
-            .attr("height", LGheight - (LGheight * 0.55))
-            .attr("transform", "translate(" + (LGmargin.left + LGwidth + 64) + "," + LGmargin.top + ")")
+            .attr("width", legendWidth)
+            .attr("height", legendHeight)
+            .attr("transform", "translate(" + parseFloat(LGmargin.left + LGwidth + 64) + "," + LGmargin.top + ")")
 
+        // background rectangle on legend
         LGlegend.append("rect")
             .attr("class", "lg-legend")
-            .attr("width", LGmargin.right - 64)
-            .attr("height", LGheight - (LGheight * (4.6 / people.length)))
+            .attr("width", legendWidth)
+            .attr("height", legendHeight)
 
         people.forEach(
             (elem, i) => {
@@ -335,7 +359,8 @@ d3.json("/crossword_data").then(
                     .on("mouseover.leg", highlightDataLegend)
                     .on("mouseleave.leg", unhighlightDataLegend)
                     .on("click", toggleName)
-                    .attr("class", elem + " data-data label-bg")
+                    .attr("data-name", elem)
+                    .attr("class", "data-data label-bg")
                     .attr("width", LGmargin.right - 94)
                     .attr("height", 13)
                     .attr("opacity", LABEL_OPACITY)
@@ -348,8 +373,9 @@ d3.json("/crossword_data").then(
                     .on("mouseover.leg", highlightDataLegend)
                     .on("mouseleave.leg", unhighlightDataLegend)
                     .on("click", toggleName)
+                    .attr("data-name", elem)
                     .attr("transform", "translate(" + ((LGmargin.right - 104) / 2) + ", " + ((i * 25) + 25) + ")")
-                    .attr("class", elem + " " + "data-data label-txt")
+                    .attr("class", "data-data label-txt")
                     .style("cursor", "pointer")
                     .text(elem)
 
@@ -359,6 +385,7 @@ d3.json("/crossword_data").then(
                     .on("mouseover.leg", highlightDataLegend)
                     .on("mouseleave.leg", unhighlightDataLegend)
                     .on("click", toggleName)
+                    .attr("data-name", elem)
                     .attr("d", d3.symbol()
                         .type(d3.symbols[people.indexOf(elem) % d3.symbols.length])
                         .size(POINT_SIZE)()
@@ -367,7 +394,7 @@ d3.json("/crossword_data").then(
                     .attr("stroke-width", POINT_STROKE)
                     .attr("fill", COLORS[people.indexOf(elem) % COLORS.length])
                     .attr("transform", "translate(" + ((LGmargin.right - 156) / 2) + ", " + ((i * 25) + 20.5) + ")")
-                    .attr("class", elem + " data-point legend")
+                    .attr("class", "data-point legend")
                     .style("cursor", "pointer")
 
 
@@ -377,13 +404,14 @@ d3.json("/crossword_data").then(
                     .on("mouseover.leg", highlightDataLegend)
                     .on("mouseleave.leg", unhighlightDataLegend)
                     .on("click", toggleName)
+                    .attr("data-name", elem)
                     .attr("stroke", COLORS[people.indexOf(elem) % COLORS.length])
                     .attr("stroke-width", 2)
                     .attr("x1", 40)
                     .attr("x2", 50)
                     .attr("y1", (i * 25) + 20.5)
                     .attr("y2", (i * 25) + 20.5)
-                    .attr("class", elem + " data-line legend")
+                    .attr("class", "data-line legend")
                     .style("cursor", "pointer")
 
             })
@@ -393,10 +421,24 @@ d3.json("/crossword_data").then(
         infobox = d3.select(".linegraph")
             .select("svg")
             .append("g")
-            .attr("class", "full_legendg")
-            .attr("width", LGmargin.right - 64)
-            .attr("height", LGheight - (LGheight * 0.55))
-            .attr("transform", "translate(" + (LGmargin.left + LGwidth + 64) + "," + LGmargin.top + (LGheight - (LGheight * 0.55)) + ")")
+            .attr("class", "infobox")
+            .attr("width", legendWidth)
+            .attr("height", LGheight - legendHeight)
+            .attr("transform", "translate(" + parseFloat(LGmargin.left + LGwidth + 64) + "," + parseFloat(LGmargin.top + legendHeight + 20) + ")")
+
+        infobox.append("rect")
+            .attr("class", "infobox-rect")
+            .attr("width", legendWidth)
+            .attr("height", LGheight - legendHeight)
+
+        infobox.append("text")
+            .attr("class", "infobox-title")
+            .attr("transform", "translate(" + parseFloat(legendWidth / 2) + ", 20)")
+            .text("Day Stats")
+
+        infobox.append("g")
+            .attr("class", "infog")
+
 
         cwdata = data;
         minTime = d3.extent(cwdata, d => d.date)[0];

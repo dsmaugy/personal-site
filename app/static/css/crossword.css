@@ -53,5 +53,15 @@
     text-anchor: middle;
 }
 
+.infobox-rect {
+    fill: #DE9F40;
+    rx: 5px;
+    ry: 5px;
+}
+
+.infobox-title {
+    text-anchor: middle;
+}
+
 
 /* TODO: find final color for tooltip */
