@@ -11,9 +11,16 @@ const LABEL_OPACITY_HIGHLIGHT = 0.35;
 const LABEL_OPACITY = 0.2;
 const LABEL_OPACITY_DISABLED = 0.05;
 
+// time parsers
 const parseTime = d3.timeParse("%M:%S");
 const parseDate = d3.timeParse("%m/%d/%Y");
 
+// time formatters
+const formatTime = d3.timeFormat("%M:%S");
+const formatDate = d3.timeFormat("%m/%d/%y");
+
+
+// global var to hold time range
 var minTime;
 
 // global var to hold data
@@ -27,22 +34,27 @@ var LGxg;
 var LGxy;
 var LGdataG;
 var LGlegend;
+var infobox;
 
+// graph size vars
 var LGmargin = { top: 80, right: 340, bottom: 50, left: 90 },
     LGwidth = 1236 - LGmargin.left - LGmargin.right,
     LGheight = 736 - LGmargin.top - LGmargin.bottom;
+
+var legendWidth = LGmargin.right - 64;
+var legendHeight;
 
 var LGxScale = d3.scaleTime()
     .range([0, LGwidth]);
 
 var LGxAxis = d3.axisBottom(LGxScale)
-    .tickFormat(d3.timeFormat("%m/%d/%y"));
+    .tickFormat(formatDate);
 
 var LGyScale = d3.scaleLinear()
     .range([LGheight, 0]);
 
 var LGyAxis = d3.axisLeft(LGyScale)
-    .tickFormat(d3.timeFormat("%M:%S"));
+    .tickFormat(formatTime);
 
 
 function highlightData() {
@@ -55,7 +67,9 @@ function highlightData() {
 
     // update the infobox only if we're hovering over a datapoint
     if (this.getAttribute("data-date")) {
-        var dayPoints = cwdata.filter(d => d.date == this.getAttribute("data-date"));
+        var dayPoints = cwdata
+            .filter(d => d.date == this.getAttribute("data-date"))
+            .sort((a, b) => d3.ascending(a.time, b.time));
         updateDayInfo(dayPoints);
     }
 }
@@ -137,7 +151,7 @@ function showTooltip(event, d) {
     tooltip.style("opacity", 0.9)
         .style("left", (event.pageX) + "px")
         .style("top", (event.pageY - 28) + "px")
-        .html("<b>" + d3.timeFormat("%m/%d/%y")(d.date) + "</b>" + "<br />" + d.name + ": " + "<b>" + d3.timeFormat("%M:%S")(d.time) + "</b>");
+        .html("<b>" + formatDate(d.date) + "</b>" + "<br />" + d.name + ": " + "<b>" + formatTime(d.time) + "</b>");
 
 }
 
@@ -250,7 +264,7 @@ function updateLG(data) {
 }
 
 // updates the date range for the visualization
-function onLGForm() {
+function updateTimeRange() {
     var timeSelection = document.getElementById("input-lg").value;
     if (timeSelection == "1week") {
         minTime = d3.timeWeek.offset(new Date(), -1);
@@ -270,7 +284,30 @@ function onLGForm() {
 
 // updates the infobox below the legend that shows times for that day on hover
 function updateDayInfo(data) {
-    console.log("ok")
+    const T = d3.transition().duration(450);
+    if (data.length > 0) {
+        console.log("Highlighting day: " + data[0].date)
+    }
+
+    infobox.select(".infog")
+        .selectAll("text")
+        .data(data)
+        .join(
+            enter => enter
+            .append("text")
+            .transition(T)
+            .attr("opacity", 1)
+            .attr("class", "infobox-text")
+            .attr("transform", (d, i) => "translate(10, " + parseFloat(i * 20 + 50) + ")")
+            .text((d, i) => parseInt(i + 1) + ". " + d.name + ": " + formatTime(d.time)),
+
+            update => update,
+
+            exit => exit
+            .transition(T)
+            .attr("opacity", 0)
+            .remove()
+        )
 }
 
 function getFilteredData() {
@@ -332,8 +369,7 @@ d3.json("/crossword_data").then(
             .attr("class", "points")
 
         // set up legend
-        var legendWidth = LGmargin.right - 64;
-        var legendHeight = LGheight - (LGheight * (5.6 / people.length));
+        legendHeight = LGheight - (LGheight * (5.6 / people.length));
         console.log("Legend Height: " + legendHeight);
         console.log("Legend Width: " + legendWidth);
 
@@ -441,7 +477,8 @@ d3.json("/crossword_data").then(
 
 
         cwdata = data;
-        minTime = d3.extent(cwdata, d => d.date)[0];
-        updateLG(cwdata);
+
+        // this also calls updateLG
+        updateTimeRange();
     }
 )

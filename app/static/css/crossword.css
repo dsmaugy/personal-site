@@ -63,5 +63,10 @@
     text-anchor: middle;
 }
 
+.infobox-text {
+    text-anchor: start;
+    text-align: left;
+}
+
 
 /* TODO: find final color for tooltip */
