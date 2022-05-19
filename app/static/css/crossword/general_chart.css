@@ -12,19 +12,31 @@
     pointer-events: none;
 }
 
-.form-group {
+.date-form-group {
     text-align: center;
 }
 
-.form-group h3 {
+.date-form-group h3 {
     text-align: center;
     display: inline;
 }
 
-.form-group select {
+.date-form-group select {
     display: inline;
     width: 6rem;
     text-align: center;
+}
+
+.form-control {
+    border-radius: 6px;
+    background-color: #DE9F40 !important;
+    outline: 0;
+    border: 1px solid crimson;
+}
+
+.form-control option {
+    background-color: #DE9F40;
+    border-radius: 3px;
 }
 
 .lg-legend {
@@ -63,9 +75,17 @@
     text-anchor: middle;
 }
 
+.infobox-title-date {
+    font-weight: bold;
+}
+
 .infobox-text {
     text-anchor: start;
     text-align: left;
+}
+
+.infobox-time {
+    font-weight: bold;
 }
 
 

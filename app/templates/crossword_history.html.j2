@@ -1,7 +1,7 @@
 {% extends "base.html.j2" %}
 {% block title %} Projects - {% endblock %}
 {% block head %} 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/crossword.css') }}"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/crossword/general_chart.css') }}"> 
     <script src="https://d3js.org/d3.v7.min.js"></script>
 {% endblock %}
 
@@ -16,7 +16,7 @@
     <div class="container"> 
         <div class="row">
             <div class="col justify-content-center">
-              <div class="form-group form-inline">
+              <div class="date-form-group">
                 <h3>looking at data from: </h3>
                 <select class="form-control" id="input-lg" onchange="updateTimeRange()">
                     <option value="all">all time</option>
@@ -31,12 +31,17 @@
         <div class="row">
 
             <div class="col d-flex justify-content-center">
-                <div class="linegraph">
-                    
-                </div>
-                <script src="{{ url_for('static', filename='js/crossword_viz.js') }}"> </script>
+                <div class="linegraph"></div>
+                <script type="module" src="{{ url_for('static', filename='js/crossword/general_chart_viz.js') }}"> </script>            
             </div>
         </div>
+
+        {# <div class="row">
+            <div class="col d-flex justify-content-center">
+                <div class="weekgraph"></div>
+                <script type="module" src="{{ url_for('static', filename='js/crossword/weekday_viz.js') }}"> </script>            
+            </div>
+        </div> #}
     </div>
 
     <div id="tooltip"></div>

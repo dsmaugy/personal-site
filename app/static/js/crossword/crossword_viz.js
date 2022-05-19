@@ -19,7 +19,6 @@ const parseDate = d3.timeParse("%m/%d/%Y");
 const formatTime = d3.timeFormat("%M:%S");
 const formatDate = d3.timeFormat("%m/%d/%y");
 
-
 // global var to hold time range
 var minTime;
 
@@ -31,7 +30,7 @@ var peopleStatus = {};
 // global graph vars
 var LGsvg;
 var LGxg;
-var LGxy;
+var LGyg;
 var LGdataG;
 var LGlegend;
 var infobox;
@@ -84,7 +83,12 @@ function unhighlightData() {
     allPoints.attr("stroke-width", POINT_STROKE);
 
     if (this.getAttribute("data-date")) {
-        updateDayInfo([]);
+        var latestDay = d3.extent(cwdata, d => d.date)[1]
+        var todayPoints = cwdata
+            .filter(d => d.date >= latestDay) // This breaks if it's an == and not a >=. I have no idea why.
+            .sort((a, b) => d3.ascending(a.time, b.time));
+
+        updateDayInfo(todayPoints);
     }
 }
 
@@ -287,26 +291,45 @@ function updateDayInfo(data) {
     const T = d3.transition().duration(450);
     if (data.length > 0) {
         console.log("Highlighting day: " + data[0].date)
+
+        d3.select(".infobox-title")
+            .text("Day Stats")
+
+        d3.select(".infobox-title")
+            .append("tspan")
+            .attr("class", "infobox-title-date")
+            .text(" (" + formatDate(data[0].date) + ")")
+
     }
 
     infobox.select(".infog")
         .selectAll("text")
-        .data(data)
+        .data(data, d => d.name + d.date)
         .join(
-            enter => enter
-            .append("text")
-            .transition(T)
-            .attr("opacity", 1)
-            .attr("class", "infobox-text")
-            .attr("transform", (d, i) => "translate(10, " + parseFloat(i * 20 + 50) + ")")
-            .text((d, i) => parseInt(i + 1) + ". " + d.name + ": " + formatTime(d.time)),
+            enter => {
+                var textBlock = enter.append("text");
+
+                textBlock.transition(T)
+                    .attr("opacity", 1)
+                    .attr("class", "infobox-text")
+                    .attr("transform", (d, i) => "translate(10, " + parseFloat(i * 20 + 50) + ")")
+
+                textBlock.text((d, i) => parseInt(i + 1) + ". " + d.name + ": ")
+
+                textBlock.append("tspan")
+                    .attr("class", "infobox-time")
+                    .text(d => formatTime(d.time))
+            },
+
 
             update => update,
 
-            exit => exit
-            .transition(T)
-            .attr("opacity", 0)
-            .remove()
+            exit => {
+                exit
+                    .transition(T)
+                    .attr("opacity", 0)
+                    .remove()
+            }
         )
 }
 
@@ -322,12 +345,14 @@ d3.json("/crossword_data").then(
                 elem.time = parseTime(elem.time);
                 elem.date = parseDate(elem.date);
 
-                if (!people.includes(elem.name)) {
-                    people.push(elem.name);
-                    peopleStatus[elem.name] = 1;
-                }
+                // if (!people.includes(elem.name)) {
+                //     people.push(elem.name);
+                //     peopleStatus[elem.name] = 1;
+                // }
             }
         );
+
+        people = [...new Set(data.map(d => d.name))];
 
         // set the line graph SVG
         LGsvg = d3.select(".linegraph").append("svg")
@@ -389,6 +414,7 @@ d3.json("/crossword_data").then(
 
         people.forEach(
             (elem, i) => {
+                peopleStatus[elem] = 1
                 LGlegend.append("rect")
                     .on("mouseover.hl", highlightData)
                     .on("mouseleave.hl", unhighlightData)
@@ -472,13 +498,23 @@ d3.json("/crossword_data").then(
             .attr("transform", "translate(" + parseFloat(legendWidth / 2) + ", 20)")
             .text("Day Stats")
 
+        d3.select(".infobox-title")
+            .append("tspan")
+            .attr("class", "infobox-title-date")
+            .text(" (today)")
+
         infobox.append("g")
             .attr("class", "infog")
-
 
         cwdata = data;
 
         // this also calls updateLG
         updateTimeRange();
+
+        // prefill the infobox with today's data (sorted) 
+        var todayPoints = cwdata
+            .filter(d => d.date >= d3.extent(cwdata, d => d.date)[1]) // This breaks if it's an == and not a >=. I have no idea why.
+            .sort((a, b) => d3.ascending(a.time, b.time));
+        updateDayInfo(todayPoints);
     }
 )
