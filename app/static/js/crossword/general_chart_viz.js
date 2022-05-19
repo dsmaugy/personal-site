@@ -39,6 +39,7 @@ var LGmargin = { top: 80, right: 340, bottom: 50, left: 90 },
 var legendWidth = LGmargin.right - 64;
 var legendHeight;
 
+// axes and scales
 var LGxScale = d3.scaleTime()
     .range([0, LGwidth]);
 
@@ -494,3 +495,7 @@ var todayPoints = cwdata
     .filter(d => d.date >= d3.extent(cwdata, d => d.date)[1]) // This breaks if it's an == and not a >=. I have no idea why.
     .sort((a, b) => d3.ascending(a.time, b.time));
 updateDayInfo(todayPoints);
+
+
+// add any event listeners
+d3.select('#input-lg').on('change', updateTimeRange);
