@@ -22,4 +22,8 @@ export default await d3.json("/crossword_data").then(
     }
 );
 
-export { people, cwdata, COLORS }
+function getPersonColor(name) {
+    return COLORS[people.indexOf(name) % COLORS.length]
+}
+
+export { people, cwdata, getPersonColor }

@@ -15,3 +15,7 @@
     transform: rotate(-90deg);
     text-anchor: middle;
 }
+
+.weekgraph {
+    margin-bottom: 20em;
+}

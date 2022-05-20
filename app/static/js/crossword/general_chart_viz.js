@@ -1,4 +1,4 @@
-import defaultImport, { people, cwdata, COLORS } from "./crossword_data.js"
+import defaultImport, { people, cwdata, getPersonColor } from "./crossword_data.js"
 
 const POINT_STROKE = "1.5";
 const POINT_STROKE_HIGHLIGHT = "5";
@@ -203,9 +203,9 @@ function updateLG(data) {
                 .type(d3.symbols[people.indexOf(d.name) % d3.symbols.length])
                 .size(POINT_SIZE)()
             )
-            .attr("stroke", d => COLORS[people.indexOf(d.name) % COLORS.length])
+            .attr("stroke", d => getPersonColor(d.name))
             .attr("stroke-width", POINT_STROKE)
-            .attr("fill", d => COLORS[people.indexOf(d.name) % COLORS.length])
+            .attr("fill", d => getPersonColor(d.name))
             .attr("transform", d => "translate(" +
                 LGxScale(d.date) +
                 ", " +
@@ -246,7 +246,7 @@ function updateLG(data) {
             .style("cursor", "pointer")
             .transition(T)
             .attr("d", ([, d]) => LGline(d))
-            .attr("stroke", ([n, ]) => COLORS[people.indexOf(n) % COLORS.length])
+            .attr("stroke", ([n, ]) => getPersonColor(n))
             .attr("stroke-width", LINE_STROKE)
             .attr("fill", "none")
             .attr("data-name", ([n, ]) => n)
@@ -432,9 +432,9 @@ people.forEach(
                 .type(d3.symbols[people.indexOf(elem) % d3.symbols.length])
                 .size(POINT_SIZE)()
             )
-            .attr("stroke", COLORS[people.indexOf(elem) % COLORS.length])
+            .attr("stroke", getPersonColor(elem))
             .attr("stroke-width", POINT_STROKE)
-            .attr("fill", COLORS[people.indexOf(elem) % COLORS.length])
+            .attr("fill", getPersonColor(elem))
             .attr("transform", "translate(" + ((LGmargin.right - 156) / 2) + ", " + ((i * 25) + 20.5) + ")")
             .attr("class", "data-point legend")
             .style("cursor", "pointer")
@@ -447,7 +447,7 @@ people.forEach(
             .on("mouseleave.leg", unhighlightDataLegend)
             .on("click", toggleName)
             .attr("data-name", elem)
-            .attr("stroke", COLORS[people.indexOf(elem) % COLORS.length])
+            .attr("stroke", getPersonColor(elem))
             .attr("stroke-width", 2)
             .attr("x1", 40)
             .attr("x2", 50)

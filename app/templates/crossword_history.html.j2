@@ -3,6 +3,7 @@
 {% block head %} 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/crossword/general_chart.css') }}"> 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/crossword/week_chart.css') }}"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/crossword/people_stats.css') }}"> 
     <script src="https://d3js.org/d3.v7.min.js"></script>
 {% endblock %}
 
@@ -40,14 +41,35 @@
         <div class="row">
             <div class="col d-flex justify-content-center">
                 <div class="weekgraph">
+                    <h2 class="weekgraph-caption">looking at the <b id="button-label"></b> completion time per day of the week</h2>
+
                     <div class="col d-flex justify-content-center">
                         <button type="button" data-toggle="button" class="weekbtn btn btn-outline-secondary" id="median-button">median</button>
                         <button type="button" data-toggle="button" class="weekbtn btn btn-outline-secondary" id="min-button">minimum</button>
                         <button type="button" data-toggle="button" class="weekbtn btn btn-outline-secondary" id="max-button">maximum</button>
                     </div>
-                    <h2 class="weekgraph-caption">looking at the <b id="button-label"></b> completion time per day of the week</h2>
                 </div>
                 <script type="module" src="{{ url_for('static', filename='js/crossword/weekday_viz.js') }}"> </script>            
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <div class="person-form-group">
+                    <h3>looking at data for: </h3>
+                    <select class="form-control" id="input-person">
+                    </select>
+                </div>         
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="personstats">
+                    <h3><b class="personstats-name"></b> has completed <b class="personstats-played"></b> daily minis</h3>
+                    <h3></h3>
+                </div>
+                <script type="module" src="{{ url_for('static', filename='js/crossword/people_viz.js') }}"> </script>   
             </div>
         </div>
     </div>

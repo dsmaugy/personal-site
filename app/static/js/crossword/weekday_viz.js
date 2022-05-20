@@ -1,4 +1,4 @@
-import defaultImport, { people, cwdata, COLORS } from "./crossword_data.js"
+import defaultImport, { people, cwdata, getPersonColor } from "./crossword_data.js"
 
 const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
@@ -95,7 +95,7 @@ function updateDataMode() {
     } else if (this.id == "min-button") {
         var dataByDay = d3.rollup(cwdata, v => d3.least(v, d => d.time), d => d.date.getDay());
         var data = Array.from(dataByDay).map(d => {
-            return { "day": WEEKDAYS[d[0]], "value": d[1].time, "name": d[1].name, "date": d[1].date, "color": COLORS[people.indexOf(d[1].name) % COLORS.length] }
+            return { "day": WEEKDAYS[d[0]], "value": d[1].time, "name": d[1].name, "date": d[1].date, "color": getPersonColor(d[1].name) }
         })
 
         d3.select("#button-label").text("minimum");
@@ -105,7 +105,7 @@ function updateDataMode() {
     } else if (this.id == "max-button") {
         var dataByDay = d3.rollup(cwdata, v => d3.greatest(v, d => d.time), d => d.date.getDay());
         var data = Array.from(dataByDay).map(d => {
-            return { "day": WEEKDAYS[d[0]], "value": d[1].time, "name": d[1].name, "date": d[1].date, "color": COLORS[people.indexOf(d[1].name) % COLORS.length] }
+            return { "day": WEEKDAYS[d[0]], "value": d[1].time, "name": d[1].name, "date": d[1].date, "color": getPersonColor(d[1].name) }
         })
 
         d3.select("#button-label").text("maximum");
