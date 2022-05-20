@@ -1,4 +1,4 @@
-#tooltip {
+.tooltip {
     position: absolute;
     opacity: 0;
     text-align: center;
@@ -37,6 +37,10 @@
 .form-control option {
     background-color: #DE9F40;
     border-radius: 3px;
+}
+
+.linegraph {
+    margin-bottom: 20em;
 }
 
 .lg-legend {

@@ -1,0 +1,17 @@
+.weekbtn {
+    margin: 0px 14px;
+}
+
+.weekgraph-caption {
+    text-align: center;
+}
+
+.wglabel {
+    fill: black;
+    font-size: large;
+}
+
+.wg-ylabel {
+    transform: rotate(-90deg);
+    text-anchor: middle;
+}

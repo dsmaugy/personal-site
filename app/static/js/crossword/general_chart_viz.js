@@ -1,6 +1,5 @@
-import defaultImport, { people, cwdata } from "./crossword_data.js"
+import defaultImport, { people, cwdata, COLORS } from "./crossword_data.js"
 
-const COLORS = ["#388EA6", "#F2AD6B", "#7796F2", "#F29983", "#F283A7", "#96967E"];
 const POINT_STROKE = "1.5";
 const POINT_STROKE_HIGHLIGHT = "5";
 const LINE_STROKE = "0.5";
@@ -147,7 +146,7 @@ function toggleName(event, d) {
 }
 
 function showTooltip(event, d) {
-    var tooltip = d3.select("#tooltip");
+    var tooltip = d3.select("#general-tooltip");
 
     tooltip.style("opacity", 0.9)
         .style("left", (event.pageX) + "px")
@@ -157,7 +156,7 @@ function showTooltip(event, d) {
 }
 
 function hideTooltip() {
-    d3.select("#tooltip")
+    d3.select("#general-tooltip")
         .style("opacity", 0)
 }
 
@@ -350,11 +349,11 @@ LGxg = LGsvg.append("g")
     .attr("transform", "translate(0," + LGheight + ")")
 LGyg = LGsvg.append("g")
 
-LGxg.append("text")
-    .attr("class", "lglabel lg-xlabel")
-    .attr("x", LGwidth / 2)
-    .attr("y", "50")
-    .text("Date")
+// LGxg.append("text")
+//     .attr("class", "lglabel lg-xlabel")
+//     .attr("x", LGwidth / 2)
+//     .attr("y", "50")
+//     .text("Date")
 
 
 LGyg.append("text")
