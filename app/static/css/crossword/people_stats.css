@@ -1,5 +1,5 @@
-.person-form-group {
-    text-align: center;
+.personstats-container {
+    display: none;
 }
 
 .person-form-group h3 {
@@ -14,5 +14,5 @@
 }
 
 .personstats {
-    margin-top: 5rem;
+    margin-top: 3rem;
 }

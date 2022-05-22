@@ -173,7 +173,7 @@ function updateLG(data) {
             .call(LGxAxis.ticks(d3.timeDay));
     } else {
         LGxg.transition(T)
-            .call(LGxAxis.ticks(15)); // I think this number can be arbitrary??
+            .call(LGxAxis.ticks(10));
     }
 
     LGyg.transition(T)
@@ -498,3 +498,7 @@ updateDayInfo(todayPoints);
 
 // add any event listeners
 d3.select('#input-lg').on('change', updateTimeRange);
+
+if (window.outerWidth > LGwidth) {
+    d3.select(".linegraph-container").style("display", "block")
+}

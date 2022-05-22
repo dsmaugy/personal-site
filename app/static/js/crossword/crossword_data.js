@@ -19,11 +19,16 @@ export default await d3.json("/crossword_data").then(
 
         people = [...new Set(data.map(d => d.name))];
         cwdata = data;
+
+        d3.select(".loading-indicator").style("display", "none");
     }
 );
 
 function getPersonColor(name) {
     return COLORS[people.indexOf(name) % COLORS.length]
 }
+
+
+
 
 export { people, cwdata, getPersonColor }

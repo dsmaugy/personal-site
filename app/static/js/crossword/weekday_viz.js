@@ -1,6 +1,7 @@
 import defaultImport, { people, cwdata, getPersonColor } from "./crossword_data.js"
 
-const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+// const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+const WEEKDAYS = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"]
 
 // time formatters
 const formatTime = d3.timeFormat("%M:%S");
@@ -14,9 +15,12 @@ const MIN_STATE = 1;
 const MAX_STATE = 2;
 
 // graph size vars
-var margin = { top: 85, right: 20, bottom: 20, left: 70 },
-    width = 1036 - margin.left - margin.right,
-    height = 636 - margin.top - margin.bottom;
+// var margin = { top: 85, right: 20, bottom: 20, left: 70 },
+//     width = 1036 - margin.left - margin.right,
+//     height = 636 - margin.top - margin.bottom;
+var margin = { top: 5, right: 0, bottom: 20, left: 70 },
+    width = window.outerWidth * 0.55 - margin.left - margin.right,
+    height = window.outerHeight * 0.56 - margin.top - margin.bottom;
 
 // global graph vars
 var svg, xScale, yScale, xAxis, yAxis, xg, yg;
@@ -142,3 +146,5 @@ function onUnhighlightData() {
 
 d3.selectAll('.weekbtn').on('click', updateDataMode);
 document.getElementById("median-button").click();
+
+d3.select(".weekgraph-container").style("display", "block")

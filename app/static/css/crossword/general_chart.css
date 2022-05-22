@@ -1,3 +1,7 @@
+.linegraph-container {
+    display: none;
+}
+
 .tooltip {
     position: absolute;
     opacity: 0;
@@ -40,7 +44,7 @@
 }
 
 .linegraph {
-    margin-bottom: 20em;
+    margin-bottom: 5em;
 }
 
 .lg-legend {

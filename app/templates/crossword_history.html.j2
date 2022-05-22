@@ -15,63 +15,93 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container"> 
-        <div class="row">
-            <div class="col justify-content-center">
-              <div class="date-form-group">
-                <h3>looking at data from: </h3>
-                <select class="form-control" id="input-lg">
-                    <option value="all">all time</option>
-                    <option value="3day">3 days</option>
-                    <option value="1week" selected>1 week</option>
-                    <option value="2week">2 weeks</option>
-                    <option value="1month">1 month</option>
-                </select>
+    <div class="container">
+        <div class="loading-indicator">
+            <div class="col" style="text-align:center;">
+                <div class="spinner-border" role="status"></div>
             </div>
         </div>
-        </div>
-        <div class="row">
-
-            <div class="col d-flex justify-content-center">
-                <div class="linegraph"></div>
-                <script type="module" src="{{ url_for('static', filename='js/crossword/general_chart_viz.js') }}"> </script>            
+        <div class="linegraph-container"> 
+            <div class="row">
+                <div class="col">
+                    <h1>breakdown by day</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col justify-content-center">
+                <div class="date-form-group">
+                    <h3>looking at data from: </h3>
+                    <select class="form-control" id="input-lg">
+                        <option value="all">all time</option>
+                        <option value="3day">3 days</option>
+                        <option value="1week" selected>1 week</option>
+                        <option value="2week">2 weeks</option>
+                        <option value="1month">1 month</option>
+                    </select>
+                </div>
+            </div>
+            </div>
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <div class="linegraph"></div>
+                    <script type="module" src="{{ url_for('static', filename='js/crossword/general_chart_viz.js') }}"> </script>            
+                </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col d-flex justify-content-center">
-                <div class="weekgraph">
+        <div class="weekgraph-container">
+            <div class="row">
+                <div class="col">
+                    <h1>breakdown by day of week</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
                     <h2 class="weekgraph-caption">looking at the <b id="button-label"></b> completion time per day of the week</h2>
-
                     <div class="col d-flex justify-content-center">
-                        <button type="button" data-toggle="button" class="weekbtn btn btn-outline-secondary" id="median-button">median</button>
-                        <button type="button" data-toggle="button" class="weekbtn btn btn-outline-secondary" id="min-button">minimum</button>
-                        <button type="button" data-toggle="button" class="weekbtn btn btn-outline-secondary" id="max-button">maximum</button>
+                            <button type="button" data-toggle="button" class="weekbtn btn btn-outline-secondary" id="median-button">median</button>
+                            <button type="button" data-toggle="button" class="weekbtn btn btn-outline-secondary" id="min-button">minimum</button>
+                            <button type="button" data-toggle="button" class="weekbtn btn btn-outline-secondary" id="max-button">maximum</button>
                     </div>
                 </div>
-                <script type="module" src="{{ url_for('static', filename='js/crossword/weekday_viz.js') }}"> </script>            
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col d-flex justify-content-center">
-                <div class="person-form-group">
-                    <h3>looking at data for: </h3>
-                    <select class="form-control" id="input-person">
-                    </select>
-                </div>         
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <div class="personstats">
-                    <h3><b class="personstats-name"></b> has completed <b class="personstats-played"></b> daily minis</h3>
-                    <h3></h3>
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <div class="weekgraph"></div>
+                    <script type="module" src="{{ url_for('static', filename='js/crossword/weekday_viz.js') }}"> </script>            
                 </div>
-                <script type="module" src="{{ url_for('static', filename='js/crossword/people_viz.js') }}"> </script>   
             </div>
         </div>
+
+        <div class="personstats-container">
+            <div class="row">
+                <h1>breakdown by person</h1>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="person-form-group">
+                        <h3>looking at data for: </h3>
+                        <select class="form-control" id="input-person">
+                        </select>
+                    </div>         
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="personstats">
+                        <h3><b class="personstats-name"></b> has completed <b class="personstats-played"></b> daily minis out of <b class="personstats-total-track"></b> days of tracked data (<b class="personstats-comletion-pct"></b>) <span class="personstast-completion-emoji"></span></h3>
+                        <h3>their <b>fastest</b> time was <b class="personstats-fastest-time"></b> on <b class="personstats-fastest-date"></b> 🤩</h3>
+                        <h3>their <b>slowest</b> time was <b class="personstats-slowest-time"></b> on <b class="personstats-slowest-date"></b> 😭</h3>
+                        <h3>their best day of the week is <b class="personstats-dow"></b> where they have an average completion time of <b class="personstats-dow-time"></b> 😀</h3>
+                    </div>
+                    <script type="module" src="{{ url_for('static', filename='js/crossword/people_viz.js') }}"> </script>   
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div class="tooltip" id="general-tooltip"></div>
