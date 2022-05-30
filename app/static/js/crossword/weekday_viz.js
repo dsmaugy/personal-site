@@ -19,7 +19,7 @@ const MAX_STATE = 2;
 //     width = 1036 - margin.left - margin.right,
 //     height = 636 - margin.top - margin.bottom;
 var margin = { top: 5, right: 0, bottom: 20, left: 70 },
-    width = window.outerWidth * 0.55 - margin.left - margin.right,
+    width = window.outerWidth * 0.69 - margin.left - margin.right,
     height = window.outerHeight * 0.56 - margin.top - margin.bottom;
 
 // global graph vars
