@@ -105,6 +105,10 @@ class NYTCrossword():
                 if name[-5:] == "(you)":
                     name = name[0:-6] # remove the (you) classifier
 
+                # jaimy
+                if name == "dr chinc":
+                    name = "dr chince"
+
                 # if I haven't done it yet
                 if len(entry.find_elements_by_class_name("lbd-score__time")) == 0:
                     logging.info("Skipping myself because I haven't done it yet!")
