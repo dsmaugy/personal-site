@@ -1,3 +1,15 @@
 .card-text {
     font-size: 1rem;
 }
+
+.card-img-top {
+    height: 200px;
+}
+
+.card-text a {
+    font-size: 1rem;
+}
+
+.card-header {
+    font-weight: bold;
+}
