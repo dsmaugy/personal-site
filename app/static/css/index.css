@@ -54,6 +54,7 @@
     border-radius: 50%;
     background-color: rgba(0, 0, 0, 0.5);
     color: #1ED05E;
+    height: 90px;
 }
 
 .play-toggle:hover {
