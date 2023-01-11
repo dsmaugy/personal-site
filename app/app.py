@@ -72,6 +72,7 @@ cache.init_app(app)
 # schedule any recurring tasks
 if os.environ['FLASK_ENV'] == 'production':
     from tasks.crossword import NYTCrossword
+    # cron minute: 55 is 55th minute of every hour
     scheduler.add_job(func=NYTCrossword.update_crossword_scores, id='update-crossword', trigger='cron', minute=55)
     scheduler.start()
 

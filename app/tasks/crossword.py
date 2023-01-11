@@ -4,6 +4,7 @@ from datetime import timedelta
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 import logging
 import os
@@ -44,10 +45,12 @@ doc = client.open_by_url(SHEETS_URL)
 def is_weekend(date: datetime) -> bool:
     return date.weekday() == 6 or date.weekday() == 5
 
+logging.info("Initialized crossword scraper")
 class NYTCrossword():
 
     @staticmethod
     def update_crossword_scores():
+        logging.info("Starting crossword scraper")
         s = doc.worksheets()[0]
 
         # set up selenium
@@ -75,7 +78,7 @@ class NYTCrossword():
 
             # wait for the leaderboard to load
             WebDriverWait(driver, 5).until(
-                EC.visibility_of(driver.find_element_by_xpath(LBOARD_XPATH))
+                EC.visibility_of(driver.find_element(By.XPATH, LBOARD_XPATH))
             )
             sleep(1) # extra sleep just in case
 
@@ -99,9 +102,9 @@ class NYTCrossword():
                     name = s.row_values(i+1)[1]
                     today_rows[name] = i+1
             
-            lboard_items = driver.find_element_by_xpath(LBOARD_ITEMS_XPATH)
-            for entry in lboard_items.find_elements_by_class_name("lbd-score"):
-                name = entry.find_element_by_class_name("lbd-score__name").text
+            lboard_items = driver.find_element(By.XPATH, LBOARD_ITEMS_XPATH)
+            for entry in lboard_items.find_elements(By.CLASS_NAME, "lbd-score"):
+                name = entry.find_element(By.CLASS_NAME, "lbd-score__name").text
                 if name[-5:] == "(you)":
                     name = name[0:-6] # remove the (you) classifier
 
@@ -110,11 +113,11 @@ class NYTCrossword():
                     name = "dr chince"
 
                 # if I haven't done it yet
-                if len(entry.find_elements_by_class_name("lbd-score__time")) == 0:
+                if len(entry.find_elements(By.CLASS_NAME, "lbd-score__time")) == 0:
                     logging.info("Skipping myself because I haven't done it yet!")
                     continue
                 
-                time = entry.find_element_by_class_name("lbd-score__time").text
+                time = entry.find_element(By.CLASS_NAME, "lbd-score__time").text
                 
                 # skip if they haven't finished it yet
                 if time == "--":
