@@ -37,7 +37,7 @@ dictConfig({
 app = Flask(__name__)
 
 CACHE_CONFIG = {
-    "CACHE_TYPE": "SASLMemcachedCache",
+    "CACHE_TYPE": "saslmemcached",
     "CACHE_MEMCACHED_SERVERS": [os.environ['MEMCACHIER_SERVERS']],
     "CACHE_MEMCACHED_USERNAME": os.environ['MEMCACHIER_USERNAME'],
     "CACHE_MEMCACHED_PASSWORD": os.environ['MEMCACHIER_PASSWORD'],
@@ -45,7 +45,7 @@ CACHE_CONFIG = {
     "CACHE_DEFAULT_TIMEOUT": 60,
     'CACHE_OPTIONS': { 'behaviors': {
                         # Faster IO
-                        'tcp_nodelay': False,
+                        'tcp_nodelay': True,
                         # Keep connection alive
                         'tcp_keepalive': True,
                         # Timeout for set/get requests
