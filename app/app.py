@@ -12,6 +12,7 @@ import re
 import os
 import codecs
 import csv
+import logging
 
 import dotenv
 dotenv.load_dotenv()
@@ -63,11 +64,18 @@ CROSSWORD_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTG3b_CTnI--Lys
 
 cache = Cache(config=CACHE_CONFIG)
 spotify = SpotifyWrap()
+logging.info("Spotify API Initialized")
+
 discogs = Discogs(user_token=os.environ['DISCOGS_TOKEN'])
+logging.info("Discogs API Initialized")
+
 scheduler = APScheduler()
 
 scheduler.init_app(app)
+logging.info("Task Scheduler Initialized")
+
 cache.init_app(app)
+logging.info("Cache Initialized")
 
 # schedule any recurring tasks
 if os.environ['FLASK_ENV'] == 'production':
