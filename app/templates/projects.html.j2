@@ -12,7 +12,26 @@
 
 {% block body %}
     <div class="container"> 
-        <div class="row">
+        <div class="row mb-5">
+            <div class="col d-flex justify-content-center">
+                <div class="card text-white bg-secondary" style="width: 24rem;">
+                    <img class="card-img-top" src="{{ url_for('static', filename='images/projects/system_symphony.jpg') }}" alt="Card image cap">
+                    <div class="card-header">system-symphony</div>
+                    <div class="card-body">
+                        <p class="card-text"><b>system-symphony</b> is a program that synthesizes sounds based on active processes on the running computer. 
+                        <br>A collaboration with <a href="https://kaloyankolev.com/" target="_blank">Kaloyan</a>.
+                        <br>For <b>The Media of Sound</b> taught by <a href="https://www.rosswightman.net/" target="_blank">Ross</a>
+                        <br>in the Fall of 2022 at Yale University.</p>
+
+                        <a href="https://pypi.org/project/system-symphony/" class="btn btn-light mb-1" target="_blank">to pypi</a> <br>
+                        <a href="https://github.com/dsmaugy/system-symphony" class="btn btn-light mb-1" target="_blank">to source code</a> <br>
+                        <a href="https://youtu.be/gnB4NOcdZZ0" class="btn btn-light mb-1    " target="_blank">to performance</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
             <div class="col d-flex justify-content-center">
                 <div class="card text-white bg-secondary" style="width: 24rem;">
                     <img class="card-img-top" src="{{ url_for('static', filename='images/projects/justin_site.jpg') }}" alt="Card image cap">
