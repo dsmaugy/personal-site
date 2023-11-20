@@ -5,7 +5,7 @@ description = "files for my site"
 authors = ["Darwin Do <darwin78913@gmail.com>"]
 license = "GNU"
 readme = "README.md"
-packages = [{include = "personal_site"}]
+packages = [{include = "app"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -21,7 +21,8 @@ python3-discogs-client = "^2.6"
 selenium = "^4.7.2"
 spotipy = "^2.22.0"
 gunicorn = "^20.1.0"
-pylibmc = "1.5.2"  # newer version breaks on production
+pylibmc = "1.6.3"  # newer version breaks on production
+tzlocal = "^5.2"
 
 
 [build-system]

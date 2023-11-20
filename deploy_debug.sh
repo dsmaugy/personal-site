@@ -1,3 +1,4 @@
 #!/bin/fish
 
-fish -c 'cd app;flask --debug run'
+export FLASK_APP=app/app.py
+poetry run flask run --debug
