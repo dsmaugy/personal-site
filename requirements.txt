@@ -283,12 +283,8 @@ pyasn1==0.5.0 ; python_version >= "3.10" and python_version < "4.0" \
 pycparser==2.21 ; python_version >= "3.10" and os_name == "nt" and implementation_name != "pypy" and python_version < "4.0" \
     --hash=sha256:8ee45429555515e1f6b185e78100aea234072576aa43ab53aefcae078162fca9 \
     --hash=sha256:e644fdec12f7872f86c58ff790da456218b10f863970249516d60a5eaca77206
-pylibmc==1.6.0 ; python_version >= "3.10" and python_version < "4.0" \
-    --hash=sha256:4fd0badca436accfe0c76fb28ee6323afc7626fa1e85f899d69242a9d9f3a729 \
-    --hash=sha256:5ef97be4ca5527d5b87dbe77cfdd94b427028caf4136feff7da23c40e1ded6d8 \
-    --hash=sha256:69bfcc6b4d39a7e04fa8670943fcd8ea13e07c2ef27d08542413b8a509aa585f \
-    --hash=sha256:d29d266dcbd3cd67ba1ca449d7412e49c548b2837b9a4a361fa57c9fdd469082 \
-    --hash=sha256:fa0a6352bb4a2e70965e5d4d5869b3e9c37e8959c51bdcf2ec743ee6b79b7dd9
+pylibmc==1.5.2 ; python_version >= "3.10" and python_version < "4.0" \
+    --hash=sha256:fc54e28a9f1b5b2ec0c030da29c7ad8a15c2755bd98aaa4142eaf419d5fabb33
 pysocks==1.7.1 ; python_version >= "3.10" and python_version < "4.0" \
     --hash=sha256:08e69f092cc6dbe92a0fdd16eeb9b9ffbc13cadfe5ca4c7bd92ffb078b293299 \
     --hash=sha256:2725bd0a9925919b9b51739eea5f9e2bae91e83288108a9ad338b2e3a4435ee5 \
