@@ -21,8 +21,8 @@ python3-discogs-client = "^2.6"
 selenium = "^4.7.2"
 spotipy = "^2.22.0"
 gunicorn = "^20.1.0"
-pylibmc = "1.6.3"  # newer version breaks on production
-tzlocal = "^5.2"
+pylibmc = "1.5.2"  # newer version breaks on production
+                   # but older version can break with local poetry :(
 
 
 [build-system]
