@@ -225,8 +225,14 @@ def index():
 @app.before_request
 def before_request():
     if os.environ['FLASK_ENV'] == 'production':
+        url = request.url
         if not request.is_secure:
-            url = request.url.replace('http://', 'https://', 1)
+            url = url.replace('http://', 'https://', 1)
+        
+        if url.startswith("https://www."):
+            url = url.replace("https://www.", "https://", 1)
+        
+        if url != request.url:
             return redirect(url, code=301)
     
 
