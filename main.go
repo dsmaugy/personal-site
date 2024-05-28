@@ -1,7 +1,7 @@
 package main
 
 import (
-	"net/http"
+	"darwindo/personal-site/routes"
 	"os"
 
 	ginlog "github.com/gin-contrib/logger"
@@ -13,12 +13,6 @@ import (
 
 // TODO: caching: https://devcenter.heroku.com/articles/gin-memcache
 // TODO: deploying: https://devcenter.heroku.com/articles/getting-started-with-go?singlepage=true#prepare-the-app
-// TODO: fancy logging: https://stackoverflow.com/questions/76508101/how-to-custom-go-gin-logger-format
-
-func index(c *gin.Context) {
-	log.Info().Msg("MY URL: " + c.Request.RequestURI)
-	c.HTML(http.StatusOK, "index.go.tmpl", nil)
-}
 
 // adds https/www redirects where needed
 func requestcheck() gin.HandlerFunc {
@@ -41,11 +35,11 @@ func main() {
 	r.Use(requestcheck())
 
 	r.Static("/static", "./static")
-	r.StaticFile("/favicon.ico", "./favicon.ico")
+	r.StaticFile("/favicon.ico", "./static/favicon.ico")
 	r.LoadHTMLGlob("./templates/*")
 
-	r.GET("/", index)
-	r.GET("/test", index)
+	r.GET("/", routes.Index)
+	r.GET("/movies", routes.RecentlyWatched)
 	r.Run("0.0.0.0:" + os.Getenv("PORT"))
 
 }
