@@ -40,6 +40,7 @@ func main() {
 
 	r.GET("/", routes.Index)
 	r.GET("/movies", routes.RecentlyWatched)
+	r.GET("/vinyl/:user", routes.VinylCollection)
 	r.Run("0.0.0.0:" + os.Getenv("PORT"))
 
 }
