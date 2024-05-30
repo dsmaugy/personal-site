@@ -14,7 +14,8 @@ import (
 
 const LetterboxdURL = "https://letterboxd.com/dsmaugy/rss"
 const NumMovies = 5
-const DiscogsCollectionRequest = "https://api.discogs.com/users/%s/collection/folders/0/releases?page=%d&per_page=50&sort=artist"
+const DiscogsPaginationMax = 50
+const DiscogsCollectionRequest = "https://api.discogs.com/users/%s/collection/folders/0/releases?page=%d&per_page=%d&sort=artist"
 
 type LetterboxdRoot struct {
 	XMLName xml.Name          `xml:"rss"`
@@ -35,8 +36,23 @@ type LetterboxdItem struct {
 }
 
 type DiscogsCollectionRoot struct {
-	Pagination map[string]any   `json:"pagination"`
-	Releases   []DiscogsRelease `json:"releases"`
+	Pagination DiscogsPagination `json:"pagination"`
+	Releases   []DiscogsRelease  `json:"releases"`
+}
+
+type DiscogsPagination struct {
+	Items   int                   `json:"items"`
+	Page    int                   `json:"page"`
+	Pages   int                   `json:"pages"`
+	PerPage int                   `json:"per_page"`
+	URLS    DiscogsPaginationURLs `json:"urls"`
+}
+
+type DiscogsPaginationURLs struct {
+	First string `json:"first"`
+	Prev  string `json:"prev"`
+	Next  string `json:"next"`
+	Last  string `json:"last"`
 }
 
 type DiscogsRelease struct {
@@ -44,11 +60,23 @@ type DiscogsRelease struct {
 }
 
 type DiscogsReleaseInformation struct {
-	Title      string `json:"title"`
-	Year       int    `json:"year"`
-	Thumb      string `json:"thumb"`
-	CoverImage string `json:"cover_image"` // larger, higher quality version of thumb
-	ReleaseURL string `json:"resource_url"`
+	Title      string          `json:"title"`
+	Artists    []DiscogsArtist `json:"artists"`
+	Year       int             `json:"year"`
+	Thumb      string          `json:"thumb"`
+	CoverImage string          `json:"cover_image"` // larger, higher quality version of thumb
+	ReleaseURL string          `json:"resource_url"`
+}
+
+type DiscogsArtist struct {
+	Name string `json:"name"`
+}
+
+type VinylInfo struct {
+	Name         string
+	Artist       string
+	Year         int
+	PreviewImage string
 }
 
 func getLetterboxdMovies() (*LetterboxdRoot, error) {
@@ -93,23 +121,45 @@ func getLetterboxdMovies() (*LetterboxdRoot, error) {
 
 func getDiscogsRecords(user string) (any, error) {
 	var collectionRoot DiscogsCollectionRoot
+	var vinylList []VinylInfo
 
 	client := &http.Client{}
-	// TODO: implement pagination and get artist name
-	req, _ := http.NewRequest("GET", fmt.Sprintf(DiscogsCollectionRequest, user, 1), nil)
-	req.Header.Set("User-Agent", "personal-go-site/1.0 +https://darwindo.com")
-	req.Header.Set("Authorization", "Discogs token="+os.Getenv("DISCOGS_TOKEN"))
-	resp, err := client.Do(req)
+	lastPage := 1
+	for page := 1; page <= lastPage; page++ {
+		req, _ := http.NewRequest("GET", fmt.Sprintf(DiscogsCollectionRequest, user, page, DiscogsPaginationMax), nil)
+		req.Header.Set("User-Agent", "personal-go-site/1.0 +https://darwindo.com")
+		req.Header.Set("Authorization", "Discogs token="+os.Getenv("DISCOGS_TOKEN"))
+		resp, err := client.Do(req)
 
-	if err != nil {
-		log.Info().Msg("Failed to fetch Discogs API: " + err.Error())
-		return nil, err
+		if err != nil {
+			log.Info().Msg("Failed to fetch Discogs API: " + err.Error())
+			return nil, err
+		}
+
+		defer resp.Body.Close()
+		body, _ := io.ReadAll(resp.Body)
+
+		json.Unmarshal(body, &collectionRoot)
+
+		for _, release := range collectionRoot.Releases {
+			var artistName string
+			if len(release.Info.Artists) == 0 {
+				artistName = "Unknown Artist"
+			} else {
+				artistName = release.Info.Artists[0].Name
+			}
+
+			vinylList = append(vinylList, VinylInfo{
+				Name:         release.Info.Title,
+				Artist:       artistName,
+				Year:         release.Info.Year,
+				PreviewImage: release.Info.Thumb,
+			})
+		}
+
+		lastPage = collectionRoot.Pagination.Pages
+		log.Info().Msg("Current page: " + fmt.Sprint(page))
 	}
 
-	defer resp.Body.Close()
-	body, _ := io.ReadAll(resp.Body)
-
-	json.Unmarshal(body, &collectionRoot)
-
-	return &collectionRoot, nil
+	return &vinylList, nil
 }
