@@ -49,6 +49,5 @@ func SpotifyTop(c *gin.Context) {
 	}
 
 	log.Info().Msg(fmt.Sprintf("Spotify API found %d top tracks", len(tracks.Tracks)))
-
 	c.JSON(http.StatusOK, tracks.Tracks)
 }
