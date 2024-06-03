@@ -43,5 +43,4 @@ func main() {
 	r.GET("/api/vinyl/:user", routes.VinylCollection)
 	r.GET("/api/spotify_top", routes.SpotifyTop)
 	r.Run("0.0.0.0:" + os.Getenv("PORT"))
-
 }
