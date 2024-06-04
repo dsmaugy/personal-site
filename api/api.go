@@ -14,6 +14,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/gin-contrib/cache/persistence"
 	"github.com/rs/zerolog/log"
 	"github.com/zmb3/spotify/v2"
 	spotifyauth "github.com/zmb3/spotify/v2/auth"
@@ -89,41 +90,62 @@ type VinylInfo struct {
 	DateAddedToCollection string
 }
 
+const CacheDuration = time.Minute * 5
+
+var cache *persistence.MemcachedBinaryStore
+
+func InitAPI(c *persistence.MemcachedBinaryStore) {
+	cache = c
+}
+
+func getCacheKey(key string) string {
+	return os.Getenv("MEMCACHIER_PREFIX") + "/dev/" + key
+}
+
 func GetLetterboxdData() (*LetterboxdRoot, error) {
 	var letterboxd LetterboxdRoot
 
-	log.Info().Msg("Movies")
-	resp, err := http.Get(LetterboxdURL)
+	movieCacheKey := getCacheKey("movies")
+	err := cache.Get(movieCacheKey, &letterboxd)
 
 	if err != nil {
-		log.Info().Msg("Failed to fetch Letterboxd data")
-		return nil, err
-	}
+		log.Debug().Err(err).Msg("Letterboxd")
+		// cache miss, query form letterboxd directly
+		resp, err := http.Get(LetterboxdURL)
 
-	defer resp.Body.Close()
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		log.Info().Msg("Error when reading Letterboxd request data")
-		return nil, err
-	}
+		if err != nil {
+			log.Info().Msg("Failed to fetch Letterboxd data")
+			return nil, err
+		}
 
-	err = xml.Unmarshal(body, &letterboxd)
-	if err != nil {
-		log.Info().Msg("Error when unmarshalling XML: " + err.Error())
-		return nil, err
-	}
+		defer resp.Body.Close()
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			log.Info().Msg("Error when reading Letterboxd request data")
+			return nil, err
+		}
 
-	letterboxd.Channel.Items = letterboxd.Channel.Items[0:NumMovies]
+		err = xml.Unmarshal(body, &letterboxd)
+		if err != nil {
+			log.Info().Msg("Error when unmarshalling XML: " + err.Error())
+			return nil, err
+		}
 
-	// extract the ImageURL from the XML Description section
-	urlreg, err := regexp.Compile(`https://.*\.jpg`)
-	if err != nil {
-		log.Info().Msg("Error when compiling regex")
-		return nil, err
-	}
+		letterboxd.Channel.Items = letterboxd.Channel.Items[0:NumMovies]
 
-	for i := range letterboxd.Channel.Items {
-		letterboxd.Channel.Items[i].ImageURL = urlreg.FindString(letterboxd.Channel.Items[i].ImageURL)
+		// extract the ImageURL from the XML Description section
+		urlreg, err := regexp.Compile(`https://.*\.jpg`)
+		if err != nil {
+			log.Info().Msg("Error when compiling regex")
+			return nil, err
+		}
+
+		for i := range letterboxd.Channel.Items {
+			letterboxd.Channel.Items[i].ImageURL = urlreg.FindString(letterboxd.Channel.Items[i].ImageURL)
+		}
+		cache.Set(movieCacheKey, letterboxd, CacheDuration)
+	} else {
+		log.Info().Msg("Cache hit for Letterboxd!")
 	}
 
 	return &letterboxd, nil
@@ -133,44 +155,56 @@ func GetDiscogsRecords(user string) (*[]VinylInfo, error) {
 	var collectionRoot DiscogsCollectionRoot
 	var vinylList []VinylInfo
 
-	client := http.Client{}
-	lastPage := 1
-	for page := 1; page <= lastPage; page++ {
-		req, _ := http.NewRequest("GET", fmt.Sprintf(DiscogsCollectionRequest, user, page, DiscogsPaginationMax), nil)
-		req.Header.Set("User-Agent", "personal-go-site/1.0 +https://darwindo.com")
-		req.Header.Set("Authorization", "Discogs token="+os.Getenv("DISCOGS_TOKEN"))
-		resp, err := client.Do(req)
+	vinylCacheKey := getCacheKey("vinyl")
+	err := cache.Get(vinylCacheKey, &vinylList)
 
-		if err != nil {
-			log.Info().Msg("Failed to fetch Discogs API: " + err.Error())
-			return nil, err
-		}
+	if err != nil {
+		// cache miss, query from discogs
+		log.Debug().Err(err).Msg("Discogs")
 
-		defer resp.Body.Close()
-		body, _ := io.ReadAll(resp.Body)
+		client := http.Client{}
+		lastPage := 1
+		for page := 1; page <= lastPage; page++ {
+			req, _ := http.NewRequest("GET", fmt.Sprintf(DiscogsCollectionRequest, user, page, DiscogsPaginationMax), nil)
+			req.Header.Set("User-Agent", "personal-go-site/1.0 +https://darwindo.com")
+			req.Header.Set("Authorization", "Discogs token="+os.Getenv("DISCOGS_TOKEN"))
+			resp, err := client.Do(req)
 
-		json.Unmarshal(body, &collectionRoot)
-		// log.Info().RawJSON("Json", body).Msg("")
-
-		for _, release := range collectionRoot.Releases {
-			var artistName string
-			if len(release.Info.Artists) == 0 {
-				artistName = "Unknown Artist"
-			} else {
-				artistName = release.Info.Artists[0].Name
+			if err != nil {
+				log.Info().Msg("Failed to fetch Discogs API: " + err.Error())
+				return nil, err
 			}
 
-			vinylList = append(vinylList, VinylInfo{
-				Name:                  release.Info.Title,
-				Artist:                artistName,
-				Year:                  release.Info.Year,
-				PreviewImage:          release.Info.CoverImage,
-				DateAddedToCollection: release.DateAdded,
-			})
+			defer resp.Body.Close()
+			body, _ := io.ReadAll(resp.Body)
+
+			json.Unmarshal(body, &collectionRoot)
+			// log.Info().RawJSON("Json", body).Msg("")
+
+			for _, release := range collectionRoot.Releases {
+				var artistName string
+				if len(release.Info.Artists) == 0 {
+					artistName = "Unknown Artist"
+				} else {
+					artistName = release.Info.Artists[0].Name
+				}
+
+				vinylList = append(vinylList, VinylInfo{
+					Name:                  release.Info.Title,
+					Artist:                artistName,
+					Year:                  release.Info.Year,
+					PreviewImage:          release.Info.CoverImage,
+					DateAddedToCollection: release.DateAdded,
+				})
+			}
+
+			lastPage = collectionRoot.Pagination.Pages
+			log.Info().Msg("Current page: " + fmt.Sprint(page))
 		}
 
-		lastPage = collectionRoot.Pagination.Pages
-		log.Info().Msg("Current page: " + fmt.Sprint(page))
+		cache.Set(vinylCacheKey, vinylList, CacheDuration)
+	} else {
+		log.Info().Msg("Cache hit for Discogs!")
 	}
 
 	return &vinylList, nil
@@ -212,12 +246,27 @@ func getSpotifyClient() *spotify.Client {
 }
 
 func GetSpotifyTopTracks(numtracks int) (*[]spotify.FullTrack, error) {
-	s := getSpotifyClient()
-	tracks, err := s.CurrentUsersTopTracks(context.Background(), spotify.Limit(numtracks), spotify.Timerange(spotify.ShortTermRange))
+	var returntracks []spotify.FullTrack
+
+	spotifyCacheKey := getCacheKey("spotifytrack")
+	err := cache.Get(spotifyCacheKey, &returntracks)
 
 	if err != nil {
-		return nil, err
+		// cache miss
+		log.Debug().Err(err).Msg("Spotify")
+
+		s := getSpotifyClient()
+		tracks, err := s.CurrentUsersTopTracks(context.Background(), spotify.Limit(numtracks), spotify.Timerange(spotify.ShortTermRange))
+
+		if err != nil {
+			return nil, err
+		}
+
+		returntracks = tracks.Tracks
+		cache.Set(spotifyCacheKey, returntracks, CacheDuration)
+	} else {
+		log.Info().Msg("Cache hit for Spotify!")
 	}
 
-	return &tracks.Tracks, nil
+	return &returntracks, nil
 }

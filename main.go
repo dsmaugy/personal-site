@@ -1,16 +1,20 @@
 package main
 
 import (
+	"darwindo/personal-site/api"
 	"darwindo/personal-site/routes"
 	"os"
+	"time"
 
+	"github.com/gin-contrib/cache/persistence"
 	ginlog "github.com/gin-contrib/logger"
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
-	"github.com/memcachier/mc/v3"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 )
+
+const CacheDuration = time.Minute
 
 // TODO: caching: https://devcenter.heroku.com/articles/gin-memcache
 // TODO: deploying: https://devcenter.heroku.com/articles/getting-started-with-go?singlepage=true#prepare-the-app
@@ -25,26 +29,27 @@ func requestcheck() gin.HandlerFunc {
 	}
 }
 
-func cacheaccess(cache *mc.Client) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		c.Set("cache", cache)
-		c.Next()
-	}
-}
+// func cacheaccess(cache *mc.Client) gin.HandlerFunc {
+// 	return func(c *gin.Context) {
+// 		c.Set("cache", cache)
+// 		c.Next()
+// 	}
+// }
 
 func init() {
 	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
 }
 
 func main() {
-	cache := mc.NewMC(os.Getenv("MEMCACHIER_SERVERS"), os.Getenv("MEMCACHIER_USERNAME"), os.Getenv("MEMCACHIER_PASSWORD"))
+	cache := persistence.NewMemcachedBinaryStore(os.Getenv("MEMCACHIER_SERVERS"), os.Getenv("MEMCACHIER_USERNAME"), os.Getenv("MEMCACHIER_PASSWORD"), CacheDuration)
 	defer cache.Quit()
+	api.InitAPI(cache)
 
 	r := gin.New()
 	r.Use(gin.Recovery())
 	r.Use(ginlog.SetLogger())
 	r.Use(requestcheck())
-	r.Use(cacheaccess(cache))
+	// r.Use(cacheaccess(cache))
 
 	r.Static("/static", "./static")
 	r.StaticFile("/favicon.ico", "./static/favicon.ico")
