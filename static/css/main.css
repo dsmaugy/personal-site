@@ -7,6 +7,7 @@ body {
 
 html, body, main {
     height: 100%;
+    overflow-y: hidden;
 }
 
 p {
@@ -33,6 +34,7 @@ h1 {
 
 .carousel-showcase {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .carousel-item {
@@ -44,7 +46,7 @@ h1 {
 }
 
 .carousel-item img {
-    width: 130px;
+    width: 180px;
 }
 
 .carousel-spotify-pic {
@@ -76,15 +78,17 @@ h1 {
     background: lightpink;
     flex: 20;
     padding: 1em;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
+    height: 100%;
 }
 
 #panel-inner {
     border: solid;
     border-radius: 1%;
-    height: 100%;
     box-sizing: border-box;
     padding: 1em;
+    margin-bottom: 2em;
+    height: 80vh;
 }
 
 #nav-path {
@@ -95,4 +99,9 @@ h1 {
     margin: 0;
     display: inline;
     margin-right: 10px;
+}
+
+#nav-content {
+    overflow-y: scroll;
+    height: 100%
 }
