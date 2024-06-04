@@ -9,6 +9,17 @@ html, body, main {
     height: 100%;
 }
 
+p {
+    margin: 0;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    /* margin-top: 0.67em;
+    margin-bottom: 0.67em; */
+}
+
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -24,6 +35,37 @@ html, body, main {
     display: flex;
 }
 
+.carousel-item {
+    flex: 2;
+    opacity: 1;
+    text-align: center;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.carousel-item img {
+    width: 130px;
+}
+
+.carousel-spotify-pic {
+    border-radius: 40%;
+}
+
+.carousel-item:last-child {
+    flex: 1;
+    align-self: center;
+}
+
+.carousel-item:hover {
+    opacity: 0.6;
+    /* cursor: pointer; */
+}
+
+/* TODO: do we want this? */
+#vinyl-ellipse {
+    padding-bottom: 75px;
+}
+
 #left-panel {
     background:lightblue;
     flex: 1 20em;
@@ -34,6 +76,7 @@ html, body, main {
     background: lightpink;
     flex: 20;
     padding: 1em;
+    overflow-y: scroll;
 }
 
 #panel-inner {

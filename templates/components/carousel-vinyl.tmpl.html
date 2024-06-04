@@ -1,0 +1,17 @@
+{{define "carousel-vinyl"}}
+<div class="carousel-showcase">
+    {{ range $vinyl := .Vinyls }}
+        <div class="carousel-item">
+            <img src="{{ $vinyl.PreviewImage }}">
+            <p>{{ $vinyl.Artist }} - {{ $vinyl.Name }} ({{ $vinyl.Year }})</p>
+            <!-- TODO: add date added in sidebar info -->
+        </div>        
+    {{end}}
+
+    <div id="vinyl-ellipse" class="carousel-item">
+        <a>
+            <h1>...</h1>
+        </a>
+    </div>
+</div>
+{{end}}

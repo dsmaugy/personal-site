@@ -1,0 +1,15 @@
+{{define "carousel-movies"}}
+<div class="carousel-showcase">
+    {{ range $movies := .Movies }}
+        <div class="carousel-item">
+            <img class="carousel-movies-pic" src="{{ $movies.ImageURL }}">
+        </div>        
+    {{end}}
+
+    <div class="carousel-item">
+        <a>
+            <h1>...</h1>
+        </a>
+    </div>
+</div>
+{{end}}

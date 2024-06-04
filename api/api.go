@@ -1,4 +1,4 @@
-package routes
+package api
 
 import (
 	"bytes"
@@ -87,7 +87,7 @@ type VinylInfo struct {
 	PreviewImage string
 }
 
-func getLetterboxdMovies() (*LetterboxdRoot, error) {
+func GetLetterboxdData() (*LetterboxdRoot, error) {
 	var letterboxd LetterboxdRoot
 
 	log.Info().Msg("Movies")
@@ -127,7 +127,7 @@ func getLetterboxdMovies() (*LetterboxdRoot, error) {
 	return &letterboxd, nil
 }
 
-func getDiscogsRecords(user string) (any, error) {
+func GetDiscogsRecords(user string) (*[]VinylInfo, error) {
 	var collectionRoot DiscogsCollectionRoot
 	var vinylList []VinylInfo
 
@@ -148,7 +148,7 @@ func getDiscogsRecords(user string) (any, error) {
 		body, _ := io.ReadAll(resp.Body)
 
 		json.Unmarshal(body, &collectionRoot)
-
+		// log.Info().RawJSON("Json", body).Msg("")
 		for _, release := range collectionRoot.Releases {
 			var artistName string
 			if len(release.Info.Artists) == 0 {
@@ -205,4 +205,15 @@ func getSpotifyClient() *spotify.Client {
 	}
 
 	return spotifyClient
+}
+
+func GetSpotifyTopTracks(numtracks int) (*[]spotify.FullTrack, error) {
+	s := getSpotifyClient()
+	tracks, err := s.CurrentUsersTopTracks(context.Background(), spotify.Limit(numtracks))
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &tracks.Tracks, nil
 }

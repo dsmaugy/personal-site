@@ -36,7 +36,7 @@ func main() {
 
 	r.Static("/static", "./static")
 	r.StaticFile("/favicon.ico", "./static/favicon.ico")
-	r.LoadHTMLGlob("./templates/*")
+	r.LoadHTMLGlob("./templates/**/*")
 
 	r.GET("/", routes.Index)
 	r.GET("/api/movies", routes.RecentlyWatched)

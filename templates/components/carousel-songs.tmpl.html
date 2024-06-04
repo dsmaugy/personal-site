@@ -1,0 +1,15 @@
+{{define "carousel-songs"}}
+<div class="carousel-showcase">
+    {{ range $track := .Tracks }}
+        <div class="carousel-item">
+            <img class="carousel-spotify-pic" src="{{ (index $track.Album.Images 0).URL }}">
+        </div>        
+    {{end}}
+
+    <div class="carousel-item">
+        <a>
+            <h1>...</h1>
+        </a>
+    </div>
+</div>
+{{end}}
