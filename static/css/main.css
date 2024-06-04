@@ -76,6 +76,18 @@ h1 {
     background:lightblue;
     flex: 1 20em;
     padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#left-panel-footer {
+    margin-top: auto;
+    margin-bottom: 1em;
+}
+
+#left-panel-footer a {
+    display: block;
+    text-align: center;
 }
 
 #right-panel {
@@ -108,4 +120,22 @@ h1 {
 #nav-content {
     overflow-y: scroll;
     height: 100%
+}
+
+#vinyl-showcase {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.vinyl-item{
+    flex: 2;
+    opacity: 1;
+    text-align: center;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.vinyl-item img {
+    width: 170px;
+    border-radius: 50%;
 }

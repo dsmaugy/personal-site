@@ -11,7 +11,19 @@
 	
 	<div id="nav-content">
 		<h1>vinyl collection</h1>
-		
+        <div id="vinyl-showcase">
+			{{ range $vinyl := .Vinyls }}
+				<div class="vinyl-item" onmouseenter="carouselItemEntered(this)" onmouseleave="carouselItemLeft(this)">
+					<img src="{{ $vinyl.PreviewImage }}">
+					<p>{{ $vinyl.Artist }} - {{ $vinyl.Name }} ({{ $vinyl.Year }})</p>
+					<div class="carousel-tooltip">						
+						<p>
+							Obtained in {{ $vinyl.DateAddedToCollection }}
+						</p>
+					</div>
+				</div>
+			{{end}}
+		</div>
 	</div>
 {{end}}
 

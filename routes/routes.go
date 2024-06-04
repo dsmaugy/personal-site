@@ -92,5 +92,8 @@ func HomePanel(c *gin.Context) {
 }
 
 func VinylPanel(c *gin.Context) {
-	c.HTML(http.StatusOK, "vinyl.tmpl.html", getHomePanelVars())
+	vinyls, _ := api.GetDiscogsRecords(MyDiscogsUsername)
+	c.HTML(http.StatusOK, "vinyl.tmpl.html", gin.H{
+		"Vinyls": vinyls,
+	})
 }
