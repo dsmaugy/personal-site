@@ -7,6 +7,7 @@ import (
 	ginlog "github.com/gin-contrib/logger"
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
+	"github.com/memcachier/mc/v3"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 )
@@ -24,15 +25,26 @@ func requestcheck() gin.HandlerFunc {
 	}
 }
 
+func cacheaccess(cache *mc.Client) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Set("cache", cache)
+		c.Next()
+	}
+}
+
 func init() {
 	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
 }
 
 func main() {
+	cache := mc.NewMC(os.Getenv("MEMCACHIER_SERVERS"), os.Getenv("MEMCACHIER_USERNAME"), os.Getenv("MEMCACHIER_PASSWORD"))
+	defer cache.Quit()
+
 	r := gin.New()
 	r.Use(gin.Recovery())
 	r.Use(ginlog.SetLogger())
 	r.Use(requestcheck())
+	r.Use(cacheaccess(cache))
 
 	r.Static("/static", "./static")
 	r.StaticFile("/favicon.ico", "./static/favicon.ico")
@@ -42,5 +54,8 @@ func main() {
 	r.GET("/api/movies", routes.RecentlyWatched)
 	r.GET("/api/vinyl/:user", routes.VinylCollection)
 	r.GET("/api/spotify_top", routes.SpotifyTop)
+
+	r.POST("/panel/home", routes.HomePanel)
+	r.POST("/panel/vinyl", routes.VinylPanel)
 	r.Run("0.0.0.0:" + os.Getenv("PORT"))
 }

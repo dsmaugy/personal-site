@@ -33,18 +33,22 @@ func getRandomSamples[listitem spotify.FullTrack | api.VinylInfo](population *[]
 	return &returnlist
 }
 
-func Index(c *gin.Context) {
-	log.Info().Msg("MY URL: " + c.Request.RequestURI)
-
+func getHomePanelVars() gin.H {
 	vinyls, _ := api.GetDiscogsRecords(MyDiscogsUsername)
 	tracks, _ := api.GetSpotifyTopTracks(25)
 	movies, _ := api.GetLetterboxdData()
 
-	c.HTML(http.StatusOK, "index.tmpl.html", gin.H{
-		"Vinyls": getRandomSamples[api.VinylInfo](vinyls),
-		"Tracks": getRandomSamples[spotify.FullTrack](tracks),
+	return gin.H{
+		"Vinyls": getRandomSamples(vinyls),
+		"Tracks": getRandomSamples(tracks),
 		"Movies": movies.Channel.Items[0:5],
-	})
+	}
+}
+
+func Index(c *gin.Context) {
+	log.Info().Msg("MY URL: " + c.Request.RequestURI)
+
+	c.HTML(http.StatusOK, "index.tmpl.html", getHomePanelVars())
 }
 
 func RecentlyWatched(c *gin.Context) {
@@ -81,4 +85,12 @@ func SpotifyTop(c *gin.Context) {
 
 	log.Info().Msg(fmt.Sprintf("Spotify API found %d top tracks", len(*tracks)))
 	c.JSON(http.StatusOK, tracks)
+}
+
+func HomePanel(c *gin.Context) {
+	c.HTML(http.StatusOK, "home.tmpl.html", getHomePanelVars())
+}
+
+func VinylPanel(c *gin.Context) {
+	c.HTML(http.StatusOK, "vinyl.tmpl.html", getHomePanelVars())
 }

@@ -46,7 +46,7 @@ h1 {
 }
 
 .carousel-item img {
-    width: 180px;
+    width: 150px;
 }
 
 .carousel-spotify-pic {
@@ -86,7 +86,7 @@ h1 {
     height: 100%;
 }
 
-#panel-inner {
+#right-panel-inner {
     border: solid;
     border-radius: 1% 1% 0% 1%;
     box-sizing: border-box;
@@ -99,7 +99,7 @@ h1 {
     border-bottom: solid;
 }
 
-#nav-path p {
+#nav-path p, #nav-path a {
     margin: 0;
     display: inline;
     margin-right: 10px;

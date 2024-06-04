@@ -1,0 +1,78 @@
+{{ define "panel-home-path" }}
+	<a hx-post="/panel/home" hx-target="#right-panel-inner">home</a>
+	<p>/</p>
+{{ end }}
+
+{{define "panel-home"}}
+	<div id="nav-path">
+		{{ template "panel-home-path" .}}
+	</div>
+	
+	<div id="nav-content">
+		<h1>some projects</h1>
+		<div class="carousel-showcase"></div>
+
+		<h1 hx-post="/panel/vinyl" hx-target="#right-panel-inner">vinyl collection</h1>
+		<div class="carousel-showcase">
+			{{ range $vinyl := .Vinyls }}
+				<div class="carousel-item" onmouseenter="carouselItemEntered(this)" onmouseleave="carouselItemLeft(this)">
+					<img src="{{ $vinyl.PreviewImage }}">
+					<!-- <p>{{ $vinyl.Artist }} - {{ $vinyl.Name }} ({{ $vinyl.Year }})</p> -->
+					<div class="carousel-tooltip">
+						<p>
+							{{ $vinyl.Artist }} - {{ $vinyl.Name }} ({{ $vinyl.Year }})
+						</p>
+						
+						<p>
+							Obtained in {{ $vinyl.DateAddedToCollection }}
+						</p>
+					</div>
+				</div>
+			{{end}}
+		
+			<div id="vinyl-ellipse" class="carousel-item" hx-post="/panel/vinyl" hx-target="#right-panel-inner">
+				<a>
+					<h1>...</h1>
+				</a>
+			</div>
+		</div>
+		<h1>some songs</h1>
+		<div class="carousel-showcase">
+			{{ range $track := .Tracks }}
+				<div class="carousel-item" onmouseenter="carouselItemEntered(this)" onmouseleave="carouselItemLeft(this)">
+					<img class="carousel-spotify-pic" src="{{ (index $track.Album.Images 0).URL }}">
+		
+					<div class="carousel-tooltip">
+						<p>
+							<strong>{{ $track.Name }}</strong> by {{ (index $track.Artists 0).Name }}
+						</p>
+					</div>
+				</div>        
+			{{end}}
+		
+			<div class="carousel-item">
+				<a>
+					<h1>...</h1>
+				</a>
+			</div>
+		</div>
+
+		<h1>some movies</h1>
+		<div class="carousel-showcase">
+			{{ range $movies := .Movies }}
+				<div class="carousel-item" onmouseenter="carouselItemEntered(this)">
+					<img class="carousel-movies-pic" src="{{ $movies.ImageURL }}">
+				</div>        
+			{{end}}
+		
+			<div class="carousel-item">
+				<a>
+					<h1>...</h1>
+				</a>
+			</div>
+		</div>
+	</div>
+{{end}}
+
+<!-- do this so we can import this directly in our POST requests -->
+{{ template "panel-home" .}}

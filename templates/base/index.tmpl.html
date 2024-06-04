@@ -3,12 +3,13 @@
 	<head>
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 
+        <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
+
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
 
 		<title>Darwin Do</title>
-
 		<link rel="stylesheet" href="/static/css/main.css"> 
 		<script src="/static/js/main.js"></script>
 
@@ -30,24 +31,8 @@
 					<div id="left-panel-footer"></div>
 				</div>
 				<div id="right-panel" class="container-panels">
-					<div id="panel-inner">
-						<div id="nav-path">
-							<p>bingus</p>
-							<p>/</p>
-							<p>bongus</p>
-							<p>/</p>
-						</div>
-						
-						<div id="nav-content">
-							<h1>some projects</h1>
-							<div class="carousel-showcase"></div>
-							<h1>vinyl collection</h1>
-							{{ template "carousel-vinyl" .}}
-							<h1>some songs</h1>
-							{{ template "carousel-songs" .}}
-							<h1>some movies</h1>
-							{{ template "carousel-movies" .}}
-						</div>
+					<div id="right-panel-inner">
+                        {{ template "panel-home" . }}
 					</div>
 				</div>
 			</div>

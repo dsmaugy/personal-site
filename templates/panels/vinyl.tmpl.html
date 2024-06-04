@@ -1,0 +1,19 @@
+{{ define "panel-vinyl-path" }}
+    {{ template "panel-home-path" . }}
+	<p>vinyl_collection</p>
+	<p>/</p>
+{{ end }}
+
+{{define "panel-vinyl"}}
+	<div id="nav-path">
+		{{ template "panel-vinyl-path" .}}
+	</div>
+	
+	<div id="nav-content">
+		<h1>vinyl collection</h1>
+		
+	</div>
+{{end}}
+
+<!-- do this so we can import this directly in our POST requests -->
+{{ template "panel-vinyl" .}}
