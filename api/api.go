@@ -64,7 +64,8 @@ type DiscogsPaginationURLs struct {
 }
 
 type DiscogsRelease struct {
-	Info DiscogsReleaseInformation `json:"basic_information"`
+	Info      DiscogsReleaseInformation `json:"basic_information"`
+	DateAdded string                    `json:"date_added"`
 }
 
 type DiscogsReleaseInformation struct {
@@ -81,10 +82,11 @@ type DiscogsArtist struct {
 }
 
 type VinylInfo struct {
-	Name         string
-	Artist       string
-	Year         int
-	PreviewImage string
+	Name                  string
+	Artist                string
+	Year                  int
+	PreviewImage          string
+	DateAddedToCollection string
 }
 
 func GetLetterboxdData() (*LetterboxdRoot, error) {
@@ -149,6 +151,7 @@ func GetDiscogsRecords(user string) (*[]VinylInfo, error) {
 
 		json.Unmarshal(body, &collectionRoot)
 		// log.Info().RawJSON("Json", body).Msg("")
+
 		for _, release := range collectionRoot.Releases {
 			var artistName string
 			if len(release.Info.Artists) == 0 {
@@ -158,10 +161,11 @@ func GetDiscogsRecords(user string) (*[]VinylInfo, error) {
 			}
 
 			vinylList = append(vinylList, VinylInfo{
-				Name:         release.Info.Title,
-				Artist:       artistName,
-				Year:         release.Info.Year,
-				PreviewImage: release.Info.Thumb,
+				Name:                  release.Info.Title,
+				Artist:                artistName,
+				Year:                  release.Info.Year,
+				PreviewImage:          release.Info.CoverImage,
+				DateAddedToCollection: release.DateAdded,
 			})
 		}
 
@@ -209,7 +213,7 @@ func getSpotifyClient() *spotify.Client {
 
 func GetSpotifyTopTracks(numtracks int) (*[]spotify.FullTrack, error) {
 	s := getSpotifyClient()
-	tracks, err := s.CurrentUsersTopTracks(context.Background(), spotify.Limit(numtracks))
+	tracks, err := s.CurrentUsersTopTracks(context.Background(), spotify.Limit(numtracks), spotify.Timerange(spotify.ShortTermRange))
 
 	if err != nil {
 		return nil, err

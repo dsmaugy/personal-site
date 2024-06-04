@@ -1,7 +1,7 @@
 {{define "carousel-movies"}}
 <div class="carousel-showcase">
     {{ range $movies := .Movies }}
-        <div class="carousel-item">
+        <div class="carousel-item" onmouseenter="carouselItemEntered(this)">
             <img class="carousel-movies-pic" src="{{ $movies.ImageURL }}">
         </div>        
     {{end}}

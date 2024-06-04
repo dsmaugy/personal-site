@@ -63,6 +63,10 @@ h1 {
     /* cursor: pointer; */
 }
 
+.carousel-tooltip {
+    display: none;
+}
+
 /* TODO: do we want this? */
 #vinyl-ellipse {
     padding-bottom: 75px;
@@ -77,18 +81,18 @@ h1 {
 #right-panel {
     background: lightpink;
     flex: 20;
-    padding: 1em;
+    /* padding: 1em; */
     /* overflow-y: scroll; */
     height: 100%;
 }
 
 #panel-inner {
     border: solid;
-    border-radius: 1%;
+    border-radius: 1% 1% 0% 1%;
     box-sizing: border-box;
-    padding: 1em;
-    margin-bottom: 2em;
-    height: 80vh;
+    padding: 1em 0em 1.46em 1em;
+    margin: 1em;
+    height: calc(100vh - 2em);
 }
 
 #nav-path {

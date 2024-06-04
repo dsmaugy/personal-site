@@ -1,11 +1,19 @@
 {{define "carousel-vinyl"}}
 <div class="carousel-showcase">
     {{ range $vinyl := .Vinyls }}
-        <div class="carousel-item">
+        <div class="carousel-item" onmouseenter="carouselItemEntered(this)" onmouseleave="carouselItemLeft(this)">
             <img src="{{ $vinyl.PreviewImage }}">
-            <p>{{ $vinyl.Artist }} - {{ $vinyl.Name }} ({{ $vinyl.Year }})</p>
-            <!-- TODO: add date added in sidebar info -->
-        </div>        
+            <!-- <p>{{ $vinyl.Artist }} - {{ $vinyl.Name }} ({{ $vinyl.Year }})</p> -->
+            <div class="carousel-tooltip">
+                <p>
+                    {{ $vinyl.Artist }} - {{ $vinyl.Name }} ({{ $vinyl.Year }})
+                </p>
+                
+                <p>
+                    Obtained in {{ $vinyl.DateAddedToCollection }}
+                </p>
+            </div>
+        </div>
     {{end}}
 
     <div id="vinyl-ellipse" class="carousel-item">

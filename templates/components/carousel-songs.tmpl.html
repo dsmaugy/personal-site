@@ -1,8 +1,14 @@
 {{define "carousel-songs"}}
 <div class="carousel-showcase">
     {{ range $track := .Tracks }}
-        <div class="carousel-item">
+        <div class="carousel-item" onmouseenter="carouselItemEntered(this)" onmouseleave="carouselItemLeft(this)">
             <img class="carousel-spotify-pic" src="{{ (index $track.Album.Images 0).URL }}">
+
+            <div class="carousel-tooltip">
+                <p>
+                    <strong>{{ $track.Name }}</strong> by {{ (index $track.Artists 0).Name }}
+                </p>
+            </div>
         </div>        
     {{end}}
 
