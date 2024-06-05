@@ -5,18 +5,20 @@
 
 {{define "panel-home"}}
 	<div id="nav-path">
-		{{ template "panel-home-path" .}}
+		<div id="nav-path-text">
+			{{ template "panel-home-path" .}}
+		</div>
 	</div>
 	
 	<div id="nav-content">
-		<h1>some projects</h1>
+		<h1 hx-post="/panel/projects" hx-target="#right-panel-inner">some projects</h1>
 		<div class="carousel-showcase"></div>
 
 		<h1 hx-post="/panel/vinyl" hx-target="#right-panel-inner">vinyl collection</h1>
 		<div class="carousel-showcase">
 			{{ range $vinyl := .Vinyls }}
 				<div class="carousel-item" onmouseenter="carouselItemEntered(this)" onmouseleave="carouselItemLeft(this)">
-					<img src="{{ $vinyl.PreviewImage }}">
+					<img class="carousel-vinyl-pic" src="{{ $vinyl.PreviewImage }}">
 					<!-- <p>{{ $vinyl.Artist }} - {{ $vinyl.Name }} ({{ $vinyl.Year }})</p> -->
 					<div class="carousel-tooltip">
 						<p>

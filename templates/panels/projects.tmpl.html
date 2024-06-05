@@ -1,0 +1,21 @@
+{{ define "panel-projects-path" }}
+    {{ template "panel-home-path" . }}
+	<p>projects</p>
+	<p>/</p>
+{{ end }}
+
+{{define "panel-projects"}}
+	<div id="nav-path">
+		<div id="nav-path-text">
+			{{ template "panel-projects-path" .}}
+		</div>		
+	</div>
+	
+	<div id="nav-content">
+		<h1>some projects</h1>
+
+	</div>
+{{end}}
+
+<!-- do this so we can import this directly in our POST requests -->
+{{ template "panel-projects" .}}

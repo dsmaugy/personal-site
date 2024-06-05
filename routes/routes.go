@@ -97,3 +97,7 @@ func VinylPanel(c *gin.Context) {
 		"Vinyls": vinyls,
 	})
 }
+
+func ProjectsPanel(c *gin.Context) {
+	c.HTML(http.StatusOK, "projects.tmpl.html", gin.H{})
+}

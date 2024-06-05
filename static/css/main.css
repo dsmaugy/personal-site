@@ -53,6 +53,10 @@ h1 {
     border-radius: 40%;
 }
 
+.carousel-vinyl-pic {
+    border-radius: 50%;
+}
+
 .carousel-item:last-child {
     flex: 1;
     align-self: center;
@@ -78,6 +82,13 @@ h1 {
     padding: 0 20px;
     display: flex;
     flex-direction: column;
+    background-image: url("/static/images/ditherduck.jpg");
+    background-position: left 0px bottom -300px;
+    background-blend-mode: overlay;
+}
+
+#left-panel p, #left-panel a, #left-panel h1 {
+    background-color: white;
 }
 
 #left-panel-footer {
@@ -90,8 +101,12 @@ h1 {
     text-align: center;
 }
 
+#left-panel-name {
+    display: inline-block;
+}
+
 #right-panel {
-    background: lightpink;
+    background: #E9FFFF;
     flex: 20;
     /* padding: 1em; */
     /* overflow-y: scroll; */
@@ -109,6 +124,11 @@ h1 {
 
 #nav-path {
     border-bottom: solid;
+}
+
+#nav-path-text {
+    display: inline-block;
+    background-color: aqua;
 }
 
 #nav-path p, #nav-path a {

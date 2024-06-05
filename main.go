@@ -62,5 +62,6 @@ func main() {
 
 	r.POST("/panel/home", routes.HomePanel)
 	r.POST("/panel/vinyl", routes.VinylPanel)
+	r.POST("/panel/projects", routes.ProjectsPanel)
 	r.Run("0.0.0.0:" + os.Getenv("PORT"))
 }
