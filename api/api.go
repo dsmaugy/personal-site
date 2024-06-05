@@ -193,7 +193,7 @@ func GetDiscogsRecords(user string) (*[]VinylInfo, error) {
 					Name:                  release.Info.Title,
 					Artist:                artistName,
 					Year:                  release.Info.Year,
-					PreviewImage:          release.Info.CoverImage,
+					PreviewImage:          release.Info.Thumb,
 					DateAddedToCollection: release.DateAdded,
 				})
 			}

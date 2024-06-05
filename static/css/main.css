@@ -37,6 +37,10 @@ h1 {
     flex-wrap: wrap;
 }
 
+.carousel-title {
+    display: inline-block;
+}
+
 .carousel-item {
     flex: 2;
     opacity: 1;
@@ -142,13 +146,18 @@ h1 {
     overflow-y: scroll;
     height: 100%;
     opacity: 1;
-    transition: opacity 1s ease-out;
-    margin-left: 1em;
+    transition: opacity 0.1s ease-out;
+    padding-left: 1em;
+
+    background-color: #E9FFFF;
+    background-image:  radial-gradient(#9ca0e5 0.75px, transparent 0.75px), radial-gradient(#9ca0e5 0.75px, #E9FFFF 0.75px);
+    background-size: 30px 30px;
+    background-position: 0 0,15px 15px;
 }
 
 #nav-content.htmx-swapping {
     opacity: 0;
-    transition: opacity 1s ease-out;
+    transition: opacity 0.1s ease-out;
 }
 
 #nav-content.htmx-added {
