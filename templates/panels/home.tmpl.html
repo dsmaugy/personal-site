@@ -1,5 +1,5 @@
 {{ define "panel-home-path" }}
-	<a hx-post="/panel/home" hx-target="#right-panel-inner">home</a>
+	<a hx-post="/panel/home" {{ template "htmx-swap-settings" }}>home</a>
 	<p>/</p>
 {{ end }}
 
@@ -11,10 +11,10 @@
 	</div>
 	
 	<div id="nav-content">
-		<h1 hx-post="/panel/projects" hx-target="#right-panel-inner">some projects</h1>
+		<h1 hx-post="/panel/projects" {{ template "htmx-swap-settings" }}>some projects</h1>
 		<div class="carousel-showcase"></div>
 
-		<h1 hx-post="/panel/vinyl" hx-target="#right-panel-inner">vinyl collection</h1>
+		<h1 hx-post="/panel/vinyl" {{ template "htmx-swap-settings" }}>vinyl collection</h1>
 		<div class="carousel-showcase">
 			{{ range $vinyl := .Vinyls }}
 				<div class="carousel-item" onmouseenter="carouselItemEntered(this)" onmouseleave="carouselItemLeft(this)">

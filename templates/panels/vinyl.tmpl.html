@@ -5,6 +5,7 @@
 {{ end }}
 
 {{define "panel-vinyl"}}
+<div id="content-to-swap">
 	<div id="nav-path">
 		<div id="nav-path-text">
 			{{ template "panel-vinyl-path" .}}
@@ -27,6 +28,7 @@
 			{{end}}
 		</div>
 	</div>
+</div>
 {{end}}
 
 <!-- do this so we can import this directly in our POST requests -->
