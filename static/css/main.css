@@ -61,6 +61,10 @@ h1 {
     border-radius: 50%;
 }
 
+.carousel-movies-pic {
+    border-radius: 4px;
+}
+
 .carousel-item:last-child {
     flex: 1;
     align-self: center;
@@ -76,9 +80,9 @@ h1 {
 }
 
 /* TODO: do we want this? */
-#vinyl-ellipse {
+/* #vinyl-ellipse {
     padding-bottom: 75px;
-}
+} */
 
 #left-panel {
     background:lightblue;
@@ -119,11 +123,13 @@ h1 {
 
 #right-panel-inner {
     border: solid;
-    border-radius: 1% 1% 0% 1%;
+    border-radius: 3px 3px 0px 3px;
     box-sizing: border-box;
-    padding-bottom: 1.46em;
     margin: 1em;
     height: calc(100vh - 2em);
+
+    display: flex;
+    flex-direction: column;
 }
 
 #nav-path {
@@ -136,10 +142,18 @@ h1 {
     margin-left: 1rem;
 }
 
+#nav-path a:hover {
+    background-color: red;
+}
+
 #nav-path p, #nav-path a {
     margin: 0;
     display: inline;
     margin-right: 10px;
+}
+
+#nav-path svg {
+    height: 1em;
 }
 
 #nav-content {
@@ -149,15 +163,19 @@ h1 {
     transition: opacity 0.1s ease-out;
     padding-left: 1em;
 
-    background-color: #E9FFFF;
+    /* background-color: #E9FFFF;
     background-image:  radial-gradient(#9ca0e5 0.75px, transparent 0.75px), radial-gradient(#9ca0e5 0.75px, #E9FFFF 0.75px);
     background-size: 30px 30px;
-    background-position: 0 0,15px 15px;
+    background-position: 0 0,15px 15px; */
+
+    background: rgb(63,200,197);
+    background: linear-gradient(51deg, rgba(63,200,197,0.24413515406162467) 0%, rgba(97,47,70,0.19091386554621848) 75%);
 }
 
 #nav-content.htmx-swapping {
     opacity: 0;
     transition: opacity 0.1s ease-out;
+    cursor: pointer;
 }
 
 #nav-content.htmx-added {
@@ -180,4 +198,8 @@ h1 {
 .vinyl-item img {
     width: 170px;
     border-radius: 50%;
+}
+
+.clickable {
+    cursor: pointer;
 }

@@ -1,5 +1,8 @@
 {{ define "panel-home-path" }}
-	<a hx-post="/panel/home" {{ template "htmx-swap-settings" }}>home</a>
+	<p>/</p>
+	<a class="clickable" hx-post="/panel/home" {{ template "htmx-swap-settings" }}>
+		home
+	</a>
 	<p>/</p>
 {{ end }}
 
@@ -11,10 +14,10 @@
 	</div>
 	
 	<div id="nav-content">
-		<h1 class="carousel-title carousel-title-link" hx-post="/panel/projects" {{ template "htmx-swap-settings" }}>some projects</h1>
+		<h1 class="carousel-title clickable" hx-post="/panel/projects" {{ template "htmx-swap-settings" }}>some projects</h1>
 		<div class="carousel-showcase"></div>
 
-		<h1 class="carousel-title carousel-title-link" hx-post="/panel/vinyl" {{ template "htmx-swap-settings" }}>vinyl collection</h1>
+		<h1 class="carousel-title clickable" hx-post="/panel/vinyl" {{ template "htmx-swap-settings" }}>vinyl collection</h1>
 		<div class="carousel-showcase">
 			{{ range $vinyl := .Vinyls }}
 				<div class="carousel-item" onmouseenter="carouselItemEntered(this)" onmouseleave="carouselItemLeft(this)">
@@ -32,9 +35,9 @@
 				</div>
 			{{end}}
 		
-			<div id="vinyl-ellipse" class="carousel-item" hx-post="/panel/vinyl" {{ template "htmx-swap-settings" }}>
+			<div class="carousel-item" hx-post="/panel/vinyl" {{ template "htmx-swap-settings" }}>
 				<a>
-					<h1>...</h1>
+					<h1 class="clickable">...</h1>
 				</a>
 			</div>
 		</div>
@@ -54,12 +57,12 @@
 		
 			<div class="carousel-item">
 				<a>
-					<h1>...</h1>
+					<h1 class="clickable">...</h1>
 				</a>
 			</div>
 		</div>
 
-		<h1 class="carousel-title carousel-title-link">just watched</h1>
+		<h1 class="carousel-title clickable">just watched</h1>
 		<div class="carousel-showcase">
 			{{ range $movies := .Movies }}
 				<div class="carousel-item" onmouseenter="carouselItemEntered(this)">
@@ -69,7 +72,7 @@
 		
 			<div class="carousel-item">
 				<a>
-					<h1>...</h1>
+					<h1 class="clickable">...</h1>
 				</a>
 			</div>
 		</div>
