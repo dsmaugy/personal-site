@@ -41,12 +41,12 @@
 				</a>
 			</div>
 		</div>
-		<h1 class="carousel-title">been listening to</h1>
+		<h1 class="carousel-title clickable">been <span id="spotify-preview-toggle" onclick="togglePreview()">listening</span> to</h1>
 		<div class="carousel-showcase">
 			{{ range $track := .Tracks }}
-				<div class="carousel-item" onmouseenter="carouselItemEntered(this)" onmouseleave="carouselItemLeft(this)">
+				<div class="carousel-item" onmouseenter="carouselItemEntered(this); previewSpotify(this)" onmouseleave="carouselItemLeft(this); stopSpotify();">
 					<img class="carousel-spotify-pic" src="{{ (index $track.Album.Images 0).URL }}">
-		
+					<p class="spotify-preview-link">{{ $track.PreviewURL }}</p>
 					<div class="carousel-tooltip">
 						<p>
 							<strong>{{ $track.Name }}</strong> by {{ (index $track.Artists 0).Name }}
@@ -56,6 +56,12 @@
 			{{end}}
 		
 			<div class="carousel-item">
+				<!-- <label class="switch">
+					toggle preview
+					<input id="spotify-preview-toggle" onchange="togglePreview(this)" type="checkbox"/>
+					<span class="slider"></span>
+				</label> -->
+
 				<a>
 					<h1 class="clickable">...</h1>
 				</a>

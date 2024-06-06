@@ -44,6 +44,7 @@ h1 {
 
 .carousel-title {
     display: inline-block;
+    font-family: "Ubuntu Mono", monospace;
 }
 
 .carousel-item {
@@ -68,6 +69,10 @@ h1 {
 
 .carousel-movies-pic {
     border-radius: 4px;
+}
+
+.spotify-preview-link {
+    display: none;
 }
 
 .carousel-item:last-child {
@@ -192,6 +197,12 @@ h1 {
 #vinyl-showcase {
     display: flex;
     flex-wrap: wrap;
+}
+
+#spotify-preview-toggle {
+    border: ridge;
+    background: aliceblue;
+    user-select: none;
 }
 
 #nav-footer {
