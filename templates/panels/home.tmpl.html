@@ -7,7 +7,7 @@
 {{ end }}
 
 {{define "panel-home"}}
-	<div id="nav-path" hx-swap-oob="true">
+	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
 		<div id="nav-path-text">
 			{{ template "panel-home-path" .}}
 		</div>
@@ -76,6 +76,10 @@
 				</a>
 			</div>
 		</div>
+	</div>
+
+	<div class="nav-bars" id="nav-footer">
+		<p>thank you to kerokerobonito</p>
 	</div>
 {{end}}
 

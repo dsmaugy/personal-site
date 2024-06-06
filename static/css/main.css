@@ -1,4 +1,9 @@
-
+@font-face {
+    font-family: 'Bonito';
+    src:    url('/static/fonts/bonito.woff2') format('woff2'),
+            url('/static/fonts/bonito.woff2') format('woff2'),
+            url('/static/fonts/bonito.ttf') format('ttf');
+}
 
 body {
     display: block;
@@ -114,16 +119,18 @@ h1 {
 }
 
 #right-panel {
-    background: #E9FFFF;
     flex: 20;
     /* padding: 1em; */
     /* overflow-y: scroll; */
     height: 100%;
+    background: rgb(238,210,174);
+    background: linear-gradient(200deg, rgba(238,210,174,0.227328431372549) 0%, rgba(183,233,148,0.19931722689075626) 100%);
+
 }
 
 #right-panel-inner {
     border: solid;
-    border-radius: 3px 3px 0px 3px;
+    border-radius: 3px;
     box-sizing: border-box;
     margin: 1em;
     height: calc(100vh - 2em);
@@ -185,6 +192,21 @@ h1 {
 #vinyl-showcase {
     display: flex;
     flex-wrap: wrap;
+}
+
+#nav-footer {
+    border-top: solid;
+    font-family: Bonito;
+    text-align: center;
+    /* weird stuff just to prevent line wrapping */
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.nav-bars {
+    background-color: #93b8d9;
 }
 
 .vinyl-item{
