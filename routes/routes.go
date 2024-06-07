@@ -37,7 +37,7 @@ func getHomePanelVars() gin.H {
 	vinyls, _ := api.GetDiscogsRecords(MyDiscogsUsername)
 	tracks, _ := api.GetSpotifyTopTracks(25)
 	movies, _ := api.GetLetterboxdData()
-
+	// TODO: gracefully handle errors in connectivity
 	return gin.H{
 		"Vinyls": getRandomSamples(vinyls),
 		"Tracks": getRandomSamples(tracks),

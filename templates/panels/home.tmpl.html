@@ -15,7 +15,14 @@
 	
 	<div id="nav-content">
 		<h1 class="carousel-title clickable" hx-post="/panel/projects" {{ template "htmx-swap-settings" }}>some projects</h1>
-		<div class="carousel-showcase"></div>
+		<div class="carousel-showcase">
+			<div class="carousel-item carousel-project" onmouseenter="carouselItemEntered(this)" onmouseleave="carouselItemLeft(this)">
+				<img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmNnaHcwMHoydTNnMGc2M2xwcnB1NWlrOHB3OWl2OHlsOWtnaHplciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6t3ISgOPaNaeY/giphy.gif"/>
+				<div class="carousel-tooltip">
+					<p>bro bro bro</p>
+				</div>
+			</div>
+		</div>
 
 		<h1 class="carousel-title clickable" hx-post="/panel/vinyl" {{ template "htmx-swap-settings" }}>vinyl collection</h1>
 		<div class="carousel-showcase">

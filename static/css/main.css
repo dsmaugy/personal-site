@@ -85,6 +85,10 @@ h1 {
     /* cursor: pointer; */
 }
 
+.carousel-project {
+    background-color: antiquewhite;
+}
+
 .carousel-tooltip {
     display: none;
 }
