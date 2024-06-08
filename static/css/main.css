@@ -5,6 +5,11 @@
             url('/static/fonts/bonito.ttf') format('ttf');
 }
 
+:root {
+    --link: #FC7D62;
+    --linktouch: #7D726F;
+}
+
 body {
     display: block;
     margin: 0;
@@ -26,6 +31,26 @@ h1 {
     margin-bottom: 0.67em; */
 }
 
+p, h1, a {
+    font-family: "Source Code Pro", monospace;
+}
+
+a:link {
+    color: var(--link);
+}
+
+a:visited {
+    color: var(--link);
+}
+
+a:hover {
+    color: var(--link);
+}
+
+a:active {
+    color: var(--linktouch);
+}
+
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -44,7 +69,6 @@ h1 {
 
 .carousel-title {
     display: inline-block;
-    font-family: "Ubuntu Mono", monospace;
 }
 
 .carousel-item {
@@ -156,6 +180,7 @@ h1 {
     display: inline-block;
     background-color: aqua;
     margin-left: 1rem;
+    font-family: "Ubuntu Mono", monospace;
 }
 
 #nav-path a:hover {
