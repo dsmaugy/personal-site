@@ -189,6 +189,7 @@ func GetDiscogsRecords(user string) (*[]VinylInfo, error) {
 					artistName = release.Info.Artists[0].Name
 				}
 
+				// TODO: format dates
 				vinylList = append(vinylList, VinylInfo{
 					Name:                  release.Info.Title,
 					Artist:                artistName,

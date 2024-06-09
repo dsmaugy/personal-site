@@ -1,13 +1,13 @@
+:root {
+    --link: #FC7D62;
+    --linktouch: #7D726F;
+}
+
 @font-face {
     font-family: 'Bonito';
     src:    url('/static/fonts/bonito.woff2') format('woff2'),
             url('/static/fonts/bonito.woff2') format('woff2'),
             url('/static/fonts/bonito.ttf') format('ttf');
-}
-
-:root {
-    --link: #FC7D62;
-    --linktouch: #7D726F;
 }
 
 body {
@@ -44,7 +44,7 @@ a:visited {
 }
 
 a:hover {
-    color: var(--link);
+    color: #3D524A;
 }
 
 a:active {
@@ -69,6 +69,7 @@ a:active {
 
 .carousel-title {
     display: inline-block;
+    font-family: "Cabin", sans-serif;
 }
 
 .carousel-item {
@@ -145,6 +146,13 @@ a:active {
 #left-panel-footer a {
     display: block;
     text-align: center;
+    padding: 5px 0px 5px 0px;
+}
+
+#built-with-notes {
+    margin-bottom: 1em;
+    font-size: 0.95em;
+    color: grey;
 }
 
 #left-panel-name {
@@ -236,13 +244,16 @@ a:active {
 
 #nav-footer {
     border-top: solid;
-    font-family: Bonito;
     text-align: center;
     /* weird stuff just to prevent line wrapping */
     -webkit-line-clamp: 1;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+
+#nav-footer p {
+    font-family: Bonito;
 }
 
 .nav-bars {

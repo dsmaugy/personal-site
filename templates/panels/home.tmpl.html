@@ -22,6 +22,12 @@
 					<p>bro bro bro</p>
 				</div>
 			</div>
+
+			<div class="carousel-item" hx-post="/panel/projects" {{ template "htmx-swap-settings" }}>
+				<a href="#" onclick="event.preventDefault()">
+					<h1 class="clickable">...</h1>
+				</a>
+			</div>
 		</div>
 
 		<h1 class="carousel-title clickable" hx-post="/panel/vinyl" {{ template "htmx-swap-settings" }}>vinyl collection</h1>
@@ -32,7 +38,7 @@
 					<!-- <p>{{ $vinyl.Artist }} - {{ $vinyl.Name }} ({{ $vinyl.Year }})</p> -->
 					<div class="carousel-tooltip">
 						<p>
-							{{ $vinyl.Artist }} - {{ $vinyl.Name }} ({{ $vinyl.Year }})
+							<strong>{{ $vinyl.Artist }}</strong> - {{ $vinyl.Name }} ({{ $vinyl.Year }})
 						</p>
 						
 						<p>
@@ -43,7 +49,7 @@
 			{{end}}
 		
 			<div class="carousel-item" hx-post="/panel/vinyl" {{ template "htmx-swap-settings" }}>
-				<a>
+				<a href="#" onclick="event.preventDefault()">
 					<h1 class="clickable">...</h1>
 				</a>
 			</div>
@@ -63,13 +69,7 @@
 			{{end}}
 		
 			<div class="carousel-item">
-				<!-- <label class="switch">
-					toggle preview
-					<input id="spotify-preview-toggle" onchange="togglePreview(this)" type="checkbox"/>
-					<span class="slider"></span>
-				</label> -->
-
-				<a>
+				<a href="https://stats.fm/smaugy" target="_blank">
 					<h1 class="clickable">...</h1>
 				</a>
 			</div>
@@ -84,7 +84,7 @@
 			{{end}}
 		
 			<div class="carousel-item">
-				<a>
+				<a href="https://letterboxd.com/dsmaugy/" target="_blank">
 					<h1 class="clickable">...</h1>
 				</a>
 			</div>
