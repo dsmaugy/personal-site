@@ -16,7 +16,7 @@
 	<div id="nav-content">
 		<h1 class="carousel-title clickable" hx-post="/panel/projects" {{ template "htmx-swap-settings" }}>some projects</h1>
 		<div class="carousel-showcase">
-			<div class="carousel-item carousel-project" onmouseenter="carouselItemEntered(this)" onmouseleave="carouselItemLeft(this)">
+			<div class="carousel-item carousel-project" {{ template "tooltip-hover" }}>
 				<img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmNnaHcwMHoydTNnMGc2M2xwcnB1NWlrOHB3OWl2OHlsOWtnaHplciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6t3ISgOPaNaeY/giphy.gif"/>
 				<div class="carousel-tooltip">
 					<p>bro bro bro</p>
@@ -33,7 +33,7 @@
 		<h1 class="carousel-title clickable" hx-post="/panel/vinyl" {{ template "htmx-swap-settings" }}>vinyl collection</h1>
 		<div class="carousel-showcase">
 			{{ range $vinyl := .Vinyls }}
-				<div class="carousel-item" onmouseenter="carouselItemEntered(this)" onmouseleave="carouselItemLeft(this)">
+				<div class="carousel-item" {{ template "tooltip-hover" }}2>
 					<img class="carousel-vinyl-pic" src="{{ $vinyl.PreviewImage }}">
 					<!-- <p>{{ $vinyl.Artist }} - {{ $vinyl.Name }} ({{ $vinyl.Year }})</p> -->
 					<div class="carousel-tooltip">

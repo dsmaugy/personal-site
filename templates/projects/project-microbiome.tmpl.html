@@ -1,0 +1,21 @@
+{{ define "project-microbiome-path" }}
+    {{ template "panel-projects-path" . }}
+	<a class="clickable">microbiome</a>
+	<p>/</p>
+{{ end }}
+
+{{define "project-microbiome"}}
+	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
+		<div id="nav-path-text">
+			{{ template "project-microbiome-path" .}}
+		</div>		
+	</div>
+	
+	<div id="nav-content">
+		<h1>microbiome</h1>
+
+	</div>
+{{end}}
+
+<!-- do this so we can import this directly in our POST requests -->
+{{ template "project-microbiome" .}}

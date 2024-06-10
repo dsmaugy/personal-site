@@ -1,6 +1,6 @@
 {{ define "panel-projects-path" }}
     {{ template "panel-home-path" . }}
-	<a class="clickable">projects</a>
+	<a class="clickable" hx-post="/panel/projects" {{ template "htmx-swap-settings" }}>projects</a>
 	<p>/</p>
 {{ end }}
 
@@ -13,7 +13,81 @@
 	
 	<div id="nav-content">
 		<h1>some projects</h1>
-		
+
+		<div id="projects-showcase">
+			<div class="project-card clickable" hx-post="/panel/projects/microbiome" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+				<img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmNnaHcwMHoydTNnMGc2M2xwcnB1NWlrOHB3OWl2OHlsOWtnaHplciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6t3ISgOPaNaeY/giphy.gif"/>
+				<p id="project-title">Microbiome</p>
+				<p>delay-based VST3/AU/LV2 audio effects plugin</p>
+				<div class="carousel-tooltip">
+					<p>bro bro bro</p>
+				</div>
+			</div>
+
+			<div class="project-card clickable" {{ template "tooltip-hover" }}>
+				<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExazd6cDl2bGdzNWlkdm1zNnB2enlhb2xobzEwcnJjMTVvdXA2NXE4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SGM2E5qBbfbWM/giphy.webp"/>
+				<p id="project-title">Sonderful Transmissions</p>
+				<p>interactive message transmission installation</p>
+				<div class="carousel-tooltip">
+					<p>Sonderful Transmissions - interactive message transmission installation</p>
+				</div>
+			</div>
+
+			<div class="project-card clickable" {{ template "tooltip-hover" }}>
+				<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExazd6cDl2bGdzNWlkdm1zNnB2enlhb2xobzEwcnJjMTVvdXA2NXE4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SGM2E5qBbfbWM/giphy.webp"/>
+				<p id="project-title">Kubernetes Herodotus Scheduler</p>
+				<p>an extension to the Kubernetes Scheduler to increase transparency and observability</p>
+				<div class="carousel-tooltip">
+					<p>Sonderful Transmissions - interactive message transmission installation</p>
+				</div>
+			</div>
+
+			<div class="project-card clickable" {{ template "tooltip-hover" }}>
+				<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExazd6cDl2bGdzNWlkdm1zNnB2enlhb2xobzEwcnJjMTVvdXA2NXE4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SGM2E5qBbfbWM/giphy.webp"/>
+				<p id="project-title">CEEDER</p>
+				<p>virtual intertellar zen garden</p>
+				<div class="carousel-tooltip">
+					<p>Sonderful Transmissions - interactive message transmission installation</p>
+				</div>
+			</div>
+
+			<div class="project-card clickable" {{ template "tooltip-hover" }}>
+				<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExazd6cDl2bGdzNWlkdm1zNnB2enlhb2xobzEwcnJjMTVvdXA2NXE4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SGM2E5qBbfbWM/giphy.webp"/>
+				<p id="project-title">pathos.irc</p>
+				<p>video about self-discovery</p>
+				<div class="carousel-tooltip">
+					<p>Sonderful Transmissions - interactive message transmission installation</p>
+				</div>
+			</div>
+
+			<div class="project-card clickable" {{ template "tooltip-hover" }}>
+				<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExazd6cDl2bGdzNWlkdm1zNnB2enlhb2xobzEwcnJjMTVvdXA2NXE4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SGM2E5qBbfbWM/giphy.webp"/>
+				<p id="project-title">System Symphony</p>
+				<p>custom laptop-ensemble demo</p>
+				<div class="carousel-tooltip">
+					<p>Sonderful Transmissions - interactive message transmission installation</p>
+				</div>
+			</div>
+
+			<div class="project-card clickable" {{ template "tooltip-hover" }}>
+				<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExazd6cDl2bGdzNWlkdm1zNnB2enlhb2xobzEwcnJjMTVvdXA2NXE4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SGM2E5qBbfbWM/giphy.webp"/>
+				<p id="project-title">Simple Discord Player</p>
+				<p>custom Discord music/assistant bot</p>
+				<div class="carousel-tooltip">
+					<p>Sonderful Transmissions - interactive message transmission installation</p>
+				</div>
+			</div>
+
+			<div class="project-card clickable" {{ template "tooltip-hover" }}>
+				<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExazd6cDl2bGdzNWlkdm1zNnB2enlhb2xobzEwcnJjMTVvdXA2NXE4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SGM2E5qBbfbWM/giphy.webp"/>
+				<p id="project-title">Justin Tseng Election Committee</p>
+				<p>webmaster/tech lead for the first Asian-American city councillor in Medford</p>
+				<div class="carousel-tooltip">
+					<p>Sonderful Transmissions - interactive message transmission installation</p>
+				</div>
+			</div>
+		</div>
+
 	</div>
 {{end}}
 

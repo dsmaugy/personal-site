@@ -101,3 +101,9 @@ func VinylPanel(c *gin.Context) {
 func ProjectsPanel(c *gin.Context) {
 	c.HTML(http.StatusOK, "projects.tmpl.html", gin.H{})
 }
+
+func ProjectPage(c *gin.Context) {
+	projectname := c.Param("name")
+
+	c.HTML(http.StatusOK, "project-"+projectname+".tmpl.html", nil)
+}

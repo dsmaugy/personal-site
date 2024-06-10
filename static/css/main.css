@@ -76,8 +76,9 @@ a:active {
     flex: 2;
     opacity: 1;
     text-align: center;
-    margin-left: 1em;
-    margin-right: 1em;
+    margin: 0 1em 0 1em;
+    /* margin-left: 1em;
+    margin-right: 1em; */
 }
 
 .carousel-item img {
@@ -242,6 +243,18 @@ a:active {
     user-select: none;
 }
 
+#projects-showcase {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    text-align: center;
+}
+
+#project-title {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
 #nav-footer {
     border-top: solid;
     text-align: center;
@@ -271,6 +284,14 @@ a:active {
 .vinyl-item img {
     width: 170px;
     border-radius: 50%;
+}
+
+.project-card {
+    flex: 0 1 0;
+    background: bisque;
+    padding: 5px;
+    margin: 1em;
+    align-self: start;
 }
 
 .clickable {

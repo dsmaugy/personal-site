@@ -3,3 +3,7 @@
 {{ define "htmx-swap-settings" }}
 hx-target="#nav-content" hx-swap="outerHTML swap:0.1s settle:0.1s"
 {{ end }}
+
+{{ define "tooltip-hover" }}
+onmouseenter="carouselItemEntered(this)" onmouseleave="carouselItemLeft(this)"
+{{ end }}
