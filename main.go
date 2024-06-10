@@ -60,6 +60,7 @@ func main() {
 	r.GET("/api/vinyl/:user", routes.VinylCollection)
 	r.GET("/api/spotify_top", routes.SpotifyTop)
 
+	// TODO: these should all be GET requests
 	r.POST("/panel/home", routes.HomePanel)
 	r.POST("/panel/vinyl", routes.VinylPanel)
 	r.POST("/panel/projects", routes.ProjectsPanel)
