@@ -77,10 +77,16 @@
 
 		<h1 class="carousel-title clickable">just watched</h1>
 		<div class="carousel-showcase">
-			{{ range $movies := .Movies }}
+			{{ range $movie := .Movies }}
 				<div class="carousel-item" onmouseenter="carouselItemEntered(this)">
-					<img class="carousel-movies-pic" src="{{ $movies.ImageURL }}">
-				</div>        
+					<img class="carousel-movies-pic" src="{{ $movie.ImageURL }}">
+
+					<div class="carousel-tooltip">
+						<p>
+							<strong>{{ $movie.Title }}</strong> watched on {{ $movie.WatchDate }}
+						</p>
+					</div>
+				</div>      
 			{{end}}
 		
 			<div class="carousel-item">

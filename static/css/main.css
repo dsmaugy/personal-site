@@ -51,6 +51,11 @@ a:active {
     color: var(--linktouch);
 }
 
+/* hr {
+    width: 100%;
+    border: 0.2em solid #615245;
+} */
+
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -137,15 +142,22 @@ the contents of the div are copied over so any styling changes here won't be ref
     background-image: url("/static/images/ditherduck.jpg");
     background-position: left 0px bottom -300px;
     background-blend-mode: overlay;
+    overflow: hidden auto;
 }
 
 #left-panel p, #left-panel a, #left-panel h1 {
     background-color: white;
 }
 
+#left-panel-introduction {
+    /* space out the tooltip evenly within the panel whitespace */
+    margin-bottom: auto;
+}
+
 #left-panel-tooltip {
-    margin-top: 1em;
     border: 1.7px dashed;
+    /* space out the tooltip evenly within the panel whitespace */
+    margin: auto 0 auto 0; 
 }
 
 #left-panel-footer {
