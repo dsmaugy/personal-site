@@ -63,7 +63,7 @@ func main() {
 	// TODO: these should all be GET requests
 	r.POST("/panel/home", routes.HomePanel)
 	r.POST("/panel/vinyl", routes.VinylPanel)
-	r.POST("/panel/projects", routes.ProjectsPanel)
-	r.POST("/panel/projects/:name", routes.ProjectPage)
+	r.POST("/panel/work", routes.ProjectsPanel)
+	r.POST("/panel/work/:name", routes.ProjectPage)
 	r.Run("0.0.0.0:" + os.Getenv("PORT"))
 }

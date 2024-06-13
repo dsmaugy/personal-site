@@ -1,6 +1,6 @@
 {{ define "panel-projects-path" }}
     {{ template "panel-home-path" . }}
-	<a class="clickable" hx-post="/panel/projects" {{ template "htmx-swap-settings" }}>projects</a>
+	<a class="clickable" hx-post="/panel/projects" {{ template "htmx-swap-settings" }}>work</a>
 	<p>/</p>
 {{ end }}
 
@@ -26,7 +26,10 @@
 			</div>
 
 			<div class="project-card clickable" {{ template "tooltip-hover" }}>
-				<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExazd6cDl2bGdzNWlkdm1zNnB2enlhb2xobzEwcnJjMTVvdXA2NXE4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SGM2E5qBbfbWM/giphy.webp"/>
+				<video playsinline autoplay loop muted>
+					<source src="/static/video/projects/sonderfultransmissions_demo.webm" type="video/webm" />
+					<source src="/static/video/projects/sonderfultransmissions_demo.mp4" type="video/mp4" />		
+				</video>
 				<p id="project-title">Sonderful Transmissions</p>
 				<p>interactive message transmission installation</p>
 				<div class="carousel-tooltip">
@@ -71,8 +74,10 @@
 			</div>
 
 			<div class="project-card clickable" {{ template "tooltip-hover" }}>
-				<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExazd6cDl2bGdzNWlkdm1zNnB2enlhb2xobzEwcnJjMTVvdXA2NXE4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SGM2E5qBbfbWM/giphy.webp"/>
-				<p id="project-title">pathos.irc</p>
+				<video playsinline autoplay loop muted>
+					<source src="/static/video/projects/pathosirc_demo.webm" type="video/webm" />
+					<source src="/static/video/projects/pathosirc_demo.mp4" type="video/mp4" />		
+				</video>				<p id="project-title">pathos.irc</p>
 				<p>a self-discovery journey</p>
 				<div class="carousel-tooltip">
 					<p>pathos.irc is a video piece about self-discovery. Created with a Sony Handycam TODO: find model of handycam</p>
@@ -80,8 +85,10 @@
 			</div>
 
 			<div class="project-card clickable" {{ template "tooltip-hover" }}>
-				<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExazd6cDl2bGdzNWlkdm1zNnB2enlhb2xobzEwcnJjMTVvdXA2NXE4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SGM2E5qBbfbWM/giphy.webp"/>
-				<p id="project-title">System Symphony</p>
+				<video playsinline autoplay loop muted>
+					<source src="/static/video/projects/systemsymphony_demo.webm" type="video/webm" />
+					<source src="/static/video/projects/systemsymphony_demo.mp4" type="video/mp4" />		
+				</video>				<p id="project-title">System Symphony</p>
 				<p>custom laptop-synthesizer using currently running processes as sonic parameters</p>
 				<div class="carousel-tooltip">
 					<p>System Symphony is program that turns computers into instruments by sonifying the currently running processes into synthesizer parameters. Advertised as an early 2000s CD-ROM software install. Built with SuperCollider and Python.</p>
@@ -89,7 +96,7 @@
 			</div>
 
 			<div class="project-card clickable" {{ template "tooltip-hover" }}>
-				<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExazd6cDl2bGdzNWlkdm1zNnB2enlhb2xobzEwcnJjMTVvdXA2NXE4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SGM2E5qBbfbWM/giphy.webp"/>
+				<img src="/static/images/projects/discord_bot.png"/>
 				<p id="project-title">Simple Discord Player</p>
 				<p>custom Discord music/assistant bot</p>
 				<div class="carousel-tooltip">
@@ -98,7 +105,7 @@
 			</div>
 
 			<div class="project-card clickable" {{ template "tooltip-hover" }}>
-				<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExazd6cDl2bGdzNWlkdm1zNnB2enlhb2xobzEwcnJjMTVvdXA2NXE4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SGM2E5qBbfbWM/giphy.webp"/>
+				<img src="/static/images/projects/justin_site.jpg"/>
 				<p id="project-title">Justin Tseng Election Committee</p>
 				<p>webmaster/tech lead for the first Asian-American city councillor in Medford</p>
 				<div class="carousel-tooltip">

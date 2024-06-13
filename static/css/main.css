@@ -316,6 +316,10 @@ the contents of the div are copied over so any styling changes here won't be ref
     border-radius: 2px;
 }
 
+.project-card video, .project-card img {
+    max-width: 300px;
+}
+
 .clickable {
     cursor: pointer;
 }
