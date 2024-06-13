@@ -1,6 +1,6 @@
 {{ define "panel-home-path" }}
 	<p>/</p>
-	<a class="clickable" hx-post="/panel/home" {{ template "htmx-swap-settings" }}>
+	<a class="clickable" hx-get="/home" {{ template "htmx-swap-settings" }}>
 		home
 	</a>
 	<p>/</p>
@@ -14,7 +14,7 @@
 	</div>
 	
 	<div id="nav-content">
-		<h1 class="carousel-title clickable" hx-post="/panel/work" {{ template "htmx-swap-settings" }}>my work</h1>
+		<h1 class="carousel-title clickable" hx-get="/work" {{ template "htmx-swap-settings" }}>my work</h1>
 		<div class="carousel-showcase">
 			<div class="carousel-item carousel-project" {{ template "tooltip-hover" }}>
 				<img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmNnaHcwMHoydTNnMGc2M2xwcnB1NWlrOHB3OWl2OHlsOWtnaHplciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6t3ISgOPaNaeY/giphy.gif"/>
@@ -23,14 +23,14 @@
 				</div>
 			</div>
 
-			<div class="carousel-item" hx-post="/panel/projects" {{ template "htmx-swap-settings" }}>
+			<div class="carousel-item" hx-get="/work" {{ template "htmx-swap-settings" }}>
 				<a href="#" onclick="event.preventDefault()">
 					<h1 class="clickable">...</h1>
 				</a>
 			</div>
 		</div>
 
-		<h1 class="carousel-title clickable" hx-post="/panel/vinyl" {{ template "htmx-swap-settings" }}>vinyl collection</h1>
+		<h1 class="carousel-title clickable" hx-get="/vinyl" {{ template "htmx-swap-settings" }}>vinyl collection</h1>
 		<div class="carousel-showcase">
 			{{ range $vinyl := .Vinyls }}
 				<div class="carousel-item" {{ template "tooltip-hover" }}2>
@@ -48,7 +48,7 @@
 				</div>
 			{{end}}
 		
-			<div class="carousel-item" hx-post="/panel/vinyl" {{ template "htmx-swap-settings" }}>
+			<div class="carousel-item" hx-get="/vinyl" {{ template "htmx-swap-settings" }}>
 				<a href="#" onclick="event.preventDefault()">
 					<h1 class="clickable">...</h1>
 				</a>
@@ -98,5 +98,5 @@
 	</div>
 {{end}}
 
-<!-- do this so we can import this directly in our POST requests -->
+<!-- do this so we can import this directly in our requests -->
 {{ template "panel-home" .}}

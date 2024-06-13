@@ -60,10 +60,11 @@ func main() {
 	r.GET("/api/vinyl/:user", routes.VinylCollection)
 	r.GET("/api/spotify_top", routes.SpotifyTop)
 
-	// TODO: these should all be GET requests
-	r.POST("/panel/home", routes.HomePanel)
-	r.POST("/panel/vinyl", routes.VinylPanel)
-	r.POST("/panel/work", routes.ProjectsPanel)
-	r.POST("/panel/work/:name", routes.ProjectPage)
+	// TODO: use hx-push-url="true" and check for HX-History-Restore-Request/Hx-Request header
+	// to send full HTML
+	r.GET("/home", routes.HomePanel)
+	r.GET("/vinyl", routes.VinylPanel)
+	r.GET("/work", routes.ProjectsPanel)
+	r.GET("/work/:name", routes.ProjectPage)
 	r.Run("0.0.0.0:" + os.Getenv("PORT"))
 }

@@ -1,3 +1,4 @@
+{{ define "root-header" }}
 <!DOCTYPE html>
 <html>
 	<head>
@@ -46,10 +47,13 @@
 						<p>Completing HTML as a <a href="https://hypermedia.systems/hypermedia-reintroduction/" target="_blank">Hypertext</a></p>
 					</div>
 				</div>
-				<div id="right-panel" class="container-panels">
+				<div id="right-panel" class="container-panels" hx-history-elt>
 					<div id="right-panel-inner">
-						{{ template "panel-home" . }}
+{{ end }}
 
+
+
+{{ define "root-footer" }}
 						<div class="nav-bars" id="nav-footer">
 							<p>thank you to kerokerobonito</p>
 						</div>
@@ -59,3 +63,4 @@
 		</main>
 	</body>
 </html>
+{{ end }}

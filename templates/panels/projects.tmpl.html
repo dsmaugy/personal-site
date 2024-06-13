@@ -1,6 +1,6 @@
 {{ define "panel-projects-path" }}
     {{ template "panel-home-path" . }}
-	<a class="clickable" hx-post="/panel/projects" {{ template "htmx-swap-settings" }}>work</a>
+	<a class="clickable" hx-get="/work" {{ template "htmx-swap-settings" }}>work</a>
 	<p>/</p>
 {{ end }}
 
@@ -13,7 +13,7 @@
 	
 	<div id="nav-content">
 		<div id="projects-showcase">
-			<div class="project-card clickable" hx-post="/panel/projects/microbiome" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+			<div class="project-card clickable" hx-get="/work/microbiome" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
 				<video playsinline autoplay loop muted>
 					<source src="/static/video/projects/microbiome_demo.webm" type="video/webm" />
 					<source src="/static/video/projects/microbiome_demo.mp4" type="video/mp4" />		
@@ -117,5 +117,5 @@
 	</div>
 {{end}}
 
-<!-- do this so we can import this directly in our POST requests -->
+<!-- do this so we can import this directly in our requests -->
 {{ template "panel-projects" .}}

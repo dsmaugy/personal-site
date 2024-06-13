@@ -46,9 +46,9 @@ func getHomePanelVars() gin.H {
 }
 
 func Index(c *gin.Context) {
-	log.Info().Msg("MY URL: " + c.Request.RequestURI)
-
-	c.HTML(http.StatusOK, "index.tmpl.html", getHomePanelVars())
+	// log.Info().Msg("MY URL: " + c.Request.RequestURI)
+	// c.HTML(http.StatusOK, "home-FULL.tmpl.html", getHomePanelVars())
+	c.Redirect(http.StatusPermanentRedirect, "/home")
 }
 
 func RecentlyWatched(c *gin.Context) {
@@ -88,22 +88,56 @@ func SpotifyTop(c *gin.Context) {
 }
 
 func HomePanel(c *gin.Context) {
-	c.HTML(http.StatusOK, "home.tmpl.html", getHomePanelVars())
+	log.Info().Msg("Request for Home page")
+	ishtmx := c.GetHeader("Hx-Request")
+	log.Info().Msg("Hx-Request: " + ishtmx)
+
+	if ishtmx == "true" {
+		c.HTML(http.StatusOK, "home.tmpl.html", getHomePanelVars())
+	} else {
+		c.HTML(http.StatusOK, "home-FULL.tmpl.html", getHomePanelVars())
+	}
 }
 
 func VinylPanel(c *gin.Context) {
+	log.Info().Msg("Request for Vinyl page")
+	ishtmx := c.GetHeader("Hx-Request")
+	log.Info().Msg("Hx-Request: " + ishtmx)
+
 	vinyls, _ := api.GetDiscogsRecords(MyDiscogsUsername)
-	c.HTML(http.StatusOK, "vinyl.tmpl.html", gin.H{
-		"Vinyls": vinyls,
-	})
+
+	if ishtmx == "true" {
+		c.HTML(http.StatusOK, "vinyl.tmpl.html", gin.H{
+			"Vinyls": vinyls,
+		})
+	} else {
+		c.HTML(http.StatusOK, "vinyl-FULL.tmpl.html", gin.H{
+			"Vinyls": vinyls,
+		})
+	}
 }
 
 func ProjectsPanel(c *gin.Context) {
-	c.HTML(http.StatusOK, "projects.tmpl.html", gin.H{})
+	log.Info().Msg("Request for Projects page")
+	ishtmx := c.GetHeader("Hx-Request")
+	log.Info().Msg("Hx-Request: " + ishtmx)
+
+	if ishtmx == "true" {
+		c.HTML(http.StatusOK, "projects.tmpl.html", nil)
+	} else {
+		c.HTML(http.StatusOK, "projects-FULL.tmpl.html", nil)
+	}
 }
 
 func ProjectPage(c *gin.Context) {
 	projectname := c.Param("name")
+	log.Info().Msg("Request for Project: " + projectname)
+	ishtmx := c.GetHeader("Hx-Request")
+	log.Info().Msg("Hx-Request: " + ishtmx)
 
-	c.HTML(http.StatusOK, "project-"+projectname+".tmpl.html", nil)
+	if ishtmx == "true" {
+		c.HTML(http.StatusOK, "project-"+projectname+".tmpl.html", nil)
+	} else {
+		c.HTML(http.StatusOK, "project-"+projectname+"-FULL.tmpl.html", nil)
+	}
 }
