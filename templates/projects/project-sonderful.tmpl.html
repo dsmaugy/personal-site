@@ -1,0 +1,49 @@
+{{ define "project-sonderful-path" }}
+    {{ template "panel-projects-path" . }}
+	<a class="clickable">sonderful_transmissions</a>
+	<p>/</p>
+{{ end }}
+
+{{define "project-sonderful"}}
+<style>
+	#microbiome-flex {
+		display: flex;
+		flex-flow: row;
+		align-content: start;
+	}
+
+	#microbiome-flex figure {
+		max-width: 400px;
+		margin: 0 auto 0 auto;
+	}
+
+	#microbiome-flex figure img {
+		width: 100%;
+	}
+</style>
+
+	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
+		<div id="nav-path-text">
+			{{ template "project-sonderful-path" .}}
+		</div>		
+	</div>
+	
+	<div id="nav-content" hx-history-elt>
+		<h1>Sonderful Transmissions is an installation</h1>
+		<figure class="centered">
+			<video playsinline autoplay loop muted>
+				<source src="/static/video/projects/sonderfultransmissions_demo.webm" type="video/webm" />
+				<source src="/static/video/projects/sonderfultransmissions_demo.mp4" type="video/mp4" />		
+			</video>
+			<figcaption>Decoding a message</figcaption>
+		</figure>
+
+		<p>Created as part of CPSC334: Creative Embedded Systems</p>
+		<p>Taught by Dr. Scott Petersen</p>
+		<p>Built with Processing and ESP32s</p>
+		<p class="project-date">Fall 2023</p>
+	</div>
+{{end}}
+
+<!-- do this so we can import this directly in our requests -->
+{{ template "project-sonderful" .}}

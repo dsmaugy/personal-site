@@ -27,12 +27,15 @@ p {
 h1 {
     font-size: 2em;
     font-weight: bold;
-    /* margin-top: 0.67em;
-    margin-bottom: 0.67em; */
 }
 
-p, h1, a {
+p, h1, h2, a, figcaption {
     font-family: "Source Code Pro", monospace;
+}
+
+figcaption {
+    font-style: italic;
+    text-align: center;
 }
 
 a:link {
@@ -246,7 +249,10 @@ the contents of the div are copied over so any styling changes here won't be ref
 #nav-content.htmx-swapping {
     opacity: 0;
     transition: opacity 0.1s ease-out;
-    cursor: pointer;
+}
+
+.htmx-request {
+    cursor: wait;
 }
 
 #nav-content.htmx-added {
@@ -322,4 +328,14 @@ the contents of the div are copied over so any styling changes here won't be ref
 
 .clickable {
     cursor: pointer;
+}
+
+.centered {
+    text-align: center;
+}
+
+.project-date {
+    text-align: right;
+    margin: 0 10px 10px 0;
+    font-style: italic;
 }

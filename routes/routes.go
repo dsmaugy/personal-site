@@ -91,7 +91,6 @@ func HomePanel(c *gin.Context) {
 	log.Info().Msg("Request for Home page")
 	ishtmx := c.GetHeader("Hx-Request")
 	log.Info().Msg("Hx-Request: " + ishtmx)
-
 	if ishtmx == "true" {
 		c.HTML(http.StatusOK, "home.tmpl.html", getHomePanelVars())
 	} else {

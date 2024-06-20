@@ -45,3 +45,11 @@ function stopSpotify() {
         currentlyPlaying.pause();
     }
 }
+
+document.body.addEventListener("htmx:beforeSend", function(e) {
+    document.body.style.cursor = "wait";
+});
+
+document.body.addEventListener("htmx:afterSwap", function(e) {
+    document.body.style.cursor = "default";
+});

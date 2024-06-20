@@ -5,6 +5,23 @@
 {{ end }}
 
 {{define "project-microbiome"}}
+<style>
+	#microbiome-flex {
+		display: flex;
+		flex-flow: row;
+		align-content: start;
+	}
+
+	#microbiome-flex figure {
+		max-width: 400px;
+		margin: 0 auto 0 auto;
+	}
+
+	#microbiome-flex figure img {
+		width: 100%;
+	}
+</style>
+
 	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
 		<div id="nav-path-text">
 			{{ template "project-microbiome-path" .}}
@@ -12,13 +29,49 @@
 	</div>
 	
 	<div id="nav-content" hx-history-elt>
-		<!-- <h1>microbiome</h1> -->
-		<video playsinline autoplay loop muted>
-			<source src="/static/video/projects/microbiome_demo.webm" type="video/webm" />
-			<source src="/static/video/projects/microbiome_demo.mp4" type="video/mp4" />		
-		</video>
+		<h1>Microbiome is a VST3/AU/LV2 audio effects plugin that loops an incoming audio signal into a series of buffers to create an aural blur.</h1>
+		<figure class="centered">
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/Ihh65Blad9o?si=ucj9ccgX-M66WZ-T" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+			<figcaption>Microbiome Demo</figcaption>
+		</figure>
+
+		<h2>What if sound was treated as a breathing, living, entity?</h2> 
+		<p>
+			Microbiome's audio processing engine consists of a number of toggleable <b>colonies</b>. Each colony is an offshoot of the original sound source, a resampling of a certain portion of the main audio signal.
+			The colonies apply their own processing algorithm to their resampled audio before feeding it back into the output signal, resulting in a constantly evolving sound signature that is based off the characteristics of the signal's past.
+		</p>
+
+		<br>
+		<div id="microbiome-flex">
+			<figure>
+				<img src="/static/images/projects/microbiome_0_enabled.webp">
+				<figcaption>Figure 1: Microbiome editor UI with focus on a disabled Colony #1</figcaption>
+			</figure>
+
+			<figure>
+				<img src="/static/images/projects/microbiome_1_enabled.webp">
+				<figcaption>Figure 2: Microbiome editor UI with focus on an enabled Colony #1</figcaption>
+			</figure>
+
+			<figure>
+				<img src="/static/images/projects/microbiome_2_enabled.webp">
+				<figcaption>Figure 3: Microbiome editor UI with three enabled colonies at varying resampling seek positions and buffer start/end points</figcaption>
+			</figure>
+		</div>
+
+		<a href="https://github.com/dsmaugy/microbiome/releases" target="_blank">download</a> 
+		<br>
+		<a href="https://github.com/dsmaugy/microbiome/tree/main" target="_blank">source</a> 
+		<br>
+		<a href="/static/other/microbiome_report.pdf" target="_blank">report</a>
+
+		<br><br>
+		<p>Created as an undergraduate thesis project</p>
+		<p>Advised by Dr. Scott Petersen</p>
+		<p>Built with JUCE and C++</p>
+		<p class="project-date">Spring 2024</p>
 	</div>
 {{end}}
 
-<!-- do this so we can import this directly in our POST requests -->
+<!-- do this so we can import this directly in our requests -->
 {{ template "project-microbiome" .}}
