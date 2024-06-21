@@ -6,19 +6,33 @@
 
 {{define "project-sonderful"}}
 <style>
-	#microbiome-flex {
+	.sonderful-images {
 		display: flex;
 		flex-flow: row;
 		align-content: start;
 	}
 
-	#microbiome-flex figure {
+	.sonderful-images figure {
 		max-width: 400px;
 		margin: 0 auto 0 auto;
 	}
 
-	#microbiome-flex figure img {
+	.sonderful-images figure img {
 		width: 100%;
+	}
+
+	.sonderful-images-full {
+		text-align: center;
+	}
+
+	#sonderful-long-figure {
+		max-height: 350px;
+		text-align: center;
+	}
+
+	#sonderful-long-figure > img {
+		height: calc(100% - 2em); /* try to make the height smaller than the height of the figure + caption */
+		width: auto;
 	}
 </style>
 
@@ -29,7 +43,7 @@
 	</div>
 	
 	<div id="nav-content" hx-history-elt>
-		<h1>Sonderful Transmissions is an installation</h1>
+		<h1>Sonderful Transmissions is about encryption, communication, meaning</h1>
 		<figure class="centered">
 			<video playsinline autoplay loop muted>
 				<source src="/static/video/projects/sonderfultransmissions_demo.webm" type="video/webm" />
@@ -38,6 +52,76 @@
 			<figcaption>Decoding a message</figcaption>
 		</figure>
 
+		<h2>sonder</h2>
+		<p>
+			Coined by writer John Koenig in the Dictionary of Obsure Sorrows, “sonder” is the realization that each random passerby is the main character of their own story, 
+			living a life just as vivid and complex as your own. “Sonderful Transmissions” explores this concept through the act of sending and receiving messages to/from outerspace.
+		</p>
+
+		<h2>communicating</h2>
+		<p>
+			Users are able to send messages to a point within a starfield with their own encoding parameters. 
+			In order to receive and decode previously transmitted messages, one has to emulate the exact encoding configuration on the transmission device in order to properly capture and translate the message. 
+			If the encoding parameters do not match the ones used during transmission, the message is garbled and the meaning is lost.
+		</p>
+
+		<br>
+		<div class="sonderful-images">
+			<figure>
+				<img src="/static/images/projects/sonderful_backdrop.webp">
+				<figcaption>navigable starfield</figcaption>
+			</figure>
+			<figure>
+				<img src="/static/images/projects/sonderful_transmit.webp">
+				<figcaption>message transmission prompt</figcaption>
+			</figure>
+			<figure>
+				<img src="/static/images/projects/sonderful_receive.webp">
+				<figcaption>message decoding screen</figcaption>
+			</figure>
+		</div>
+
+		<h2>transmission device</h2>
+		<p>The physical transmission device contains adjustable sensors (push buttons, distance sensor, potentiometer)
+			that correspond to different transmission parameters in the installation (encoding method, signal attenuation, signal frequency).
+		</p>
+		<br>
+		<div class="sonderful-images">
+			<figure>
+				<img src="/static/images/projects/sonderful_device.webp">
+				<figcaption>transmission device with adjustable encoding parameters</figcaption>
+			</figure>
+			<figure>
+				<img src="/static/images/projects/sonderful_device_2.webp">
+				<figcaption>transmission device internals</figcaption>
+			</figure>
+		</div>
+		<h2>physical message receipts</h2>
+		<p>Upon succesfully decoding a message, users can obtain a physical certificate of the decoded transmission, transcribing the encoded digital message into a permanent, human-readable form.</p>
+		<br>
+		<div class="sonderful-images">
+			<figure id="sonderful-long-figure">
+				<img src="/static/images/projects/sonderful_receipt_0.webp">
+				<figcaption>transmission of an excerpt from <a href="https://www.are.na/editorial/on-motivation" target="_blank">Charles Broskoski</a></figcaption>
+			</figure>
+			<figure id="sonderful-long-figure">
+				<img src="/static/images/projects/sonderful_receipt_1.webp">
+				<figcaption>transmission of a YouTube video comment</figcaption>
+			</figure>
+		</div>
+
+		<h2>final</h2>
+		<div class="sonderful-images-full">
+			<figure>
+				<img src="/static/images/projects/sonderful_full.webp">
+				<figcaption>full installation setup</figcaption>
+			</figure>
+		</div>
+
+		<br>
+		<a href="https://github.com/dsmaugy/cpsc334/tree/main/final" target="_blank">source</a> 
+
+		<br>
 		<p>Created as part of CPSC334: Creative Embedded Systems</p>
 		<p>Taught by Dr. Scott Petersen</p>
 		<p>Built with Processing and ESP32s</p>
