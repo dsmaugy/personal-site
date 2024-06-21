@@ -5,23 +5,6 @@
 {{ end }}
 
 {{define "project-microbiome"}}
-<style>
-	#microbiome-flex {
-		display: flex;
-		flex-flow: row;
-		align-content: start;
-	}
-
-	#microbiome-flex figure {
-		max-width: 400px;
-		margin: 0 auto 0 auto;
-	}
-
-	#microbiome-flex figure img {
-		width: 100%;
-	}
-</style>
-
 	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
 		<div id="nav-path-text">
 			{{ template "project-microbiome-path" .}}
@@ -29,6 +12,22 @@
 	</div>
 	
 	<div id="nav-content" hx-history-elt>
+		<style>
+			#microbiome-flex {
+				display: flex;
+				flex-flow: row;
+				align-content: start;
+			}
+		
+			#microbiome-flex figure {
+				max-width: 400px;
+				margin: 0 auto 0 auto;
+			}
+		
+			#microbiome-flex figure img {
+				width: 100%;
+			}
+		</style>
 		<h1>A VST3/AU/LV2 audio effects plugin that loops an incoming audio signal into a series of buffers to create an aural blur</h1>
 		<figure class="centered">
 			<iframe width="560" height="315" src="https://www.youtube.com/embed/Ihh65Blad9o?si=ucj9ccgX-M66WZ-T" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

@@ -5,10 +5,6 @@
 {{ end }}
 
 {{define "project-pathos"}}
-<style>
-
-</style>
-
 	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
 		<div id="nav-path-text">
 			{{ template "project-pathos-path" .}}
@@ -16,17 +12,21 @@
 	</div>
 	
 	<div id="nav-content" hx-history-elt>
-		<h1>a virutal interstellar zen-garden</h1>
+		<style>
+			#pathos-video {
+				max-width: 100%;
+			}
+		</style>
+		<h1>an irc chat</h1>
+
+		<figure class="centered">
+			<iframe id="pathos-video" width="840" height="472.5" src="https://www.youtube.com/embed/9D0L2PIRq3I?si=QPj4je5rdVr2FeHU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+		</figure>
 
 		<br>
-		<p>Created as a final project for CPSC478: Computer Graphics</p>
-		<p>Taught by Professor Julie Dorsey</p>
-		<p>Collaboration with 
-			<a href="https://www.linkedin.com/in/jack-l-7008601ba/" target="_blank">Jack Li</a>
-			<a href="https://samanthatrimboli.com/" target="_blank">Samantha Trimboli</a>
-			<a href="https://www.linkedin.com/in/raffael-davila/" target="_blank">Raffael Davila</a>
-		</p>
-		<p>Built with JavaScript and Three.JS</p>
+		<p>Created as a final project for ART145: Introduction to Digital Video</p>
+		<p>Taught by <a href="https://neilgoldberg.com/" target="_blank">Neil Goldberg</a></p>
+		<p>Filmed with Sony Handycam CCD-TRV815 Hi-8</p>
 		<p class="project-date">Spring 2023</p>
 	</div>
 {{end}}

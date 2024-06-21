@@ -1,0 +1,38 @@
+{{ define "project-symphony-path" }}
+    {{ template "panel-projects-path" . }}
+	<a class="clickable">system_symphony</a>
+	<p>/</p>
+{{ end }}
+
+{{define "project-symphony"}}
+	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
+		<div id="nav-path-text">
+			{{ template "project-symphony-path" .}}
+		</div>		
+	</div>
+	
+	<div id="nav-content" hx-history-elt>
+		<style>
+			#system-video {
+				max-width: 100%;
+			}
+		</style>
+		
+		<h1>an irc chat</h1>
+
+		<figure class="centered">
+			<iframe id="system-video" width="840" height="472.5" src="https://www.youtube.com/embed/7eFRx9gCreM?si=sPmuTHx1zS8MGVhv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+		</figure>
+
+		<br>
+		<p>Created as a final project for CSGH370: The Media of Sound</p>
+		<p>Taught by <a href="https://www.rosswightman.net/" target="_blank">Ross Wightman</a></p>
+		<p>Collaboration with <a href="https://kaloyankolev.com/" target="_blank">Kaloyan Kolev</a></p>
+		<p>Built with SuperCollider/Python</p>
+		<p>Filmed with Sony Handycam CCD-TRV815 Hi-8</p>
+		<p class="project-date">Spring 2023</p>
+	</div>
+{{end}}
+
+<!-- do this so we can import this directly in our requests -->
+{{ template "project-symphony" .}}

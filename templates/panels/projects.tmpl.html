@@ -67,7 +67,7 @@
 					<source src="/static/video/projects/ceeder_demo.mp4" type="video/mp4" />		
 				</video>
 				<p id="project-title">CEEDER</p>
-				<p>virtual intertellar zen garden</p>
+				<p>virtual interstellar zen garden</p>
 				<div class="carousel-tooltip">
 					<p>CEEDER is an in-browser 3D gardening experience where procedurally generated flowers can be planted on a variety of different planets. Built with JavaScript and Three.JS.</p>
 				</div>
@@ -78,13 +78,13 @@
 					<source src="/static/video/projects/pathosirc_demo.webm" type="video/webm" />
 					<source src="/static/video/projects/pathosirc_demo.mp4" type="video/mp4" />		
 				</video>				<p id="project-title">pathos.irc</p>
-				<p>a self-discovery journey</p>
+				<p>a self-discovery journey through IRC</p>
 				<div class="carousel-tooltip">
-					<p>pathos.irc is a video piece about self-discovery. Created with a Sony Handycam TODO: find model of handycam</p>
+					<p>pathos.irc is a video piece about self-discovery. Created with a Sony Handycam CCD-TRV815 Hi-8.</p>
 				</div>
 			</div>
 
-			<div class="project-card clickable" {{ template "tooltip-hover" }}>
+			<div class="project-card clickable" hx-get="/work/symphony" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
 				<video playsinline autoplay loop muted>
 					<source src="/static/video/projects/systemsymphony_demo.webm" type="video/webm" />
 					<source src="/static/video/projects/systemsymphony_demo.mp4" type="video/mp4" />		

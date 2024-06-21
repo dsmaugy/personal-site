@@ -5,37 +5,6 @@
 {{ end }}
 
 {{define "project-sonderful"}}
-<style>
-	.sonderful-images {
-		display: flex;
-		flex-flow: row;
-		align-content: start;
-	}
-
-	.sonderful-images figure {
-		max-width: 400px;
-		margin: 0 auto 0 auto;
-	}
-
-	.sonderful-images figure img {
-		width: 100%;
-	}
-
-	.sonderful-images-full {
-		text-align: center;
-	}
-
-	#sonderful-long-figure {
-		max-height: 350px;
-		text-align: center;
-	}
-
-	#sonderful-long-figure > img {
-		height: calc(100% - 2em); /* try to make the height smaller than the height of the figure + caption */
-		width: auto;
-	}
-</style>
-
 	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
 		<div id="nav-path-text">
 			{{ template "project-sonderful-path" .}}
@@ -43,6 +12,36 @@
 	</div>
 	
 	<div id="nav-content" hx-history-elt>
+		<style>
+			.sonderful-images {
+				display: flex;
+				flex-flow: row;
+				align-content: start;
+			}
+		
+			.sonderful-images figure {
+				max-width: 400px;
+				margin: 0 auto 0 auto;
+			}
+		
+			.sonderful-images figure img {
+				width: 100%;
+			}
+		
+			.sonderful-images-full {
+				text-align: center;
+			}
+		
+			#sonderful-long-figure {
+				max-height: 350px;
+				text-align: center;
+			}
+		
+			#sonderful-long-figure > img {
+				height: calc(100% - 2em); /* try to make the height smaller than the height of the figure + caption */
+				width: auto;
+			}
+		</style>
 		<h1>Sonderful Transmissions is about encryption, communication, meaning</h1>
 		<figure class="centered">
 			<video playsinline autoplay loop muted>

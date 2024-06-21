@@ -5,17 +5,6 @@
 {{ end }}
 
 {{define "project-ceeder"}}
-<style>
-	#ceeder-iframe {
-		width: 800px;
-		height: 470px;
-	}
-
-	#ceeder-iframe-div {
-		text-align: center;
-	}
-</style>
-
 	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
 		<div id="nav-path-text">
 			{{ template "project-ceeder-path" .}}
@@ -23,11 +12,22 @@
 	</div>
 	
 	<div id="nav-content" hx-history-elt>
-		<h1>a virutal interstellar zen-garden</h1>
+		<style>
+			#ceeder-iframe {
+				width: 800px;
+				height: 470px;
+				max-width: 100%;
+			}
+		
+			#ceeder-iframe-div {
+				text-align: center;
+			}
+		</style>
+		<h1>a virtual interstellar zen-garden</h1>
 
 		<figure id="ceeder-iframe-div">
 			<iframe id="ceeder-iframe" src="https://dsmaugy.github.io/ceeder/"></iframe>
-			<figcaption>CEEDER Window</figcaption>
+			<figcaption>ceeder</figcaption>
 		</figure>
 
 		<h2>procedurally generated flowers</h2>

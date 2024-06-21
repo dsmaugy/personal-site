@@ -5,12 +5,7 @@
 {{ end }}
 
 {{define "project-rainplayer"}}
-<style>
-	#rainplayer-demo {
-		display: flex;
-		flex-direction: row;
-	}
-</style>
+
 
 	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
 		<div id="nav-path-text">
@@ -19,6 +14,12 @@
 	</div>
 	
 	<div id="nav-content" hx-history-elt>
+		<style>
+			#rainplayer-demo {
+				display: flex;
+				flex-direction: row;
+			}
+		</style>
 		<h1>ambient music player/visualizer</h1>
 		<div id="rainplayer-demo">
 			<figure>
