@@ -2,8 +2,8 @@
     --link: #FC7D62;
     --linktouch: #7D726F;
 
-    --scrollbar-color-thumb: #BDF0F7;
-    --scrollbar-color-track: #607375;
+    --scrollbar-color-thumb: #607375;
+    --scrollbar-color-track: unset;
     --scrollbar-width: thin;
     --scrollbar-width-legacy: 8px;
 }
@@ -56,7 +56,7 @@ h1 {
     font-weight: bold;
 }
 
-p, h1, h2, a, figcaption {
+p, h1, h2, a, figcaption, li, ul {
     font-family: "Source Code Pro", monospace;
 }
 

@@ -1,0 +1,35 @@
+{{ define "project-pathos-path" }}
+    {{ template "panel-projects-path" . }}
+	<a class="clickable">pathos_irc</a>
+	<p>/</p>
+{{ end }}
+
+{{define "project-pathos"}}
+<style>
+
+</style>
+
+	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
+		<div id="nav-path-text">
+			{{ template "project-pathos-path" .}}
+		</div>		
+	</div>
+	
+	<div id="nav-content" hx-history-elt>
+		<h1>a virutal interstellar zen-garden</h1>
+
+		<br>
+		<p>Created as a final project for CPSC478: Computer Graphics</p>
+		<p>Taught by Professor Julie Dorsey</p>
+		<p>Collaboration with 
+			<a href="https://www.linkedin.com/in/jack-l-7008601ba/" target="_blank">Jack Li</a>
+			<a href="https://samanthatrimboli.com/" target="_blank">Samantha Trimboli</a>
+			<a href="https://www.linkedin.com/in/raffael-davila/" target="_blank">Raffael Davila</a>
+		</p>
+		<p>Built with JavaScript and Three.JS</p>
+		<p class="project-date">Spring 2023</p>
+	</div>
+{{end}}
+
+<!-- do this so we can import this directly in our requests -->
+{{ template "project-pathos" .}}
