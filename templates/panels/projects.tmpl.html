@@ -95,7 +95,7 @@
 				</div>
 			</div>
 
-			<div class="project-card clickable" {{ template "tooltip-hover" }}>
+			<div class="project-card clickable" hx-get="/work/discord" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
 				<img src="/static/images/projects/discord_bot.png"/>
 				<p id="project-title">Simple Discord Player</p>
 				<p>custom Discord music/assistant bot</p>
@@ -104,7 +104,7 @@
 				</div>
 			</div>
 
-			<div class="project-card clickable" {{ template "tooltip-hover" }}>
+			<div class="project-card clickable" hx-get="/work/justin" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
 				<img src="/static/images/projects/justin_site.jpg"/>
 				<p id="project-title">Justin Tseng Election Committee</p>
 				<p>webmaster/tech lead for the first Asian-American city councillor in Medford</p>

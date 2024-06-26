@@ -16,10 +16,50 @@
 	<div id="nav-content">
 		<h1 class="carousel-title clickable" hx-get="/work" {{ template "htmx-swap-settings" }}>my work</h1>
 		<div class="carousel-showcase">
-			<div class="carousel-item carousel-project" {{ template "tooltip-hover" }}>
-				<img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmNnaHcwMHoydTNnMGc2M2xwcnB1NWlrOHB3OWl2OHlsOWtnaHplciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6t3ISgOPaNaeY/giphy.gif"/>
+			<div class="project-card clickable carousel-item carousel-project" hx-get="/work/microbiome" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+				<video playsinline autoplay loop muted>
+					<source src="/static/video/projects/microbiome_demo.webm" type="video/webm" />
+					<source src="/static/video/projects/microbiome_demo.mp4" type="video/mp4" />		
+				</video>
+				<p id="project-title">Microbiome</p>
+				<p>delay-based VST3/AU/LV2 audio effects plugin</p>
 				<div class="carousel-tooltip">
-					<p>bro bro bro</p>
+					<p>Microbiome is a VST3/AU/LV2 audio effects plugin that loops an incoming audio signal into a series of buffers to create an aural blur. Built with JUCE and C++.</p>
+				</div>
+			</div>
+
+			<div class="project-card clickable carousel-item carousel-project" hx-get="/work/herodotus" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+				<video playsinline autoplay loop muted>
+					<source src="/static/video/projects/herodotus_demo.webm" type="video/webm" />
+					<source src="/static/video/projects/herodotus_demo.mp4" type="video/mp4" />		
+				</video>
+				<p id="project-title">Kubernetes Herodotus Scheduler</p>
+				<p>an extension to the Kubernetes Scheduler to increase transparency and observability</p>
+				<div class="carousel-tooltip">
+					<p>The Herodotus scheduler is a custom K8s scheduler and CLI tool that tracks statistics for every pod scheduling decision and displays them in an easy-to-read manner in the terminal. Built with Go and Python.</p>
+				</div>
+			</div>
+
+			<div class="project-card clickable carousel-item carousel-project" hx-get="/work/sonderful" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+				<video playsinline autoplay loop muted>
+					<source src="/static/video/projects/sonderfultransmissions_demo.webm" type="video/webm" />
+					<source src="/static/video/projects/sonderfultransmissions_demo.mp4" type="video/mp4" />		
+				</video>
+				<p id="project-title">Sonderful Transmissions</p>
+				<p>interactive message transmission installation</p>
+				<div class="carousel-tooltip">
+					<p>Sonderful Transmissions is an installation that explores the idea of communicating messages across arbitrary encodings in space. Users use a physical transmission device to encode/decode radio signals across a simulated universe. Built with Processing and ESP32s.</p>
+				</div>
+			</div>
+
+			<div class="project-card clickable carousel-item carousel-project" hx-get="/work/symphony" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+				<video playsinline autoplay loop muted>
+					<source src="/static/video/projects/systemsymphony_demo.webm" type="video/webm" />
+					<source src="/static/video/projects/systemsymphony_demo.mp4" type="video/mp4" />		
+				</video>				<p id="project-title">System Symphony</p>
+				<p>custom laptop-synthesizer using currently running processes as sonic parameters</p>
+				<div class="carousel-tooltip">
+					<p>System Symphony is program that turns computers into instruments by sonifying the currently running processes into synthesizer parameters. Advertised as an early 2000s CD-ROM software install. Built with SuperCollider and Python.</p>
 				</div>
 			</div>
 

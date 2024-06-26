@@ -16,7 +16,7 @@
 			{{ range $vinyl := .Vinyls }}
 				<div class="vinyl-item" onmouseenter="carouselItemEntered(this)" onmouseleave="carouselItemLeft(this)">
 					<img src="{{ $vinyl.PreviewImage }}">
-					<p>{{ $vinyl.Artist }} - {{ $vinyl.Name }} ({{ $vinyl.Year }})</p>
+					<p><b>{{ $vinyl.Artist }}</b> <br> {{ $vinyl.Name }} ({{ $vinyl.Year }})</p>
 					<div class="carousel-tooltip">						
 						<p>
 							Obtained in {{ $vinyl.DateAddedToCollection }}

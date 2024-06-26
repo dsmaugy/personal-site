@@ -1,0 +1,33 @@
+{{ define "project-discord-path" }}
+    {{ template "panel-projects-path" . }}
+	<a class="clickable">simple_discord_player</a>
+	<p>/</p>
+{{ end }}
+
+{{define "project-discord"}}
+	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
+		<div id="nav-path-text">
+			{{ template "project-discord-path" .}}
+		</div>		
+	</div>
+	
+	<div id="nav-content" hx-history-elt>		
+		<h1>discord media player</h1>
+
+		<figure class="centered">
+			<img src="/static/images/projects/discord_bot.png">
+		</figure>
+
+		<p>Media player service that supports streaming audio from YouTube/SoundCloud sources.</p>
+		<p>Also contains other utility functions, such as a "BeReal" service, for me and my friends.</p>
+		<br>
+		<a href="https://github.com/dsmaugy/simple-discord-player" target="_blank">source</a>
+		<br>
+		<br>
+		<p>Built with Python</p>
+		<p class="project-date">Winter 2021</p>
+	</div>
+{{end}}
+
+<!-- do this so we can import this directly in our requests -->
+{{ template "project-discord" .}}

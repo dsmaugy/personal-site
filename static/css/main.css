@@ -117,6 +117,10 @@ a:active {
     margin-right: 1em; */
 }
 
+.carousel-item a {
+    text-decoration: none;
+}
+
 .carousel-item img {
     width: 150px;
 }
@@ -331,8 +335,7 @@ the contents of the div are copied over so any styling changes here won't be ref
     flex: 2;
     opacity: 1;
     text-align: center;
-    margin-left: 1em;
-    margin-right: 1em;
+    margin: 1em;
 }
 
 .vinyl-item img {

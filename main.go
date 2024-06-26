@@ -16,7 +16,6 @@ import (
 
 const CacheDuration = time.Minute
 
-// TODO: caching: https://devcenter.heroku.com/articles/gin-memcache
 // TODO: deploying: https://devcenter.heroku.com/articles/getting-started-with-go?singlepage=true#prepare-the-app
 
 // adds https/www redirects where needed
@@ -28,13 +27,6 @@ func requestcheck() gin.HandlerFunc {
 		// }
 	}
 }
-
-// func cacheaccess(cache *mc.Client) gin.HandlerFunc {
-// 	return func(c *gin.Context) {
-// 		c.Set("cache", cache)
-// 		c.Next()
-// 	}
-// }
 
 func init() {
 	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
