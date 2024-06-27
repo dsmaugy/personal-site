@@ -235,7 +235,7 @@ the contents of the div are copied over so any styling changes here won't be ref
     border-radius: 3px;
     box-sizing: border-box;
     margin: 1em;
-    height: calc(100vh - 2em);
+    height: calc(100dvh - 2em);
 
     display: flex;
     flex-direction: column;
