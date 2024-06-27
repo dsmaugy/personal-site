@@ -9,6 +9,7 @@ import (
 
 	"github.com/gin-contrib/cache/persistence"
 	ginlog "github.com/gin-contrib/logger"
+	"github.com/gin-gonic/contrib/secure"
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/rs/zerolog"
@@ -24,6 +25,7 @@ func requestcheck() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		log.Info().Msg("Host: " + c.Request.Host)
 		log.Info().Msg("Path: " + c.Request.URL.Path)
+		log.Info().Msg("Scheme: " + c.Request.URL.Scheme)
 
 		if c.Request.Host == "www.darwindo.com" || c.Request.Host == "darwindo.com" {
 			c.Redirect(http.StatusPermanentRedirect, "https://darwins.cloud"+c.Request.URL.Path)
@@ -51,7 +53,11 @@ func main() {
 	r.Use(gin.Recovery())
 	r.Use(ginlog.SetLogger())
 	r.Use(requestcheck())
-	// r.Use(cacheaccess(cache))
+	r.Use(secure.Secure(secure.Options{
+		AllowedHosts:  []string{"darwins.cloud"},
+		SSLRedirect:   true,
+		IsDevelopment: os.Getenv("GIN_MODE") == "debug",
+	}))
 
 	r.Static("/static", "./static")
 	r.StaticFile("/favicon.ico", "./static/favicon.ico")
