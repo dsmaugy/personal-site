@@ -23,14 +23,17 @@ const CacheDuration = time.Minute
 func requestcheck() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		log.Info().Msg("Host: " + c.Request.Host)
+		log.Info().Msg("Path: " + c.Request.URL.Path)
+
 		if c.Request.Host == "www.darwindo.com" || c.Request.Host == "darwindo.com" {
 			c.Redirect(http.StatusPermanentRedirect, "https://darwins.cloud"+c.Request.URL.Path)
 			c.Abort()
+			return
 		} else if c.Request.Host == "www.darwins.cloud" {
 			c.Redirect(http.StatusPermanentRedirect, "https://darwins.cloud"+c.Request.URL.Path)
 			c.Abort()
+			return
 		}
-
 		c.Next()
 	}
 }
