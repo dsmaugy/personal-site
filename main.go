@@ -54,8 +54,6 @@ func main() {
 	r.Use(ginlog.SetLogger())
 	r.Use(requestcheck())
 	r.Use(secure.Secure(secure.Options{
-		// AllowedHosts:  []string{"darwins.cloud"},
-		// SSLRedirect:   true,
 		IsDevelopment: os.Getenv("GIN_MODE") == "debug",
 	}))
 

@@ -65,6 +65,10 @@ figcaption {
     text-align: center;
 }
 
+/* figure, video, img, iframe {
+    max-width: 100%;
+} */
+
 a:link {
     color: var(--link);
 }

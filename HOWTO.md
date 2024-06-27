@@ -7,3 +7,5 @@
 
 - Add corresponding FULL entry to `templates/projects`
 - Add project card in `templates/panels/projects.tmpl.html`
+- Add project template
+    - Set 100% max-width on figures to make them display responsively on mobile
