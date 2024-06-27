@@ -22,6 +22,11 @@ const CacheDuration = time.Minute
 func requestcheck() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		log.Info().Msg("Host: " + c.Request.Host)
+		if c.Request.Host == "www.darwindo.com" || c.Request.Host == "darwindo.com" {
+			c.Request.Host = "darwins.cloud"
+		} else if c.Request.Host == "www.darwins.cloud" {
+			c.Request.Host = "darwins.cloud"
+		}
 	}
 }
 
