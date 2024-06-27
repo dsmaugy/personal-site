@@ -55,7 +55,7 @@ func main() {
 	r.Use(requestcheck())
 	r.Use(secure.Secure(secure.Options{
 		// AllowedHosts:  []string{"darwins.cloud"},
-		SSLRedirect:   true,
+		// SSLRedirect:   true,
 		IsDevelopment: os.Getenv("GIN_MODE") == "debug",
 	}))
 
