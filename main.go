@@ -3,6 +3,7 @@ package main
 import (
 	"darwindo/personal-site/api"
 	"darwindo/personal-site/routes"
+	"net/http"
 	"os"
 	"time"
 
@@ -23,10 +24,14 @@ func requestcheck() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		log.Info().Msg("Host: " + c.Request.Host)
 		if c.Request.Host == "www.darwindo.com" || c.Request.Host == "darwindo.com" {
-			c.Request.Host = "darwins.cloud"
+			c.Redirect(http.StatusPermanentRedirect, "darwins.cloud"+c.Request.URL.RawPath)
+			c.Abort()
 		} else if c.Request.Host == "www.darwins.cloud" {
-			c.Request.Host = "darwins.cloud"
+			c.Redirect(http.StatusPermanentRedirect, "darwins.cloud"+c.Request.URL.RawPath)
+			c.Abort()
 		}
+
+		c.Next()
 	}
 }
 
