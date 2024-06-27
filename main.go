@@ -21,10 +21,7 @@ const CacheDuration = time.Minute
 // adds https/www redirects where needed
 func requestcheck() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// if c.Request.URL.Path != "/" {
-		// 	c.Redirect(http.StatusMovedPermanently, "/")
-		// 	c.Abort()
-		// }
+		log.Info().Msg("Host: " + c.Request.Host)
 	}
 }
 
