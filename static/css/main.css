@@ -65,10 +65,6 @@ figcaption {
     text-align: center;
 }
 
-/* figure, video, img, iframe {
-    max-width: 100%;
-} */
-
 a:link {
     color: var(--link);
 }
@@ -248,6 +244,7 @@ the contents of the div are copied over so any styling changes here won't be ref
     display: inline-block;
     background-color: aqua;
     margin-left: 1rem;
+    margin-right: 1rem;
     font-family: "Ubuntu Mono", monospace;
 }
 
