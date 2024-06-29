@@ -3,6 +3,7 @@ package main
 import (
 	"darwindo/personal-site/api"
 	"darwindo/personal-site/routes"
+	"html/template"
 	"net/http"
 	"os"
 	"time"
@@ -59,6 +60,10 @@ func main() {
 
 	r.Static("/static", "./static")
 	r.StaticFile("/favicon.ico", "./static/favicon.ico")
+
+	r.SetFuncMap(template.FuncMap{
+		"safe": func(s string) template.HTML { return template.HTML(s) },
+	})
 	r.LoadHTMLGlob("./templates/**/*")
 
 	r.GET("/", routes.Index)
