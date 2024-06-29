@@ -74,8 +74,8 @@ func main() {
 	// TODO: use hx-push-url="true" and check for HX-History-Restore-Request/Hx-Request header
 	// to send full HTML
 	r.GET("/home", routes.HomePanel)
-	r.GET("/vinyl", routes.VinylPanel)
-	r.GET("/work", routes.ProjectsPanel)
-	r.GET("/work/:name", routes.ProjectPage)
+	r.GET("/home/vinyl_collection", routes.VinylPanel)
+	r.GET("/home/work", routes.ProjectsPanel)
+	r.GET("/home/work/:name", routes.ProjectPage)
 	r.Run("0.0.0.0:" + os.Getenv("PORT"))
 }

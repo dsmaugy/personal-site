@@ -1,6 +1,6 @@
 {{ define "panel-projects-path" }}
     {{ template "panel-home-path" . }}
-	<a class="clickable" hx-get="/work" {{ template "htmx-swap-settings" }}>work</a>
+	<a class="clickable" hx-get="/home/work" {{ template "htmx-swap-settings" }}>work</a>
 	<p>/</p>
 {{ end }}
 
@@ -13,7 +13,7 @@
 	
 	<div id="nav-content">
 		<div id="projects-showcase">
-			<div class="project-card clickable" hx-get="/work/microbiome" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+			<div class="project-card clickable" hx-get="/home/work/microbiome" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
 				<video playsinline autoplay loop muted>
 					<source src="/static/video/projects/microbiome_demo.webm" type="video/webm" />
 					<source src="/static/video/projects/microbiome_demo.mp4" type="video/mp4" />		
@@ -25,7 +25,7 @@
 				</div>
 			</div>
 
-			<div class="project-card clickable" hx-get="/work/sonderful" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+			<div class="project-card clickable" hx-get="/home/work/sonderful" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
 				<video playsinline autoplay loop muted>
 					<source src="/static/video/projects/sonderfultransmissions_demo.webm" type="video/webm" />
 					<source src="/static/video/projects/sonderfultransmissions_demo.mp4" type="video/mp4" />		
@@ -37,7 +37,7 @@
 				</div>
 			</div>
 
-			<div class="project-card clickable" hx-get="/work/rainplayer" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+			<div class="project-card clickable" hx-get="/home/work/rainplayer" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
 				<video playsinline autoplay loop muted>
 					<source src="/static/video/projects/rainplayer_demo.webm" type="video/webm" />
 					<source src="/static/video/projects/rainplayer_demo.mp4" type="video/mp4" />		
@@ -49,7 +49,7 @@
 				</div>
 			</div>
 
-			<div class="project-card clickable" hx-get="/work/herodotus" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+			<div class="project-card clickable" hx-get="/home/work/herodotus" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
 				<video playsinline autoplay loop muted>
 					<source src="/static/video/projects/herodotus_demo.webm" type="video/webm" />
 					<source src="/static/video/projects/herodotus_demo.mp4" type="video/mp4" />		
@@ -61,7 +61,7 @@
 				</div>
 			</div>
 
-			<div class="project-card clickable" hx-get="/work/ceeder" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+			<div class="project-card clickable" hx-get="/home/work/ceeder" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
 				<video playsinline autoplay loop muted>
 					<source src="/static/video/projects/ceeder_demo.webm" type="video/webm" />
 					<source src="/static/video/projects/ceeder_demo.mp4" type="video/mp4" />		
@@ -73,7 +73,7 @@
 				</div>
 			</div>
 
-			<div class="project-card clickable" hx-get="/work/pathos" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+			<div class="project-card clickable" hx-get="/home/work/pathos" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
 				<video playsinline autoplay loop muted>
 					<source src="/static/video/projects/pathosirc_demo.webm" type="video/webm" />
 					<source src="/static/video/projects/pathosirc_demo.mp4" type="video/mp4" />		
@@ -84,7 +84,7 @@
 				</div>
 			</div>
 
-			<div class="project-card clickable" hx-get="/work/symphony" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+			<div class="project-card clickable" hx-get="/home/work/symphony" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
 				<video playsinline autoplay loop muted>
 					<source src="/static/video/projects/systemsymphony_demo.webm" type="video/webm" />
 					<source src="/static/video/projects/systemsymphony_demo.mp4" type="video/mp4" />		
@@ -95,7 +95,7 @@
 				</div>
 			</div>
 
-			<div class="project-card clickable" hx-get="/work/discord" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+			<div class="project-card clickable" hx-get="/home/work/discord" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
 				<img src="/static/images/projects/discord_bot.png"/>
 				<p id="project-title">Simple Discord Player</p>
 				<p>custom Discord music/assistant bot</p>
@@ -104,7 +104,7 @@
 				</div>
 			</div>
 
-			<div class="project-card clickable" hx-get="/work/justin" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+			<div class="project-card clickable" hx-get="/home/work/justin" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
 				<img src="/static/images/projects/justin_site.jpg"/>
 				<p id="project-title">Justin Tseng Election Committee</p>
 				<p>webmaster/tech lead for the first Asian-American city councillor in Medford</p>

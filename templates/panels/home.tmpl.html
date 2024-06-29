@@ -14,9 +14,9 @@
 	</div>
 	
 	<div id="nav-content">
-		<h1 class="carousel-title clickable" hx-get="/work" {{ template "htmx-swap-settings" }}>my work</h1>
+		<h1 class="carousel-title clickable" hx-get="/home/work" {{ template "htmx-swap-settings" }}>my work</h1>
 		<div class="carousel-showcase">
-			<div class="project-card clickable carousel-item carousel-project" hx-get="/work/microbiome" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+			<div class="project-card clickable carousel-item carousel-project" hx-get="/home/work/microbiome" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
 				<video playsinline autoplay loop muted>
 					<source src="/static/video/projects/microbiome_demo.webm" type="video/webm" />
 					<source src="/static/video/projects/microbiome_demo.mp4" type="video/mp4" />		
@@ -28,7 +28,7 @@
 				</div>
 			</div>
 
-			<div class="project-card clickable carousel-item carousel-project" hx-get="/work/herodotus" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+			<div class="project-card clickable carousel-item carousel-project" hx-get="/home/work/herodotus" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
 				<video playsinline autoplay loop muted>
 					<source src="/static/video/projects/herodotus_demo.webm" type="video/webm" />
 					<source src="/static/video/projects/herodotus_demo.mp4" type="video/mp4" />		
@@ -40,7 +40,7 @@
 				</div>
 			</div>
 
-			<div class="project-card clickable carousel-item carousel-project" hx-get="/work/sonderful" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+			<div class="project-card clickable carousel-item carousel-project" hx-get="/home/work/sonderful" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
 				<video playsinline autoplay loop muted>
 					<source src="/static/video/projects/sonderfultransmissions_demo.webm" type="video/webm" />
 					<source src="/static/video/projects/sonderfultransmissions_demo.mp4" type="video/mp4" />		
@@ -52,7 +52,7 @@
 				</div>
 			</div>
 
-			<div class="project-card clickable carousel-item carousel-project" hx-get="/work/symphony" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+			<div class="project-card clickable carousel-item carousel-project" hx-get="/home/work/symphony" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
 				<video playsinline autoplay loop muted>
 					<source src="/static/video/projects/systemsymphony_demo.webm" type="video/webm" />
 					<source src="/static/video/projects/systemsymphony_demo.mp4" type="video/mp4" />		
@@ -63,14 +63,14 @@
 				</div>
 			</div>
 
-			<div class="carousel-item" hx-get="/work" {{ template "htmx-swap-settings" }}>
+			<div class="carousel-item" hx-get="/home/work" {{ template "htmx-swap-settings" }}>
 				<a href="#" onclick="event.preventDefault()">
 					<h1 class="clickable">...</h1>
 				</a>
 			</div>
 		</div>
 
-		<h1 class="carousel-title clickable" hx-get="/vinyl" {{ template "htmx-swap-settings" }}>vinyl collection</h1>
+		<h1 class="carousel-title clickable" hx-get="/home/vinyl_collection" {{ template "htmx-swap-settings" }}>vinyl collection</h1>
 		<div class="carousel-showcase">
 			{{ range $vinyl := .Vinyls }}
 				<div class="carousel-item" {{ template "tooltip-hover" }}2>
@@ -88,7 +88,7 @@
 				</div>
 			{{end}}
 		
-			<div class="carousel-item" hx-get="/vinyl" {{ template "htmx-swap-settings" }}>
+			<div class="carousel-item" hx-get="/home/vinyl_collection" {{ template "htmx-swap-settings" }}>
 				<a href="#" onclick="event.preventDefault()">
 					<h1 class="clickable">...</h1>
 				</a>
