@@ -1,32 +1,35 @@
-{{ define "panel-vinyl-path" }}
-    {{ template "panel-home-path" . }}
-	<a class="clickable">vinyl_collection</a>
-	<p>/</p>
-{{ end }}
+{{ define "panel-vinyl-path" }} {{ template "panel-home-path" . }}
+<a class="clickable">vinyl_collection</a>
+<p>/</p>
+{{ end }} {{define "panel-vinyl"}}
+<div class="nav-bars" id="nav-path" hx-swap-oob="true">
+  <div id="nav-path-text">{{ template "panel-vinyl-path" .}}</div>
+</div>
 
-{{define "panel-vinyl"}}
-	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
-		<div id="nav-path-text">
-			{{ template "panel-vinyl-path" .}}
-		</div>		
-	</div>
-	
-	<div id="nav-content">
-        <div id="vinyl-showcase">
-			{{ range $vinyl := .Vinyls }}
-				<div class="vinyl-item" onmouseenter="carouselItemEntered(this)" onmouseleave="carouselItemLeft(this)">
-					<img src="{{ $vinyl.PreviewImage }}">
-					<p><b>{{ $vinyl.Artist }}</b> <br> {{ $vinyl.Name }} ({{ $vinyl.Year }})</p>
-					<div class="carousel-tooltip">						
-						<p>
-							Obtained in {{ $vinyl.DateAddedToCollection }}
-						</p>
-					</div>
-				</div>
-			{{end}}
-		</div>
-	</div>
+<div id="nav-content">
+  <div id="vinyl-showcase">
+    {{ range $vinyl := .Vinyls }}
+    <div
+      class="vinyl-item"
+      onmouseenter="carouselItemEntered(this)"
+      onmouseleave="carouselItemLeft(this)"
+    >
+      <a href="{{ $vinyl.URL }}">
+        <img src="{{ $vinyl.PreviewImage }}" />
+        <p>
+          <b>{{ $vinyl.Artist }}</b> <br />
+          {{ $vinyl.Name }} ({{ $vinyl.Year }})
+        </p>
+        <div class="carousel-tooltip">
+          <p>Obtained in {{ $vinyl.DateAddedToCollection }}</p>
+        </div>
+      </a>
+    </div>
+    {{end}}
+  </div>
+</div>
 {{end}}
 
 <!-- do this so we can import this directly in our requests -->
 {{ template "panel-vinyl" .}}
+

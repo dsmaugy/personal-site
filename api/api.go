@@ -21,10 +21,12 @@ import (
 	"golang.org/x/oauth2"
 )
 
-const LetterboxdURL = "https://letterboxd.com/dsmaugy/rss"
-const NumMovies = 5
-const DiscogsPaginationMax = 50
-const DiscogsCollectionRequest = "https://api.discogs.com/users/%s/collection/folders/0/releases?page=%d&per_page=%d&sort=artist"
+const (
+	LetterboxdURL            = "https://letterboxd.com/dsmaugy/rss"
+	NumMovies                = 5
+	DiscogsPaginationMax     = 50
+	DiscogsCollectionRequest = "https://api.discogs.com/users/%s/collection/folders/0/releases?page=%d&per_page=%d&sort=artist"
+)
 
 type LetterboxdRoot struct {
 	XMLName xml.Name          `xml:"rss"`
@@ -88,6 +90,7 @@ type VinylInfo struct {
 	Year                  int
 	PreviewImage          string
 	DateAddedToCollection string
+	URL                   string
 }
 
 const CacheDuration = time.Minute * 5
@@ -112,7 +115,6 @@ func GetLetterboxdData() (*LetterboxdRoot, error) {
 		log.Debug().Err(err).Msg("Letterboxd")
 		// cache miss, query form letterboxd directly
 		resp, err := http.Get(LetterboxdURL)
-
 		if err != nil {
 			log.Info().Msg("Failed to fetch Letterboxd data")
 			return nil, err
@@ -169,7 +171,6 @@ func GetDiscogsRecords(user string) (*[]VinylInfo, error) {
 			req.Header.Set("User-Agent", "personal-go-site/1.0 +https://darwindo.com")
 			req.Header.Set("Authorization", "Discogs token="+os.Getenv("DISCOGS_TOKEN"))
 			resp, err := client.Do(req)
-
 			if err != nil {
 				log.Info().Msg("Failed to fetch Discogs API: " + err.Error())
 				return nil, err
@@ -196,6 +197,7 @@ func GetDiscogsRecords(user string) (*[]VinylInfo, error) {
 					Year:                  release.Info.Year,
 					PreviewImage:          release.Info.Thumb,
 					DateAddedToCollection: release.DateAdded,
+					URL:                   release.Info.ReleaseURL,
 				})
 			}
 
@@ -220,7 +222,6 @@ func getSpotifyClient() *spotify.Client {
 		req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 		req.Header.Set("Authorization", fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(fmt.Sprintf("%s:%s", os.Getenv("SPOTIFY_ID"), os.Getenv("SPOTIFY_SECRET"))))))
 		resp, err := client.Do(req)
-
 		if err != nil {
 			spotifyClient = nil
 			return spotifyClient
@@ -258,7 +259,6 @@ func GetSpotifyTopTracks(numtracks int) (*[]spotify.FullTrack, error) {
 
 		s := getSpotifyClient()
 		tracks, err := s.CurrentUsersTopTracks(context.Background(), spotify.Limit(numtracks), spotify.Timerange(spotify.ShortTermRange))
-
 		if err != nil {
 			return nil, err
 		}
