@@ -47,8 +47,8 @@ type LetterboxdItem struct {
 }
 
 type DiscogsCollectionRoot struct {
-	Pagination DiscogsPagination `json:"pagination"`
-	Releases   []DiscogsRelease  `json:"releases"`
+	Pagination DiscogsPagination          `json:"pagination"`
+	Releases   []DiscogsCollectionRelease `json:"releases"`
 }
 
 type DiscogsPagination struct {
@@ -66,7 +66,7 @@ type DiscogsPaginationURLs struct {
 	Last  string `json:"last"`
 }
 
-type DiscogsRelease struct {
+type DiscogsCollectionRelease struct {
 	Info      DiscogsReleaseInformation `json:"basic_information"`
 	DateAdded string                    `json:"date_added"`
 }
@@ -90,7 +90,6 @@ type VinylInfo struct {
 	Year                  int
 	PreviewImage          string
 	DateAddedToCollection string
-	URL                   string
 }
 
 const CacheDuration = time.Minute * 5
@@ -153,6 +152,17 @@ func GetLetterboxdData() (*LetterboxdRoot, error) {
 	return &letterboxd, nil
 }
 
+func createDiscogsRequest(method string, url string) (*http.Request, error) {
+	req, err := http.NewRequest(method, url, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Set("User-Agent", "personal-go-site/1.0 +https://darwindo.com")
+	req.Header.Set("Authorization", "Discogs token="+os.Getenv("DISCOGS_TOKEN"))
+	return req, nil
+}
+
 func GetDiscogsRecords(user string) (*[]VinylInfo, error) {
 	var collectionRoot DiscogsCollectionRoot
 	var vinylList []VinylInfo
@@ -167,12 +177,10 @@ func GetDiscogsRecords(user string) (*[]VinylInfo, error) {
 		client := http.Client{}
 		lastPage := 1
 		for page := 1; page <= lastPage; page++ {
-			req, _ := http.NewRequest("GET", fmt.Sprintf(DiscogsCollectionRequest, user, page, DiscogsPaginationMax), nil)
-			req.Header.Set("User-Agent", "personal-go-site/1.0 +https://darwindo.com")
-			req.Header.Set("Authorization", "Discogs token="+os.Getenv("DISCOGS_TOKEN"))
+			req, _ := createDiscogsRequest("GET", fmt.Sprintf(DiscogsCollectionRequest, user, page, DiscogsPaginationMax))
 			resp, err := client.Do(req)
 			if err != nil {
-				log.Info().Msg("Failed to fetch Discogs API: " + err.Error())
+				log.Info().Msg("Failed to fetch Discogs API for collection: " + err.Error())
 				return nil, err
 			}
 
@@ -190,14 +198,21 @@ func GetDiscogsRecords(user string) (*[]VinylInfo, error) {
 					artistName = release.Info.Artists[0].Name
 				}
 
+				// NOTE: can't use URLs here because we need to make a request per release to get the discogs URL
 				// TODO: format dates
+				var dateAddedToCollection string
+				parsedDate, err := time.Parse(time.RFC3339, release.DateAdded)
+				if err != nil {
+					dateAddedToCollection = release.DateAdded
+				} else {
+					dateAddedToCollection = parsedDate.Format("01/02/06")
+				}
 				vinylList = append(vinylList, VinylInfo{
 					Name:                  release.Info.Title,
 					Artist:                artistName,
 					Year:                  release.Info.Year,
 					PreviewImage:          release.Info.Thumb,
-					DateAddedToCollection: release.DateAdded,
-					URL:                   release.Info.ReleaseURL,
+					DateAddedToCollection: dateAddedToCollection,
 				})
 			}
 

@@ -14,16 +14,14 @@
       onmouseenter="carouselItemEntered(this)"
       onmouseleave="carouselItemLeft(this)"
     >
-      <!-- <a href="{{ $vinyl.URL }}"> -->
       <img src="{{ $vinyl.PreviewImage }}" />
       <p>
         <b>{{ $vinyl.Artist }}</b> <br />
         {{ $vinyl.Name }} ({{ $vinyl.Year }})
       </p>
       <div class="carousel-tooltip">
-        <p>Obtained in {{ $vinyl.DateAddedToCollection }}</p>
+        <p>Obtained on {{ $vinyl.DateAddedToCollection }}</p>
       </div>
-      <!-- </a> -->
     </div>
     {{end}}
   </div>
@@ -32,4 +30,3 @@
 
 <!-- do this so we can import this directly in our requests -->
 {{ template "panel-vinyl" .}}
-
