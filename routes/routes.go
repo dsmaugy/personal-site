@@ -11,8 +11,10 @@ import (
 	"github.com/zmb3/spotify/v2"
 )
 
-const MyDiscogsUsername = "dsmaugy"
-const CarouselLimit = 5
+const (
+	MyDiscogsUsername = "dsmaugy"
+	CarouselLimit     = 5
+)
 
 func getRandomSamples[listitem spotify.FullTrack | api.VinylInfo](population *[]listitem) *[5]listitem {
 	var returnlist [CarouselLimit]listitem
@@ -47,13 +49,12 @@ func getHomePanelVars() gin.H {
 
 func Index(c *gin.Context) {
 	// log.Info().Msg("MY URL: " + c.Request.RequestURI)
-	// c.HTML(http.StatusOK, "home-FULL.tmpl.html", getHomePanelVars())
+	// c.HTML(http.StatusOK, "home-FULL.html.tmpl", getHomePanelVars())
 	c.Redirect(http.StatusPermanentRedirect, "/home")
 }
 
 func RecentlyWatched(c *gin.Context) {
 	movies, err := api.GetLetterboxdData()
-
 	if err != nil {
 		c.AbortWithError(http.StatusBadRequest, err)
 		return
@@ -65,7 +66,6 @@ func RecentlyWatched(c *gin.Context) {
 func VinylCollection(c *gin.Context) {
 	user := c.Param("user")
 	vinyls, err := api.GetDiscogsRecords(user)
-
 	if err != nil {
 		c.AbortWithError(http.StatusBadRequest, err)
 		return
@@ -76,7 +76,6 @@ func VinylCollection(c *gin.Context) {
 
 func SpotifyTop(c *gin.Context) {
 	tracks, err := api.GetSpotifyTopTracks(5)
-
 	if err != nil {
 		log.Err(err).Msg("Failed to fetch top tracks")
 		c.AbortWithStatus(http.StatusBadRequest)
@@ -92,9 +91,9 @@ func HomePanel(c *gin.Context) {
 	ishtmx := c.GetHeader("Hx-Request")
 	log.Info().Msg("Hx-Request: " + ishtmx)
 	if ishtmx == "true" {
-		c.HTML(http.StatusOK, "home.tmpl.html", getHomePanelVars())
+		c.HTML(http.StatusOK, "home.html.tmpl", getHomePanelVars())
 	} else {
-		c.HTML(http.StatusOK, "home-FULL.tmpl.html", getHomePanelVars())
+		c.HTML(http.StatusOK, "home-FULL.html.tmpl", getHomePanelVars())
 	}
 }
 
@@ -106,11 +105,11 @@ func VinylPanel(c *gin.Context) {
 	vinyls, _ := api.GetDiscogsRecords(MyDiscogsUsername)
 
 	if ishtmx == "true" {
-		c.HTML(http.StatusOK, "vinyl.tmpl.html", gin.H{
+		c.HTML(http.StatusOK, "vinyl.html.tmpl", gin.H{
 			"Vinyls": vinyls,
 		})
 	} else {
-		c.HTML(http.StatusOK, "vinyl-FULL.tmpl.html", gin.H{
+		c.HTML(http.StatusOK, "vinyl-FULL.html.tmpl", gin.H{
 			"Vinyls": vinyls,
 		})
 	}
@@ -122,9 +121,9 @@ func ProjectsPanel(c *gin.Context) {
 	log.Info().Msg("Hx-Request: " + ishtmx)
 
 	if ishtmx == "true" {
-		c.HTML(http.StatusOK, "projects.tmpl.html", nil)
+		c.HTML(http.StatusOK, "projects.html.tmpl", nil)
 	} else {
-		c.HTML(http.StatusOK, "projects-FULL.tmpl.html", nil)
+		c.HTML(http.StatusOK, "projects-FULL.html.tmpl", nil)
 	}
 }
 
@@ -135,8 +134,8 @@ func ProjectPage(c *gin.Context) {
 	log.Info().Msg("Hx-Request: " + ishtmx)
 
 	if ishtmx == "true" {
-		c.HTML(http.StatusOK, "project-"+projectname+".tmpl.html", nil)
+		c.HTML(http.StatusOK, "project-"+projectname+".html.tmpl", nil)
 	} else {
-		c.HTML(http.StatusOK, "project-"+projectname+"-FULL.tmpl.html", nil)
+		c.HTML(http.StatusOK, "project-"+projectname+"-FULL.html.tmpl", nil)
 	}
 }
