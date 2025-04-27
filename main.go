@@ -29,11 +29,13 @@ func requestcheck() gin.HandlerFunc {
 		log.Info().Msg("Scheme: " + c.Request.URL.Scheme)
 
 		if c.Request.Host == "www.darwindo.com" || c.Request.Host == "darwindo.com" {
-			c.Redirect(http.StatusPermanentRedirect, "https://darwins.cloud"+c.Request.URL.Path)
+			c.Redirect(http.StatusPermanentRedirect,
+				"https://darwins.cloud"+c.Request.URL.Path)
 			c.Abort()
 			return
 		} else if c.Request.Host == "www.darwins.cloud" {
-			c.Redirect(http.StatusPermanentRedirect, "https://darwins.cloud"+c.Request.URL.Path)
+			c.Redirect(http.StatusPermanentRedirect,
+				"https://darwins.cloud"+c.Request.URL.Path)
 			c.Abort()
 			return
 		}
@@ -46,7 +48,7 @@ func init() {
 }
 
 func main() {
-	cache := persistence.NewMemcachedBinaryStore(os.Getenv("MEMCACHIER_SERVERS"), os.Getenv("MEMCACHIER_USERNAME"), os.Getenv("MEMCACHIER_PASSWORD"), CacheDuration)
+	cache := persistence.NewMemcachedBinaryStore("localhost:11211", "", "", CacheDuration)
 	defer cache.Quit()
 	api.InitAPI(cache)
 
