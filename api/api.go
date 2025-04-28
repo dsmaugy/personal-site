@@ -142,7 +142,8 @@ func GetLetterboxdData() (*LetterboxdRoot, error) {
 		}
 
 		for i := range letterboxd.Channel.Items {
-			letterboxd.Channel.Items[i].ImageURL = urlreg.FindString(letterboxd.Channel.Items[i].ImageURL)
+			letterboxd.Channel.Items[i].ImageURL =
+				urlreg.FindString(letterboxd.Channel.Items[i].ImageURL)
 		}
 		cache.Set(movieCacheKey, letterboxd, CacheDuration)
 	} else {
@@ -233,9 +234,12 @@ var spotifyClient *spotify.Client
 func getSpotifyClient() *spotify.Client {
 	if spotifyClient == nil {
 		client := http.Client{}
-		req, _ := http.NewRequest("POST", spotifyauth.TokenURL, bytes.NewBuffer([]byte(fmt.Sprintf("grant_type=refresh_token&refresh_token=%s", os.Getenv("SPOTIFY_REFRESH_TOKEN")))))
+		req, _ := http.NewRequest("POST", spotifyauth.TokenURL,
+			bytes.NewBuffer([]byte(fmt.Sprintf("grant_type=refresh_token&refresh_token=%s", os.Getenv("SPOTIFY_REFRESH_TOKEN")))))
 		req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-		req.Header.Set("Authorization", fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(fmt.Sprintf("%s:%s", os.Getenv("SPOTIFY_ID"), os.Getenv("SPOTIFY_SECRET"))))))
+		req.Header.Set("Authorization", fmt.Sprintf("Basic %s",
+			base64.StdEncoding.EncodeToString([]byte(
+				fmt.Sprintf("%s:%s", os.Getenv("SPOTIFY_ID"), os.Getenv("SPOTIFY_SECRET"))))))
 		resp, err := client.Do(req)
 		if err != nil {
 			spotifyClient = nil
@@ -273,7 +277,8 @@ func GetSpotifyTopTracks(numtracks int) (*[]spotify.FullTrack, error) {
 		log.Debug().Err(err).Msg("Spotify")
 
 		s := getSpotifyClient()
-		tracks, err := s.CurrentUsersTopTracks(context.Background(), spotify.Limit(numtracks), spotify.Timerange(spotify.ShortTermRange))
+		tracks, err := s.CurrentUsersTopTracks(context.Background(),
+			spotify.Limit(numtracks), spotify.Timerange(spotify.ShortTermRange))
 		if err != nil {
 			return nil, err
 		}
@@ -283,6 +288,8 @@ func GetSpotifyTopTracks(numtracks int) (*[]spotify.FullTrack, error) {
 	} else {
 		log.Info().Msg("Cache hit for Spotify!")
 	}
+
+	log.Info().Msgf("url: %s", returntracks[0].PreviewURL)
 
 	return &returntracks, nil
 }

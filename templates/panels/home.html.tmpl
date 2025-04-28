@@ -1,142 +1,159 @@
 {{ define "panel-home-path" }}
-	<p>/</p>
-	<a class="clickable" hx-get="/home" {{ template "htmx-swap-settings" }}>
-		home
-	</a>
-	<p>/</p>
+<p>/</p>
+<a class="clickable" hx-get="/home" {{ template "htmx-swap-settings" }}>
+  home
+</a>
+<p>/</p>
 {{ end }}
 
 {{define "panel-home"}}
-	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
-		<div id="nav-path-text">
-			{{ template "panel-home-path" .}}
-		</div>
-	</div>
-	
-	<div id="nav-content">
-		<h1 class="carousel-title clickable" hx-get="/home/work" {{ template "htmx-swap-settings" }}>my work</h1>
-		<div class="carousel-showcase">
-			<div class="project-card clickable carousel-item carousel-project" hx-get="/home/work/microbiome" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
-				<video playsinline autoplay loop muted>
-					<source src="/static/video/projects/microbiome_demo.webm" type="video/webm" />
-					<source src="/static/video/projects/microbiome_demo.mp4" type="video/mp4" />		
-				</video>
-				<p id="project-title">Microbiome</p>
-				<p>delay-based VST3/AU/LV2 audio effects plugin</p>
-				<div class="carousel-tooltip">
-					<p>Microbiome is a VST3/AU/LV2 audio effects plugin that loops an incoming audio signal into a series of buffers to create an aural blur. Built with JUCE and C++.</p>
-				</div>
-			</div>
+<div class="nav-bars" id="nav-path" hx-swap-oob="true">
+  <div id="nav-path-text">
+    {{ template "panel-home-path" .}}
+  </div>
+</div>
 
-			<div class="project-card clickable carousel-item carousel-project" hx-get="/home/work/herodotus" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
-				<video playsinline autoplay loop muted>
-					<source src="/static/video/projects/herodotus_demo.webm" type="video/webm" />
-					<source src="/static/video/projects/herodotus_demo.mp4" type="video/mp4" />		
-				</video>
-				<p id="project-title">Kubernetes Herodotus Scheduler</p>
-				<p>an extension to the Kubernetes Scheduler to increase transparency and observability</p>
-				<div class="carousel-tooltip">
-					<p>The Herodotus scheduler is a custom K8s scheduler and CLI tool that tracks statistics for every pod scheduling decision and displays them in an easy-to-read manner in the terminal. Built with Go and Python.</p>
-				</div>
-			</div>
+<div id="nav-content">
+  <h1 class="carousel-title clickable" hx-get="/home/work" {{ template "htmx-swap-settings" }}>my work</h1>
+  <div class="carousel-showcase">
+    <div class="project-card clickable carousel-item carousel-project" hx-get="/home/work/microbiome" {{
+      template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+      <video playsinline autoplay loop muted>
+        <source src="/static/video/projects/microbiome_demo.webm" type="video/webm" />
+        <source src="/static/video/projects/microbiome_demo.mp4" type="video/mp4" />
+      </video>
+      <p id="project-title">Microbiome</p>
+      <p>delay-based VST3/AU/LV2 audio effects plugin</p>
+      <div class="carousel-tooltip">
+        <p>Microbiome is a VST3/AU/LV2 audio effects plugin that loops an incoming audio signal into a series of buffers
+          to create an aural blur. Built with JUCE and C++.</p>
+      </div>
+    </div>
 
-			<div class="project-card clickable carousel-item carousel-project" hx-get="/home/work/sonderful" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
-				<video playsinline autoplay loop muted>
-					<source src="/static/video/projects/sonderfultransmissions_demo.webm" type="video/webm" />
-					<source src="/static/video/projects/sonderfultransmissions_demo.mp4" type="video/mp4" />		
-				</video>
-				<p id="project-title">Sonderful Transmissions</p>
-				<p>interactive message transmission installation</p>
-				<div class="carousel-tooltip">
-					<p>Sonderful Transmissions is an installation that explores the idea of communicating messages across arbitrary encodings in space. Users use a physical transmission device to encode/decode radio signals across a simulated universe. Built with Processing and ESP32s.</p>
-				</div>
-			</div>
+    <div class="project-card clickable carousel-item carousel-project" hx-get="/home/work/herodotus" {{
+      template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+      <video playsinline autoplay loop muted>
+        <source src="/static/video/projects/herodotus_demo.webm" type="video/webm" />
+        <source src="/static/video/projects/herodotus_demo.mp4" type="video/mp4" />
+      </video>
+      <p id="project-title">Kubernetes Herodotus Scheduler</p>
+      <p>an extension to the Kubernetes Scheduler to increase transparency and observability</p>
+      <div class="carousel-tooltip">
+        <p>The Herodotus scheduler is a custom K8s scheduler and CLI tool that tracks statistics for every pod
+          scheduling decision and displays them in an easy-to-read manner in the terminal. Built with Go and Python.</p>
+      </div>
+    </div>
 
-			<div class="project-card clickable carousel-item carousel-project" hx-get="/home/work/symphony" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
-				<video playsinline autoplay loop muted>
-					<source src="/static/video/projects/systemsymphony_demo.webm" type="video/webm" />
-					<source src="/static/video/projects/systemsymphony_demo.mp4" type="video/mp4" />		
-				</video>				<p id="project-title">System Symphony</p>
-				<p>custom laptop-synthesizer using currently running processes as sonic parameters</p>
-				<div class="carousel-tooltip">
-					<p>System Symphony is program that turns computers into instruments by sonifying the currently running processes into synthesizer parameters. Advertised as an early 2000s CD-ROM software install. Built with SuperCollider and Python.</p>
-				</div>
-			</div>
+    <div class="project-card clickable carousel-item carousel-project" hx-get="/home/work/sonderful" {{
+      template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+      <video playsinline autoplay loop muted>
+        <source src="/static/video/projects/sonderfultransmissions_demo.webm" type="video/webm" />
+        <source src="/static/video/projects/sonderfultransmissions_demo.mp4" type="video/mp4" />
+      </video>
+      <p id="project-title">Sonderful Transmissions</p>
+      <p>interactive message transmission installation</p>
+      <div class="carousel-tooltip">
+        <p>Sonderful Transmissions is an installation that explores the idea of communicating messages across arbitrary
+          encodings in space. Users use a physical transmission device to encode/decode radio signals across a simulated
+          universe. Built with Processing and ESP32s.</p>
+      </div>
+    </div>
 
-			<div class="carousel-item" hx-get="/home/work" {{ template "htmx-swap-settings" }}>
-				<a href="#" onclick="event.preventDefault()">
-					<h1 class="clickable">...</h1>
-				</a>
-			</div>
-		</div>
+    <div class="project-card clickable carousel-item carousel-project" hx-get="/home/work/symphony" {{
+      template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+      <video playsinline autoplay loop muted>
+        <source src="/static/video/projects/systemsymphony_demo.webm" type="video/webm" />
+        <source src="/static/video/projects/systemsymphony_demo.mp4" type="video/mp4" />
+      </video>
+      <p id="project-title">System Symphony</p>
+      <p>custom laptop-synthesizer using currently running processes as sonic parameters</p>
+      <div class="carousel-tooltip">
+        <p>System Symphony is program that turns computers into instruments by sonifying the currently running processes
+          into synthesizer parameters. Advertised as an early 2000s CD-ROM software install. Built with SuperCollider
+          and Python.</p>
+      </div>
+    </div>
 
-		<h1 class="carousel-title clickable" hx-get="/home/vinyl_collection" {{ template "htmx-swap-settings" }}>vinyl collection</h1>
-		<div class="carousel-showcase">
-			{{ range $vinyl := .Vinyls }}
-				<div class="carousel-item" {{ template "tooltip-hover" }}2>
-					<img class="carousel-vinyl-pic" src="{{ $vinyl.PreviewImage }}">
-					<!-- <p>{{ $vinyl.Artist }} - {{ $vinyl.Name }} ({{ $vinyl.Year }})</p> -->
-					<div class="carousel-tooltip">
-						<p>
-							<strong>{{ $vinyl.Artist }}</strong> - {{ $vinyl.Name }} ({{ $vinyl.Year }})
-						</p>
-						
-						<p>
-							Obtained on {{ $vinyl.DateAddedToCollection }}
-						</p>
-					</div>
-				</div>
-			{{end}}
-		
-			<div class="carousel-item" hx-get="/home/vinyl_collection" {{ template "htmx-swap-settings" }}>
-				<a href="#" onclick="event.preventDefault()">
-					<h1 class="clickable">...</h1>
-				</a>
-			</div>
-		</div>
-		<h1 class="carousel-title clickable">been <span id="spotify-preview-toggle" onclick="togglePreview()">listening</span> to</h1>
-		<div class="carousel-showcase">
-			{{ range $track := .Tracks }}
-				<div class="carousel-item" onmouseenter="carouselItemEntered(this); previewSpotify(this)" onmouseleave="carouselItemLeft(this); stopSpotify();">
-					<img class="carousel-spotify-pic" src="{{ (index $track.Album.Images 0).URL }}">
-					<p class="spotify-preview-link">{{ $track.PreviewURL }}</p>
-					<div class="carousel-tooltip">
-						<p>
-							<strong>{{ $track.Name }}</strong> by {{ (index $track.Artists 0).Name }}
-						</p>
-					</div>
-				</div>        
-			{{end}}
-		
-			<div class="carousel-item">
-				<a href="https://stats.fm/smaugy" target="_blank">
-					<h1 class="clickable">...</h1>
-				</a>
-			</div>
-		</div>
+    <div class="carousel-item" hx-get="/home/work" {{ template "htmx-swap-settings" }}>
+      <a href="#" onclick="event.preventDefault()">
+        <h1 class="clickable">...</h1>
+      </a>
+    </div>
+  </div>
 
-		<h1 class="carousel-title clickable">just watched</h1>
-		<div class="carousel-showcase">
-			{{ range $movie := .Movies }}
-				<div class="carousel-item" onmouseenter="carouselItemEntered(this)">
-					<img class="carousel-movies-pic" src="{{ $movie.ImageURL }}">
+  <h1 class="carousel-title clickable" hx-get="/home/vinyl_collection" {{ template "htmx-swap-settings" }}>vinyl
+    collection</h1>
+  <div class="carousel-showcase">
+    {{ range $vinyl := .Vinyls }}
+    <div class="carousel-item" {{ template "tooltip-hover" }}2>
+      <img class="carousel-vinyl-pic" src="{{ $vinyl.PreviewImage }}">
+      <!-- <p>{{ $vinyl.Artist }} - {{ $vinyl.Name }} ({{ $vinyl.Year }})</p> -->
+      <div class="carousel-tooltip">
+        <p>
+          <strong>{{ $vinyl.Artist }}</strong> - {{ $vinyl.Name }} ({{ $vinyl.Year }})
+        </p>
 
-					<div class="carousel-tooltip">
-						<p>
-							<strong>{{ $movie.Title }}</strong> watched on {{ $movie.WatchDate }}
-						</p>
-					</div>
-				</div>      
-			{{end}}
-		
-			<div class="carousel-item">
-				<a href="https://letterboxd.com/dsmaugy/" target="_blank">
-					<h1 class="clickable">...</h1>
-				</a>
-			</div>
-		</div>
-	</div>
+        <p>
+          Obtained on {{ $vinyl.DateAddedToCollection }}
+        </p>
+      </div>
+    </div>
+    {{end}}
+
+    <div class="carousel-item" hx-get="/home/vinyl_collection" {{ template "htmx-swap-settings" }}>
+      <a href="#" onclick="event.preventDefault()">
+        <h1 class="clickable">...</h1>
+      </a>
+    </div>
+  </div>
+  <h1 class="carousel-title clickable">been listening to</h1>
+  <div class="carousel-showcase">
+    {{ range $track := .Tracks }}
+    <div class="carousel-item" onmouseenter="carouselItemEntered(this);" onmouseleave="carouselItemLeft(this);">
+      <img class="carousel-spotify-pic" src="{{ (index $track.Album.Images 0).URL }}">
+      <div class="carousel-tooltip">
+        <p>
+          <strong>{{ $track.Name }}</strong> by {{ (index $track.Artists 0).Name }}
+        </p>
+      </div>
+    </div>
+    {{end}}
+
+    <div class="carousel-item">
+      <a href="https://stats.fm/smaugy" target="_blank">
+        <h1 class="clickable">...</h1>
+      </a>
+    </div>
+  </div>
+
+  <h1 class="carousel-title clickable">just watched</h1>
+  <div class="carousel-showcase">
+    {{ range $movie := .Movies }}
+    <div class="carousel-item" onmouseenter="carouselItemEntered(this)">
+      <img class="carousel-movies-pic" src="{{ $movie.ImageURL }}">
+
+      <div class="carousel-tooltip">
+        <p>
+          <strong>{{ $movie.Title }}</strong> watched on {{ $movie.WatchDate }}
+        </p>
+      </div>
+    </div>
+    {{end}}
+
+    <div class="carousel-item">
+      <a href="https://letterboxd.com/dsmaugy/" target="_blank">
+        <h1 class="clickable">...</h1>
+      </a>
+    </div>
+  </div>
+</div>
 {{end}}
 
-<!-- do this so we can import this directly in our requests -->
+
+{{ if .ishtmx }}
 {{ template "panel-home" .}}
+{{ else }}
+{{ template "root-header" .}}
+{{ template "panel-home" .}}
+{{ template "root-footer" .}}
+{{ end }}

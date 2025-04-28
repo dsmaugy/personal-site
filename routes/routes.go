@@ -90,11 +90,9 @@ func HomePanel(c *gin.Context) {
 	log.Info().Msg("Request for Home page")
 	ishtmx := c.GetHeader("Hx-Request")
 	log.Info().Msg("Hx-Request: " + ishtmx)
-	if ishtmx == "true" {
-		c.HTML(http.StatusOK, "home.html.tmpl", getHomePanelVars())
-	} else {
-		c.HTML(http.StatusOK, "home-FULL.html.tmpl", getHomePanelVars())
-	}
+	renderVars := getHomePanelVars()
+	renderVars["ishtmx"] = ishtmx
+	c.HTML(http.StatusOK, "home.html.tmpl", renderVars)
 }
 
 func VinylPanel(c *gin.Context) {
