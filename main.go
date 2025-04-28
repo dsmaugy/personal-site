@@ -28,12 +28,8 @@ func requestcheck() gin.HandlerFunc {
 		log.Info().Msg("Path: " + c.Request.URL.Path)
 		log.Info().Msg("Scheme: " + c.Request.URL.Scheme)
 
-		if c.Request.Host == "www.darwindo.com" || c.Request.Host == "darwindo.com" {
-			c.Redirect(http.StatusPermanentRedirect,
-				"https://darwins.cloud"+c.Request.URL.Path)
-			c.Abort()
-			return
-		} else if c.Request.Host == "www.darwins.cloud" {
+		if c.Request.Host == "www.darwindo.com" || c.Request.Host == "darwindo.com" ||
+			c.Request.Host == "www.darwins.cloud" || c.Request.Host == "darwins-cloud.fly.dev" {
 			c.Redirect(http.StatusPermanentRedirect,
 				"https://darwins.cloud"+c.Request.URL.Path)
 			c.Abort()
