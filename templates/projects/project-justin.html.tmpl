@@ -1,47 +1,54 @@
 {{ define "project-justin-path" }}
-    {{ template "panel-projects-path" . }}
-	<a class="clickable">justin_tseng_election</a>
-	<p>/</p>
+{{ template "panel-projects-path" . }}
+<a class="clickable">justin_tseng_election</a>
+<p>/</p>
 {{ end }}
 
 {{define "project-justin"}}
-	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
-		<div id="nav-path-text">
-			{{ template "project-justin-path" .}}
-		</div>		
-	</div>
-	<style>
-		#justin-image {
-			max-width: 600px;
-			margin: 0 auto 0 auto;
-		}
+<div class="nav-bars" id="nav-path" hx-swap-oob="true">
+  <div id="nav-path-text">
+    {{ template "project-justin-path" .}}
+  </div>
+</div>
+<style>
+  #justin-image {
+    max-width: 600px;
+    margin: 0 auto 0 auto;
+  }
 
-		#justin-image img {
-			width: 100%;
-		}
-	</style>
-	
-	<div id="nav-content" hx-history-elt>		
-		<h1>justin tseng election committee</h1>
+  #justin-image img {
+    width: 100%;
+  }
+</style>
 
-		<figure id="justin-image" class="centered">
-			<img src="/static/images/projects/justin_site.jpg">
-		</figure>
+<div id="nav-content" hx-history-elt>
+  <h1>justin tseng election committee</h1>
 
-		<br>
-		<p>In the summer of 2021, I set up the campaign website for Medford city council candidate Justin Tseng.</p>
-		<p>In November of that year, Justin was elected to the city council, becoming the first Asian American to hold office.
-			<sup><a href="https://www.thecrimson.com/article/2021/11/3/tseng-medford-council-election/" target="_blank">1</a></sup>
-		</p>
-		<br>
-		<a href="https://justin4medford.com/" target="_blank">link (live)</a><br>
-		<a href="https://web.archive.org/web/20211101191012/https://www.justin4medford.com/en/" target="_blank">link (wayback)</a>
-		<br>
-		<br>
-		<p>Built with WordPress</p>
-		<p class="project-date">Summer 2021</p>
-	</div>
+  <figure id="justin-image" class="centered">
+    <img src="/static/images/projects/justin_site.jpg">
+  </figure>
+
+  <br>
+  <p>In the summer of 2021, I set up the campaign website for Medford city council candidate Justin Tseng.</p>
+  <p>In November of that year, Justin was elected to the city council, becoming the first Asian American to hold office.
+    <sup><a href="https://www.thecrimson.com/article/2021/11/3/tseng-medford-council-election/"
+        target="_blank">1</a></sup>
+  </p>
+  <br>
+  <a href="https://justin4medford.com/" target="_blank">link (live)</a><br>
+  <a href="https://web.archive.org/web/20211101191012/https://www.justin4medford.com/en/" target="_blank">link
+    (wayback)</a>
+  <br>
+  <br>
+  <p>Built with WordPress</p>
+  <p class="project-date">Summer 2021</p>
+</div>
 {{end}}
 
-<!-- do this so we can import this directly in our requests -->
+{{ if .ishtmx }}
 {{ template "project-justin" .}}
+{{ else }}
+{{ template "root-header" .}}
+{{ template "project-justin" .}}
+{{ template "root-footer" .}}
+{{ end }}

@@ -102,15 +102,10 @@ func VinylPanel(c *gin.Context) {
 
 	vinyls, _ := api.GetDiscogsRecords(MyDiscogsUsername)
 
-	if ishtmx == "true" {
-		c.HTML(http.StatusOK, "vinyl.html.tmpl", gin.H{
-			"Vinyls": vinyls,
-		})
-	} else {
-		c.HTML(http.StatusOK, "vinyl-FULL.html.tmpl", gin.H{
-			"Vinyls": vinyls,
-		})
-	}
+	c.HTML(http.StatusOK, "vinyl.html.tmpl", gin.H{
+		"Vinyls": vinyls,
+		"ishtmx": ishtmx,
+	})
 }
 
 func ProjectsPanel(c *gin.Context) {
@@ -118,11 +113,9 @@ func ProjectsPanel(c *gin.Context) {
 	ishtmx := c.GetHeader("Hx-Request")
 	log.Info().Msg("Hx-Request: " + ishtmx)
 
-	if ishtmx == "true" {
-		c.HTML(http.StatusOK, "projects.html.tmpl", nil)
-	} else {
-		c.HTML(http.StatusOK, "projects-FULL.html.tmpl", nil)
-	}
+	c.HTML(http.StatusOK, "projects.html.tmpl", gin.H{
+		"ishtmx": ishtmx,
+	})
 }
 
 func ProjectPage(c *gin.Context) {
@@ -131,9 +124,7 @@ func ProjectPage(c *gin.Context) {
 	ishtmx := c.GetHeader("Hx-Request")
 	log.Info().Msg("Hx-Request: " + ishtmx)
 
-	if ishtmx == "true" {
-		c.HTML(http.StatusOK, "project-"+projectname+".html.tmpl", nil)
-	} else {
-		c.HTML(http.StatusOK, "project-"+projectname+"-FULL.html.tmpl", nil)
-	}
+	c.HTML(http.StatusOK, "project-"+projectname+".html.tmpl", gin.H{
+		"ishtmx": ishtmx,
+	})
 }

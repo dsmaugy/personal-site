@@ -1,66 +1,81 @@
 {{ define "project-rainplayer-path" }}
-    {{ template "panel-projects-path" . }}
-	<a class="clickable">rainplayer</a>
-	<p>/</p>
+{{ template "panel-projects-path" . }}
+<a class="clickable">rainplayer</a>
+<p>/</p>
 {{ end }}
 
 {{define "project-rainplayer"}}
 
 
-	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
-		<div id="nav-path-text">
-			{{ template "project-rainplayer-path" .}}
-		</div>		
-	</div>
-	
-	<div id="nav-content" hx-history-elt>
-		<style>
-			iframe {
-				max-width: 100%;
-			}
+<div class="nav-bars" id="nav-path" hx-swap-oob="true">
+  <div id="nav-path-text">
+    {{ template "project-rainplayer-path" .}}
+  </div>
+</div>
 
-			#rainplayer-demo {
-				display: flex;
-				flex-direction: row;
-				flex-wrap: wrap;
-			}
+<div id="nav-content" hx-history-elt>
+  <style>
+    iframe {
+      max-width: 100%;
+    }
 
-		</style>
-		<h1>ambient music player/visualizer</h1>
-		<div id="rainplayer-demo">
-			<figure>
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/LdFgIT9qOJU?si=tFPRBbLCCXenViwc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-				<figcaption>rainplayer desktop recording</figcaption>
-			</figure>
-	
-			<figure>
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/_TbbDGC6yNM?si=Fz63ghr7jEZXzMIk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-				<figcaption>rainplayer live demo</figcaption>
-			</figure>
-		</div>
+    #rainplayer-demo {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  </style>
+  <h1>ambient music player/visualizer</h1>
+  <div id="rainplayer-demo">
+    <figure>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/LdFgIT9qOJU?si=tFPRBbLCCXenViwc"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <figcaption>rainplayer desktop recording</figcaption>
+    </figure>
 
-		<h2>movement</h2>
-		<p>
-			Rainplayer draws the dots on screen using a series of randomly generated Bézier curves. The amplitude of the audio affects the speed of how fast the dot travels along its curve.
-			Once a dot has reached the end of its path, a new curve is generated starting at its current position. This creates the "jumping" effect that occurs during the audio peaks.
-		</p>
+    <figure>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/_TbbDGC6yNM?si=Fz63ghr7jEZXzMIk"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <figcaption>rainplayer live demo</figcaption>
+    </figure>
+  </div>
 
-		<h2>rain sounds</h2>
-		<p>
-			The physical box controls the attributes of the ambient rainstorm in the background. The volume of the rain can be adjusted and thunderstorm claps can be summoned at will.
-		</p>
+  <h2>movement</h2>
+  <p>
+    Rainplayer draws the dots on screen using a series of randomly generated Bézier curves. The amplitude of the audio
+    affects the speed of how fast the dot travels along its curve.
+    Once a dot has reached the end of its path, a new curve is generated starting at its current position. This creates
+    the "jumping" effect that occurs during the audio peaks.
+  </p>
 
-		<br>
-		<a href="https://github.com/dsmaugy/cpsc334-module2/tree/d759c4cef8f9cd64d0bd8c0398ac4d7e25097ac6/task2" target="_blank">source</a><br>
-		<a href="https://github.com/dsmaugy/cpsc334-module2/blob/d759c4cef8f9cd64d0bd8c0398ac4d7e25097ac6/task2/docs/writeup.md" target="_blank">writeup</a>
+  <h2>rain sounds</h2>
+  <p>
+    The physical box controls the attributes of the ambient rainstorm in the background. The volume of the rain can be
+    adjusted and thunderstorm claps can be summoned at will.
+  </p>
 
-		<br><br>
-		<p>Created as part of CPSC334: Creative Embedded Systems</p>
-		<p>Taught by <a href="https://www.scottericpetersen.com/" target="_blank">Dr. Scott Petersen</a></p>
-		<p>Built with Processing and ESP32s</p>
-		<p class="project-date">Fall 2023</p>
-	</div>
+  <br>
+  <a href="https://github.com/dsmaugy/cpsc334-module2/tree/d759c4cef8f9cd64d0bd8c0398ac4d7e25097ac6/task2"
+    target="_blank">source</a><br>
+  <a href="https://github.com/dsmaugy/cpsc334-module2/blob/d759c4cef8f9cd64d0bd8c0398ac4d7e25097ac6/task2/docs/writeup.md"
+    target="_blank">writeup</a>
+
+  <br><br>
+  <p>Created as part of CPSC334: Creative Embedded Systems</p>
+  <p>Taught by <a href="https://www.scottericpetersen.com/" target="_blank">Dr. Scott Petersen</a></p>
+  <p>Built with Processing and ESP32s</p>
+  <p class="project-date">Fall 2023</p>
+</div>
 {{end}}
 
-<!-- do this so we can import this directly in our requests -->
+{{ if .ishtmx }}
 {{ template "project-rainplayer" .}}
+{{ else }}
+{{ template "root-header" .}}
+{{ template "project-rainplayer" .}}
+{{ template "root-footer" .}}
+{{ end }}

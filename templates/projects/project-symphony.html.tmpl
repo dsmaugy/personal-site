@@ -1,99 +1,108 @@
 {{ define "project-symphony-path" }}
-    {{ template "panel-projects-path" . }}
-	<a class="clickable">system_symphony</a>
-	<p>/</p>
+{{ template "panel-projects-path" . }}
+<a class="clickable">system_symphony</a>
+<p>/</p>
 {{ end }}
 
 {{define "project-symphony"}}
-	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
-		<div id="nav-path-text">
-			{{ template "project-symphony-path" .}}
-		</div>		
-	</div>
-
-	
-	<div id="nav-content" hx-history-elt>
-		<style>
-			#system-video {
-				max-width: 100%;
-			}
-
-			#system-flex {
-				display: flex;
-			}
-
-			#system-flex figure {
-				max-width: 350px;
-				margin: 0 auto 0 auto;
-			}
-		
-			#system-flex figure img {
-				width: 100%;
-			}
-
-			#left-panel-tooltip p {
-				font-size: 0.95em;
-			}
-		</style>
-		
-		<h1>a laptop synthesizer ensemble</h1>
-
-		<figure class="centered">
-			<iframe id="system-video" width="840" height="472.5" src="https://www.youtube.com/embed/7eFRx9gCreM?si=sPmuTHx1zS8MGVhv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-			<figcaption>Software DVD Demo</figcaption>
-		</figure>
-
-		<h1>the whispers of your computer</h1>
-		<p>System symphony sonifies the inner workings of operating systems by turning the attributes of currently-running processes into synthesizer parameters.
-			Spikes in memory usage and CPU utilization can be heard in the dynamic symphony of sounds.
-		</p>
-
-		<h1>packaging</h1>
-		<p>The executables of the program are packaged in a CD-ROM alongside a DVD demo, 
-			evoking the marketing aesthetics of early 2000s infomercials.
-		</p>
-
-		<h2>front-back</h2>
-		<div id="system-flex">
-			<figure>
-				<img src="/static/images/projects/system_cover.webp">
-				<figcaption>front cover</figcaption>
-			</figure>
+<div class="nav-bars" id="nav-path" hx-swap-oob="true">
+  <div id="nav-path-text">
+    {{ template "project-symphony-path" .}}
+  </div>
+</div>
 
 
-			<figure>
-				<img src="/static/images/projects/system_back.webp">
-				<figcaption>back cover</figcaption>
-			</figure>
+<div id="nav-content" hx-history-elt>
+  <style>
+    #system-video {
+      max-width: 100%;
+    }
 
-		</div>
+    #system-flex {
+      display: flex;
+    }
 
-		<h2>inside-cover</h2>
-		<div id="system-flex">
-			<figure>
-				<img src="/static/images/projects/system_inside.webp">
-				<figcaption>inside cover</figcaption>
-			</figure>
-			<figure>
-				<img src="/static/images/projects/system_flap.webp">
-				<figcaption>inside flap</figcaption>
-			</figure>
-		</div>
+    #system-flex figure {
+      max-width: 350px;
+      margin: 0 auto 0 auto;
+    }
 
-		<a href="https://github.com/dsmaugy/system-symphony" target="_blank">source</a>
-		<br>
-		<br>
+    #system-flex figure img {
+      width: 100%;
+    }
 
-		<p>Created as a final project for CSGH370: The Media of Sound</p>
-		<p>Taught by <a href="https://www.rosswightman.net/" target="_blank">Ross Wightman</a></p>
-		<p>Collaboration with <a href="https://kaloyankolev.com/" target="_blank">Kaloyan Kolev</a></p>
-		<p>Built with SuperCollider/Python</p>
-		<p>Filmed with Sony Handycam CCD-TRV815 Hi-8</p>
+    #left-panel-tooltip p {
+      font-size: 0.95em;
+    }
+  </style>
 
-		<p class="project-date">Spring 2023</p>
+  <h1>a laptop synthesizer ensemble</h1>
 
-	</div>
+  <figure class="centered">
+    <iframe id="system-video" width="840" height="472.5"
+      src="https://www.youtube.com/embed/7eFRx9gCreM?si=sPmuTHx1zS8MGVhv" title="YouTube video player" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <figcaption>Software DVD Demo</figcaption>
+  </figure>
+
+  <h1>the whispers of your computer</h1>
+  <p>System symphony sonifies the inner workings of operating systems by turning the attributes of currently-running
+    processes into synthesizer parameters.
+    Spikes in memory usage and CPU utilization can be heard in the dynamic symphony of sounds.
+  </p>
+
+  <h1>packaging</h1>
+  <p>The executables of the program are packaged in a CD-ROM alongside a DVD demo,
+    evoking the marketing aesthetics of early 2000s infomercials.
+  </p>
+
+  <h2>front-back</h2>
+  <div id="system-flex">
+    <figure>
+      <img src="/static/images/projects/system_cover.webp">
+      <figcaption>front cover</figcaption>
+    </figure>
+
+
+    <figure>
+      <img src="/static/images/projects/system_back.webp">
+      <figcaption>back cover</figcaption>
+    </figure>
+
+  </div>
+
+  <h2>inside-cover</h2>
+  <div id="system-flex">
+    <figure>
+      <img src="/static/images/projects/system_inside.webp">
+      <figcaption>inside cover</figcaption>
+    </figure>
+    <figure>
+      <img src="/static/images/projects/system_flap.webp">
+      <figcaption>inside flap</figcaption>
+    </figure>
+  </div>
+
+  <a href="https://github.com/dsmaugy/system-symphony" target="_blank">source</a>
+  <br>
+  <br>
+
+  <p>Created as a final project for CSGH370: The Media of Sound</p>
+  <p>Taught by <a href="https://www.rosswightman.net/" target="_blank">Ross Wightman</a></p>
+  <p>Collaboration with <a href="https://kaloyankolev.com/" target="_blank">Kaloyan Kolev</a></p>
+  <p>Built with SuperCollider/Python</p>
+  <p>Filmed with Sony Handycam CCD-TRV815 Hi-8</p>
+
+  <p class="project-date">Spring 2023</p>
+
+</div>
 {{end}}
 
-<!-- do this so we can import this directly in our requests -->
+{{ if .ishtmx }}
 {{ template "project-symphony" .}}
+{{ else }}
+{{ template "root-header" .}}
+{{ template "project-symphony" .}}
+{{ template "root-footer" .}}
+{{ end }}

@@ -1,35 +1,43 @@
 {{ define "project-pathos-path" }}
-    {{ template "panel-projects-path" . }}
-	<a class="clickable">pathos_irc</a>
-	<p>/</p>
+{{ template "panel-projects-path" . }}
+<a class="clickable">pathos_irc</a>
+<p>/</p>
 {{ end }}
 
 {{define "project-pathos"}}
-	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
-		<div id="nav-path-text">
-			{{ template "project-pathos-path" .}}
-		</div>		
-	</div>
-	
-	<div id="nav-content" hx-history-elt>
-		<style>
-			#pathos-video {
-				max-width: 100%;
-			}
-		</style>
-		<h1>an irc chat</h1>
+<div class="nav-bars" id="nav-path" hx-swap-oob="true">
+  <div id="nav-path-text">
+    {{ template "project-pathos-path" .}}
+  </div>
+</div>
 
-		<figure class="centered">
-			<iframe id="pathos-video" width="840" height="472.5" src="https://www.youtube.com/embed/9D0L2PIRq3I?si=QPj4je5rdVr2FeHU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-		</figure>
+<div id="nav-content" hx-history-elt>
+  <style>
+    #pathos-video {
+      max-width: 100%;
+    }
+  </style>
+  <h1>an irc chat</h1>
 
-		<br>
-		<p>Created as a final project for ART145: Introduction to Digital Video</p>
-		<p>Taught by <a href="https://neilgoldberg.com/" target="_blank">Neil Goldberg</a></p>
-		<p>Filmed with Sony Handycam CCD-TRV815 Hi-8</p>
-		<p class="project-date">Spring 2023</p>
-	</div>
+  <figure class="centered">
+    <iframe id="pathos-video" width="840" height="472.5"
+      src="https://www.youtube.com/embed/9D0L2PIRq3I?si=QPj4je5rdVr2FeHU" title="YouTube video player" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </figure>
+
+  <br>
+  <p>Created as a final project for ART145: Introduction to Digital Video</p>
+  <p>Taught by <a href="https://neilgoldberg.com/" target="_blank">Neil Goldberg</a></p>
+  <p>Filmed with Sony Handycam CCD-TRV815 Hi-8</p>
+  <p class="project-date">Spring 2023</p>
+</div>
 {{end}}
 
-<!-- do this so we can import this directly in our requests -->
+{{ if .ishtmx }}
 {{ template "project-pathos" .}}
+{{ else }}
+{{ template "root-header" .}}
+{{ template "project-pathos" .}}
+{{ template "root-footer" .}}
+{{ end }}

@@ -1,62 +1,74 @@
 {{ define "project-herodotus-path" }}
-    {{ template "panel-projects-path" . }}
-	<a class="clickable">k8s_herodotus</a>
-	<p>/</p>
+{{ template "panel-projects-path" . }}
+<a class="clickable">k8s_herodotus</a>
+<p>/</p>
 {{ end }}
 
 {{define "project-herodotus"}}
-	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
-		<div id="nav-path-text">
-			{{ template "project-herodotus-path" .}}
-		</div>		
-	</div>
-	
-	<div id="nav-content" hx-history-elt>
-		<style>
-			iframe {
-				max-width: 100%;
-			}
-		</style>
-		<h1>increasing transparency in the kubernetes scheduler</h1>
+<div class="nav-bars" id="nav-path" hx-swap-oob="true">
+  <div id="nav-path-text">
+    {{ template "project-herodotus-path" .}}
+  </div>
+</div>
 
-		<figure class="centered">
-			<iframe width="560" height="315" src="https://www.youtube.com/embed/cthQR859AlA?si=J-fE5p8LRTqZQXcw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-			<figcaption>Scheduler Demo and Overview</figcaption>
-		</figure>
+<div id="nav-content" hx-history-elt>
+  <style>
+    iframe {
+      max-width: 100%;
+    }
+  </style>
+  <h1>increasing transparency in the kubernetes scheduler</h1>
 
-		<h2>scheduling</h2>
-		<p>
-			The Kubernetes scheduler is responsible for choosing which node to place a pod on. 
-			It makes this decision by running every node within the cluster through a series of scoring and filtering plugins, choosing the plugin that passes all filters and scores the highest.
-		</p>
+  <figure class="centered">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/cthQR859AlA?si=J-fE5p8LRTqZQXcw"
+      title="YouTube video player" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <figcaption>Scheduler Demo and Overview</figcaption>
+  </figure>
 
-		<h2>history keeping</h2>
-		<p>
-			The Herodotus (the "<a href="https://en.wikipedia.org/wiki/Herodotus">father of history</a>") scheduler keeps track of the output of each plugin for every scheduled pod as a Prometheus-style metric.
-			A provided CLI tool allows for easy querying and displaying of this data. 
-		</p>
+  <h2>scheduling</h2>
+  <p>
+    The Kubernetes scheduler is responsible for choosing which node to place a pod on.
+    It makes this decision by running every node within the cluster through a series of scoring and filtering plugins,
+    choosing the plugin that passes all filters and scores the highest.
+  </p>
 
-		<h2>goals</h2>
-		<p>The goal for this project is to reveal the decision-making process behind the Kubernetes scheduler and help cluster operators answer questions such as:</p>
-		<ul>
-			<li>Why was my pod placed on this node?</li>
-			<li>Why does this one node keep getting pods of this specific type?</li>
-			<li>Why does my pod balancing look the way it is?</li>
-			<li>Any other scheduling-related questions</li>
-		</ul>
-		<br>
-		<p>more info in writeup</p>
-		<br>
-		<a href="https://github.com/dsmaugy/kubernetes-herodotus" target="_blank">source</a><br>
-		<a href="/static/other/k8s_herodotus_writeup.pdf" target="_blank">writeup</a>
-		<br>
-		<br>
-		<p>Created as a final project for CPSC426: Building Distributed Systems</p>
-		<p>Taught by Professor <a href="https://www.cs.yale.edu/homes/yry/" target="_blank">Richard Yang</a> and <a href="https://www.shixiao.org/" target="_blank">Xiao Shi</a></p>
-		<p>Built with Go, forked from the Kubernetes Source</p>
-		<p class="project-date">Spring 2023</p>
-	</div>
+  <h2>history keeping</h2>
+  <p>
+    The Herodotus (the "<a href="https://en.wikipedia.org/wiki/Herodotus">father of history</a>") scheduler keeps track
+    of the output of each plugin for every scheduled pod as a Prometheus-style metric.
+    A provided CLI tool allows for easy querying and displaying of this data.
+  </p>
+
+  <h2>goals</h2>
+  <p>The goal for this project is to reveal the decision-making process behind the Kubernetes scheduler and help cluster
+    operators answer questions such as:</p>
+  <ul>
+    <li>Why was my pod placed on this node?</li>
+    <li>Why does this one node keep getting pods of this specific type?</li>
+    <li>Why does my pod balancing look the way it is?</li>
+    <li>Any other scheduling-related questions</li>
+  </ul>
+  <br>
+  <p>more info in writeup</p>
+  <br>
+  <a href="https://github.com/dsmaugy/kubernetes-herodotus" target="_blank">source</a><br>
+  <a href="/static/other/k8s_herodotus_writeup.pdf" target="_blank">writeup</a>
+  <br>
+  <br>
+  <p>Created as a final project for CPSC426: Building Distributed Systems</p>
+  <p>Taught by Professor <a href="https://www.cs.yale.edu/homes/yry/" target="_blank">Richard Yang</a> and <a
+      href="https://www.shixiao.org/" target="_blank">Xiao Shi</a></p>
+  <p>Built with Go, forked from the Kubernetes Source</p>
+  <p class="project-date">Spring 2023</p>
+</div>
 {{end}}
 
-<!-- do this so we can import this directly in our requests -->
+{{ if .ishtmx }}
 {{ template "project-herodotus" .}}
+{{ else }}
+{{ template "root-header" .}}
+{{ template "project-herodotus" .}}
+{{ template "root-footer" .}}
+{{ end }}

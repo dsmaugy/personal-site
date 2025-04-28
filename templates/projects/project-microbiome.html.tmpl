@@ -1,80 +1,92 @@
 {{ define "project-microbiome-path" }}
-    {{ template "panel-projects-path" . }}
-	<a class="clickable">microbiome</a>
-	<p>/</p>
+{{ template "panel-projects-path" . }}
+<a class="clickable">microbiome</a>
+<p>/</p>
 {{ end }}
 
 {{define "project-microbiome"}}
-	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
-		<div id="nav-path-text">
-			{{ template "project-microbiome-path" .}}
-		</div>		
-	</div>
-	
-	<div id="nav-content" hx-history-elt>
-		<style>
-			#microbiome-flex {
-				display: flex;
-				flex-flow: row;
-				align-content: start;
-			}
-		
-			#microbiome-flex figure {
-				max-width: 400px;
-				margin: 0 auto 0 auto;
-			}
-		
-			#microbiome-flex figure img {
-				width: 100%;
-			}
+<div class="nav-bars" id="nav-path" hx-swap-oob="true">
+  <div id="nav-path-text">
+    {{ template "project-microbiome-path" .}}
+  </div>
+</div>
 
-			#iframe-video {
-				max-width: 100%;
-			}
-		</style>
-		<h1>a VST3/AU/LV2 delay-based audio effects plugin</h1>
-		<figure class="centered">
-			<iframe id="iframe-video" width="560" height="315" src="https://www.youtube.com/embed/Ihh65Blad9o?si=ucj9ccgX-M66WZ-T" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-			<figcaption>Microbiome Demo</figcaption>
-		</figure>
+<div id="nav-content" hx-history-elt>
+  <style>
+    #microbiome-flex {
+      display: flex;
+      flex-flow: row;
+      align-content: start;
+    }
 
-		<h2>What if sound was treated as a breathing, living, entity?</h2> 
-		<p>
-			Microbiome's audio processing engine consists of a number of toggleable <b>colonies</b>. Each colony is an offshoot of the original sound source, a resampling of a certain portion of the main audio signal.
-			The colonies apply their own processing algorithm to their resampled audio before feeding it back into the output signal, resulting in a constantly evolving sound signature that is based off the characteristics of the signal's past.
-		</p>
+    #microbiome-flex figure {
+      max-width: 400px;
+      margin: 0 auto 0 auto;
+    }
 
-		<br>
-		<div id="microbiome-flex">
-			<figure>
-				<img src="/static/images/projects/microbiome_0_enabled.webp">
-				<figcaption>Figure 1: Microbiome editor UI with focus on a disabled Colony #1</figcaption>
-			</figure>
+    #microbiome-flex figure img {
+      width: 100%;
+    }
 
-			<figure>
-				<img src="/static/images/projects/microbiome_1_enabled.webp">
-				<figcaption>Figure 2: Microbiome editor UI with focus on an enabled Colony #1</figcaption>
-			</figure>
+    #iframe-video {
+      max-width: 100%;
+    }
+  </style>
+  <h1>a VST3/AU/LV2 delay-based audio effects plugin</h1>
+  <figure class="centered">
+    <iframe id="iframe-video" width="560" height="315"
+      src="https://www.youtube.com/embed/Ihh65Blad9o?si=ucj9ccgX-M66WZ-T" title="YouTube video player" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <figcaption>Microbiome Demo</figcaption>
+  </figure>
 
-			<figure>
-				<img src="/static/images/projects/microbiome_2_enabled.webp">
-				<figcaption>Figure 3: Microbiome editor UI with three enabled colonies at varying resampling seek positions and buffer start/end points</figcaption>
-			</figure>
-		</div>
+  <h2>What if sound was treated as a breathing, living, entity?</h2>
+  <p>
+    Microbiome's audio processing engine consists of a number of toggleable <b>colonies</b>. Each colony is an offshoot
+    of the original sound source, a resampling of a certain portion of the main audio signal.
+    The colonies apply their own processing algorithm to their resampled audio before feeding it back into the output
+    signal, resulting in a constantly evolving sound signature that is based off the characteristics of the signal's
+    past.
+  </p>
 
-		<a href="https://github.com/dsmaugy/microbiome/releases" target="_blank">download</a> 
-		<br>
-		<a href="https://github.com/dsmaugy/microbiome/tree/main" target="_blank">source</a> 
-		<br>
-		<a href="/static/other/microbiome_report.pdf" target="_blank">report</a>
+  <br>
+  <div id="microbiome-flex">
+    <figure>
+      <img src="/static/images/projects/microbiome_0_enabled.webp">
+      <figcaption>Figure 1: Microbiome editor UI with focus on a disabled Colony #1</figcaption>
+    </figure>
 
-		<br><br>
-		<p>Created as an undergraduate thesis project</p>
-		<p>Advised by <a href="https://www.scottericpetersen.com/" target="_blank">Dr. Scott Petersen</a></p>
-		<p>Built with JUCE and C++</p>
-		<p class="project-date">Spring 2024</p>
-	</div>
+    <figure>
+      <img src="/static/images/projects/microbiome_1_enabled.webp">
+      <figcaption>Figure 2: Microbiome editor UI with focus on an enabled Colony #1</figcaption>
+    </figure>
+
+    <figure>
+      <img src="/static/images/projects/microbiome_2_enabled.webp">
+      <figcaption>Figure 3: Microbiome editor UI with three enabled colonies at varying resampling seek positions and
+        buffer start/end points</figcaption>
+    </figure>
+  </div>
+
+  <a href="https://github.com/dsmaugy/microbiome/releases" target="_blank">download</a>
+  <br>
+  <a href="https://github.com/dsmaugy/microbiome/tree/main" target="_blank">source</a>
+  <br>
+  <a href="/static/other/microbiome_report.pdf" target="_blank">report</a>
+
+  <br><br>
+  <p>Created as an undergraduate thesis project</p>
+  <p>Advised by <a href="https://www.scottericpetersen.com/" target="_blank">Dr. Scott Petersen</a></p>
+  <p>Built with JUCE and C++</p>
+  <p class="project-date">Spring 2024</p>
+</div>
 {{end}}
 
-<!-- do this so we can import this directly in our requests -->
+{{ if .ishtmx }}
 {{ template "project-microbiome" .}}
+{{ else }}
+{{ template "root-header" .}}
+{{ template "project-microbiome" .}}
+{{ template "root-footer" .}}
+{{ end }}

@@ -1,121 +1,148 @@
 {{ define "panel-projects-path" }}
-    {{ template "panel-home-path" . }}
-	<a class="clickable" hx-get="/home/work" {{ template "htmx-swap-settings" }}>work</a>
-	<p>/</p>
+{{ template "panel-home-path" . }}
+<a class="clickable" hx-get="/home/work" {{ template "htmx-swap-settings" }}>work</a>
+<p>/</p>
 {{ end }}
 
 {{define "panel-projects"}}
-	<div class="nav-bars" id="nav-path" hx-swap-oob="true">
-		<div id="nav-path-text">
-			{{ template "panel-projects-path" .}}
-		</div>		
-	</div>
-	
-	<div id="nav-content">
-		<div id="projects-showcase">
-			<div class="project-card clickable" hx-get="/home/work/microbiome" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
-				<video playsinline autoplay loop muted>
-					<source src="/static/video/projects/microbiome_demo.webm" type="video/webm" />
-					<source src="/static/video/projects/microbiome_demo.mp4" type="video/mp4" />		
-				</video>
-				<p id="project-title">Microbiome</p>
-				<p>delay-based VST3/AU/LV2 audio effects plugin</p>
-				<div class="carousel-tooltip">
-					<p>Microbiome is a VST3/AU/LV2 audio effects plugin that loops an incoming audio signal into a series of buffers to create an aural blur. Built with JUCE and C++.</p>
-				</div>
-			</div>
+<div class="nav-bars" id="nav-path" hx-swap-oob="true">
+  <div id="nav-path-text">
+    {{ template "panel-projects-path" .}}
+  </div>
+</div>
 
-			<div class="project-card clickable" hx-get="/home/work/sonderful" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
-				<video playsinline autoplay loop muted>
-					<source src="/static/video/projects/sonderfultransmissions_demo.webm" type="video/webm" />
-					<source src="/static/video/projects/sonderfultransmissions_demo.mp4" type="video/mp4" />		
-				</video>
-				<p id="project-title">Sonderful Transmissions</p>
-				<p>interactive message transmission installation</p>
-				<div class="carousel-tooltip">
-					<p>Sonderful Transmissions is an installation that explores the idea of communicating messages across arbitrary encodings in space. Users use a physical transmission device to encode/decode radio signals across a simulated universe. Built with Processing and ESP32s.</p>
-				</div>
-			</div>
+<div id="nav-content">
+  <div id="projects-showcase">
+    <div class="project-card clickable" hx-get="/home/work/microbiome" {{ template "htmx-swap-settings" }} {{
+      template "tooltip-hover" }}>
+      <video playsinline autoplay loop muted>
+        <source src="/static/video/projects/microbiome_demo.webm" type="video/webm" />
+        <source src="/static/video/projects/microbiome_demo.mp4" type="video/mp4" />
+      </video>
+      <p id="project-title">Microbiome</p>
+      <p>delay-based VST3/AU/LV2 audio effects plugin</p>
+      <div class="carousel-tooltip">
+        <p>Microbiome is a VST3/AU/LV2 audio effects plugin that loops an incoming audio signal into a series of buffers
+          to create an aural blur. Built with JUCE and C++.</p>
+      </div>
+    </div>
 
-			<div class="project-card clickable" hx-get="/home/work/rainplayer" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
-				<video playsinline autoplay loop muted>
-					<source src="/static/video/projects/rainplayer_demo.webm" type="video/webm" />
-					<source src="/static/video/projects/rainplayer_demo.mp4" type="video/mp4" />		
-				</video>
-				<p id="project-title">Rainplayer</p>
-				<p>user-controlled ambient music box</p>
-				<div class="carousel-tooltip">
-					<p>The Rainplayer is a music player with a visualizer and controllable backing ambient rainstorm. Built with Processing and ESP32s.</p>
-				</div>
-			</div>
+    <div class="project-card clickable" hx-get="/home/work/sonderful" {{ template "htmx-swap-settings" }} {{
+      template "tooltip-hover" }}>
+      <video playsinline autoplay loop muted>
+        <source src="/static/video/projects/sonderfultransmissions_demo.webm" type="video/webm" />
+        <source src="/static/video/projects/sonderfultransmissions_demo.mp4" type="video/mp4" />
+      </video>
+      <p id="project-title">Sonderful Transmissions</p>
+      <p>interactive message transmission installation</p>
+      <div class="carousel-tooltip">
+        <p>Sonderful Transmissions is an installation that explores the idea of communicating messages across arbitrary
+          encodings in space. Users use a physical transmission device to encode/decode radio signals across a simulated
+          universe. Built with Processing and ESP32s.</p>
+      </div>
+    </div>
 
-			<div class="project-card clickable" hx-get="/home/work/herodotus" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
-				<video playsinline autoplay loop muted>
-					<source src="/static/video/projects/herodotus_demo.webm" type="video/webm" />
-					<source src="/static/video/projects/herodotus_demo.mp4" type="video/mp4" />		
-				</video>
-				<p id="project-title">Kubernetes Herodotus Scheduler</p>
-				<p>an extension to the Kubernetes Scheduler to increase transparency and observability</p>
-				<div class="carousel-tooltip">
-					<p>The Herodotus scheduler is a custom K8s scheduler and CLI tool that tracks statistics for every pod scheduling decision and displays them in an easy-to-read manner in the terminal. Built with Go and Python.</p>
-				</div>
-			</div>
+    <div class="project-card clickable" hx-get="/home/work/rainplayer" {{ template "htmx-swap-settings" }} {{
+      template "tooltip-hover" }}>
+      <video playsinline autoplay loop muted>
+        <source src="/static/video/projects/rainplayer_demo.webm" type="video/webm" />
+        <source src="/static/video/projects/rainplayer_demo.mp4" type="video/mp4" />
+      </video>
+      <p id="project-title">Rainplayer</p>
+      <p>user-controlled ambient music box</p>
+      <div class="carousel-tooltip">
+        <p>The Rainplayer is a music player with a visualizer and controllable backing ambient rainstorm. Built with
+          Processing and ESP32s.</p>
+      </div>
+    </div>
 
-			<div class="project-card clickable" hx-get="/home/work/ceeder" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
-				<video playsinline autoplay loop muted>
-					<source src="/static/video/projects/ceeder_demo.webm" type="video/webm" />
-					<source src="/static/video/projects/ceeder_demo.mp4" type="video/mp4" />		
-				</video>
-				<p id="project-title">CEEDER</p>
-				<p>virtual interstellar zen garden</p>
-				<div class="carousel-tooltip">
-					<p>CEEDER is an in-browser 3D gardening experience where procedurally generated flowers can be planted on a variety of different planets. Built with JavaScript and Three.JS.</p>
-				</div>
-			</div>
+    <div class="project-card clickable" hx-get="/home/work/herodotus" {{ template "htmx-swap-settings" }} {{
+      template "tooltip-hover" }}>
+      <video playsinline autoplay loop muted>
+        <source src="/static/video/projects/herodotus_demo.webm" type="video/webm" />
+        <source src="/static/video/projects/herodotus_demo.mp4" type="video/mp4" />
+      </video>
+      <p id="project-title">Kubernetes Herodotus Scheduler</p>
+      <p>an extension to the Kubernetes Scheduler to increase transparency and observability</p>
+      <div class="carousel-tooltip">
+        <p>The Herodotus scheduler is a custom K8s scheduler and CLI tool that tracks statistics for every pod
+          scheduling decision and displays them in an easy-to-read manner in the terminal. Built with Go and Python.</p>
+      </div>
+    </div>
 
-			<div class="project-card clickable" hx-get="/home/work/pathos" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
-				<video playsinline autoplay loop muted>
-					<source src="/static/video/projects/pathosirc_demo.webm" type="video/webm" />
-					<source src="/static/video/projects/pathosirc_demo.mp4" type="video/mp4" />		
-				</video>				<p id="project-title">pathos.irc</p>
-				<p>a self-discovery journey through IRC</p>
-				<div class="carousel-tooltip">
-					<p>pathos.irc is a video piece about self-discovery. Created with a Sony Handycam CCD-TRV815 Hi-8.</p>
-				</div>
-			</div>
+    <div class="project-card clickable" hx-get="/home/work/ceeder" {{ template "htmx-swap-settings" }} {{
+      template "tooltip-hover" }}>
+      <video playsinline autoplay loop muted>
+        <source src="/static/video/projects/ceeder_demo.webm" type="video/webm" />
+        <source src="/static/video/projects/ceeder_demo.mp4" type="video/mp4" />
+      </video>
+      <p id="project-title">CEEDER</p>
+      <p>virtual interstellar zen garden</p>
+      <div class="carousel-tooltip">
+        <p>CEEDER is an in-browser 3D gardening experience where procedurally generated flowers can be planted on a
+          variety of different planets. Built with JavaScript and Three.JS.</p>
+      </div>
+    </div>
 
-			<div class="project-card clickable" hx-get="/home/work/symphony" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
-				<video playsinline autoplay loop muted>
-					<source src="/static/video/projects/systemsymphony_demo.webm" type="video/webm" />
-					<source src="/static/video/projects/systemsymphony_demo.mp4" type="video/mp4" />		
-				</video>				<p id="project-title">System Symphony</p>
-				<p>custom laptop-synthesizer using currently running processes as sonic parameters</p>
-				<div class="carousel-tooltip">
-					<p>System Symphony is program that turns computers into instruments by sonifying the currently running processes into synthesizer parameters. Advertised as an early 2000s CD-ROM software install. Built with SuperCollider and Python.</p>
-				</div>
-			</div>
+    <div class="project-card clickable" hx-get="/home/work/pathos" {{ template "htmx-swap-settings" }} {{
+      template "tooltip-hover" }}>
+      <video playsinline autoplay loop muted>
+        <source src="/static/video/projects/pathosirc_demo.webm" type="video/webm" />
+        <source src="/static/video/projects/pathosirc_demo.mp4" type="video/mp4" />
+      </video>
+      <p id="project-title">pathos.irc</p>
+      <p>a self-discovery journey through IRC</p>
+      <div class="carousel-tooltip">
+        <p>pathos.irc is a video piece about self-discovery. Created with a Sony Handycam CCD-TRV815 Hi-8.</p>
+      </div>
+    </div>
 
-			<div class="project-card clickable" hx-get="/home/work/discord" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
-				<img src="/static/images/projects/discord_bot.png"/>
-				<p id="project-title">Simple Discord Player</p>
-				<p>custom Discord music/assistant bot</p>
-				<div class="carousel-tooltip">
-					<p>The Simple Discord Player is a Discord bot that can play audio through YouTube/SoundCloud and perform other server-maintenance tasks. Built with Python.</p>
-				</div>
-			</div>
+    <div class="project-card clickable" hx-get="/home/work/symphony" {{ template "htmx-swap-settings" }} {{
+      template "tooltip-hover" }}>
+      <video playsinline autoplay loop muted>
+        <source src="/static/video/projects/systemsymphony_demo.webm" type="video/webm" />
+        <source src="/static/video/projects/systemsymphony_demo.mp4" type="video/mp4" />
+      </video>
+      <p id="project-title">System Symphony</p>
+      <p>custom laptop-synthesizer using currently running processes as sonic parameters</p>
+      <div class="carousel-tooltip">
+        <p>System Symphony is program that turns computers into instruments by sonifying the currently running processes
+          into synthesizer parameters. Advertised as an early 2000s CD-ROM software install. Built with SuperCollider
+          and Python.</p>
+      </div>
+    </div>
 
-			<div class="project-card clickable" hx-get="/home/work/justin" {{ template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
-				<img src="/static/images/projects/justin_site.jpg"/>
-				<p id="project-title">Justin Tseng Election Committee</p>
-				<p>webmaster/tech lead for the first Asian-American city councillor in Medford</p>
-				<div class="carousel-tooltip">
-					<p>This site served as Justin Tseng's digital homebase in his first city council election victory in 2021. Created with WordPress running on GCP.</p>
-				</div>
-			</div>
-		</div>
+    <div class="project-card clickable" hx-get="/home/work/discord" {{ template "htmx-swap-settings" }} {{
+      template "tooltip-hover" }}>
+      <img src="/static/images/projects/discord_bot.png" />
+      <p id="project-title">Simple Discord Player</p>
+      <p>custom Discord music/assistant bot</p>
+      <div class="carousel-tooltip">
+        <p>The Simple Discord Player is a Discord bot that can play audio through YouTube/SoundCloud and perform other
+          server-maintenance tasks. Built with Python.</p>
+      </div>
+    </div>
 
-	</div>
+    <div class="project-card clickable" hx-get="/home/work/justin" {{ template "htmx-swap-settings" }} {{
+      template "tooltip-hover" }}>
+      <img src="/static/images/projects/justin_site.jpg" />
+      <p id="project-title">Justin Tseng Election Committee</p>
+      <p>webmaster/tech lead for the first Asian-American city councillor in Medford</p>
+      <div class="carousel-tooltip">
+        <p>This site served as Justin Tseng's digital homebase in his first city council election victory in 2021.
+          Created with WordPress running on GCP.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
 {{end}}
 
-<!-- do this so we can import this directly in our requests -->
+
+{{ if .ishtmx }}
 {{ template "panel-projects" .}}
+{{ else }}
+{{ template "root-header" .}}
+{{ template "panel-projects" .}}
+{{ template "root-footer" .}}
+{{ end }}
