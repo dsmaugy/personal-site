@@ -48,6 +48,7 @@ body,
 main {
   height: 100%;
   overflow-y: hidden;
+  cursor: url("/static/favicon.ico"), auto;
 }
 
 p {
@@ -394,4 +395,3 @@ the contents of the div are copied over so any styling changes here won't be ref
   margin: 0 10px 10px 0;
   font-style: italic;
 }
-
