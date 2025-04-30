@@ -48,7 +48,7 @@ body,
 main {
   height: 100%;
   overflow-y: hidden;
-  cursor: url("/static/favicon.ico"), auto;
+  cursor: url("/static/images/cursors/default.png"), auto;
 }
 
 p {
@@ -73,6 +73,10 @@ ul {
 figcaption {
   font-style: italic;
   text-align: center;
+}
+
+a {
+  cursor: url("/static/images/cursors/link.png"), pointer;
 }
 
 a:link {
@@ -191,6 +195,10 @@ the contents of the div are copied over so any styling changes here won't be ref
   background-position: left 0px bottom -300px;
   background-blend-mode: overlay;
   overflow: hidden auto;
+}
+
+#left-panel:hover {
+  cursor: url("/static/images/cursors/dinosaur.gif"), auto;
 }
 
 #left-panel p,
@@ -383,7 +391,7 @@ the contents of the div are copied over so any styling changes here won't be ref
 }
 
 .clickable {
-  cursor: pointer;
+  cursor: url("/static/images/cursors/link.png"), pointer;
 }
 
 .centered {
