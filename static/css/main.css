@@ -6,6 +6,8 @@
   --scrollbar-color-track: unset;
   --scrollbar-width: thin;
   --scrollbar-width-legacy: 8px;
+
+  --pointer-cursor: url("/static/images/cursors/link.png") 6 0, pointer;
 }
 
 @font-face {
@@ -76,7 +78,7 @@ figcaption {
 }
 
 a {
-  cursor: url("/static/images/cursors/link.png"), pointer;
+  cursor: var(--pointer-cursor);
 }
 
 a:link {
@@ -391,7 +393,7 @@ the contents of the div are copied over so any styling changes here won't be ref
 }
 
 .clickable {
-  cursor: url("/static/images/cursors/link.png"), pointer;
+  cursor: var(--pointer-cursor);
 }
 
 .centered {

@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html>
 
-	{{
-		`<!-- 
+{{
+`<!-- 
 shoutout to my friends who have inspired me in the design and philosophy of website-making:
 	- Chia Amisola 	(https://chia.design/)
 	- Kevin Chen 	(https://kevinnchen.com/)
@@ -11,68 +11,80 @@ shoutout to my friends who have inspired me in the design and philosophy of webs
 	
 and thanks to yi zhen for inspiring me to play around with text highlights and image dithering:
 	- https://yizhens.work/
+
+  custom cursors are from windows xp
 -->` | safe
-	}}
-	<head>
-		<meta name="viewport" content="width=device-width,initial-scale=1" />
+}}
 
-        <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Questrial&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/htmx.org@1.9.12"
+    integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2"
+    crossorigin="anonymous"></script>
 
-		<title>Darwin Do</title>
-		<link rel="stylesheet" href="/static/css/main.css"> 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Questrial&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
 
-	</head>
+  <title>Darwin Do</title>
+  <link rel="stylesheet" href="/static/css/main.css">
 
-	<body>
-		<main>
-			<div class="container">
-				<div id="left-panel" class="container-panels">
-					<div id="left-panel-introduction">
-						<h1 id="left-panel-name">darwins.cloud</h1>
-						<p style="display: inline-block;"><strong>also known as darwin do</strong></p>
-						<br><br>
-						<p>I am a software engineer, tinkerer, and curious about the world.</p>
-						<br>
-						<p>I'm interested in FOSS operating systems, transportation infrastructure, digital audio, electronic music, self-data-collection, memory-keeping, and professional StarCraft.</p>
-						<br>
-						<p>I graduated from Yale University in 2024 with a BS in Computer Science and am currently based in Boston.</p>
-						<br>
-						<p>My favorite bird is the shoebill stork.</p>
-					</div>
+</head>
 
-					<div id="left-panel-tooltip"></div>
+<body>
+  <main>
+    <div class="container">
+      <div id="left-panel" class="container-panels">
+        <div id="left-panel-introduction">
+          <h1 id="left-panel-name">darwins.cloud</h1>
+          <p style="display: inline-block;"><strong>also known as darwin do</strong></p>
+          <br><br>
+          <p>I am a software engineer, tinkerer, and curious about the world.</p>
+          <br>
+          <p>I'm interested in FOSS operating systems, transportation infrastructure, digital audio, electronic music,
+            self-data-collection, memory-keeping, and professional StarCraft.</p>
+          <br>
+          <p>I graduated from Yale University in 2024 with a BS in Computer Science and am currently based in Boston.
+          </p>
+          <br>
+          <p>My favorite bird is the shoebill stork.</p>
+        </div>
 
-					<div id="left-panel-footer">
-                        <a href="https://drive.google.com/file/d/1YAk03v9I4wXVoFazskZWve8AXpABvDzD/view" target="_blank">resume</a>
-                        <a href="https://www.linkedin.com/in/darwinddo/" target="_blank">linkedin</a>
-                        <a href="mailto:darwin78913@gmail.com">email</a>
-						<a href="https://github.com/dsmaugy" target="_blank">github</a>
-                    </div>
-					
-					<div id="built-with-notes">
-						<p>Built with <a href="https://github.com/gin-gonic/gin" target="_blank">Gin</a> and <a href="https://htmx.org/" target="_blank">HTMX</a></p>
-						<p>Completing HTML as a <a href="https://hypermedia.systems/hypermedia-a-reintroduction/" target="_blank">Hypertext</a></p>
-					</div>
-				</div>
-				<div id="right-panel" class="container-panels" hx-history-elt>
-					<div id="right-panel-inner">
-{{ end }}
+        <div id="left-panel-tooltip"></div>
+
+        <div id="left-panel-footer">
+          <a href="https://drive.google.com/file/d/1YAk03v9I4wXVoFazskZWve8AXpABvDzD/view" target="_blank">resume</a>
+          <a href="https://www.linkedin.com/in/darwinddo/" target="_blank">linkedin</a>
+          <a href="mailto:darwin78913@gmail.com">email</a>
+          <a href="https://github.com/dsmaugy" target="_blank">github</a>
+        </div>
+
+        <div id="built-with-notes">
+          <p>Built with <a href="https://github.com/gin-gonic/gin" target="_blank">Gin</a> and <a
+              href="https://htmx.org/" target="_blank">HTMX</a></p>
+          <p>Completing HTML as a <a href="https://hypermedia.systems/hypermedia-a-reintroduction/"
+              target="_blank">Hypertext</a></p>
+        </div>
+      </div>
+      <div id="right-panel" class="container-panels" hx-history-elt>
+        <div id="right-panel-inner">
+          {{ end }}
 
 
 
-{{ define "root-footer" }}
-						<div class="nav-bars" id="nav-footer">
-							<p>thank you to kerokerobonito</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</main>
-	<script src="/static/js/main.js"></script>
-	</body>
+          {{ define "root-footer" }}
+          <div class="nav-bars" id="nav-footer">
+            <p>thank you to kerokerobonito</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="/static/js/main.js"></script>
+</body>
+
 </html>
 {{ end }}
