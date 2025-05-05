@@ -68,7 +68,8 @@ h2,
 a,
 figcaption,
 li,
-ul {
+ul,
+i {
   font-family: "Source Code Pro", monospace;
 }
 

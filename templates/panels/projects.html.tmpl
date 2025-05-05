@@ -13,6 +13,20 @@
 
 <div id="nav-content">
   <div id="projects-showcase">
+    <div class="project-card clickable" hx-get="/home/work/thresholds" {{ template "htmx-swap-settings" }} {{
+      template "tooltip-hover" }}>
+      <video playsinline autoplay loop muted>
+        <source src="/static/video/projects/thresholds_demo.webm" type="video/webm" />
+        <source src="/static/video/projects/thresholds_demo.mp4" type="video/mp4" />
+      </video>
+      <p id="project-title">Thresholds</p>
+      <p>technical contributor for live projection installation</p>
+      <div class="carousel-tooltip">
+        <p>Thresholds is a projection-based installation that invites participants to reshape spatial relationships
+          through movement. Showcased at the Yale University 2025 CCAM Studio Fellowship.</p>
+      </div>
+    </div>
+
     <div class="project-card clickable" hx-get="/home/work/microbiome" {{ template "htmx-swap-settings" }} {{
       template "tooltip-hover" }}>
       <video playsinline autoplay loop muted>

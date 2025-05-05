@@ -1,0 +1,103 @@
+{{ define "project-thresholds-path" }}
+{{ template "panel-projects-path" . }}
+<a class="clickable">thresholds</a>
+<p>/</p>
+{{ end }}
+
+{{define "project-thresholds"}}
+<div class="nav-bars" id="nav-path" hx-swap-oob="true">
+  <div id="nav-path-text">
+    {{ template "project-thresholds-path" .}}
+  </div>
+</div>
+
+<div id="nav-content" hx-history-elt>
+  <style>
+    #microbiome-flex {
+      display: flex;
+      flex-flow: row;
+      align-content: start;
+    }
+
+    #microbiome-flex figure {
+      max-width: 400px;
+      margin: 0 auto 0 auto;
+    }
+
+    #microbiome-flex figure img {
+      width: 100%;
+    }
+
+    #iframe-video {
+      max-width: 100%;
+    }
+
+    .thresholds-main-demo {
+      width: 50%;
+      margin: auto;
+    }
+
+    video {
+      max-width: 100%;
+    }
+  </style>
+  <h1>interactive projection installation</h1>
+
+  <figure class="centered thresholds-main-demo">
+    <video playsinline autoplay loop muted>
+      <source src="/static/video/extra/thresholds_live.webm" type="video/webm" />
+      <source src="/static/video/extra/thresholds_live.mp4" type="video/mp4" />
+    </video>
+    <figcaption>Installation setup at CCAM's Leeds Studio</figcaption>
+  </figure>
+
+  <h2></h2>
+  <i>"Inspird by Rudolf Laban's kinesphere — the invisible sphere defined by one's reach — this installation challenges
+    rigid perceptions of personal space, encouraging participants to co-create and reshape spatial relationships through
+    movement."</i>
+
+  <h2></h2>
+  <p>A collaboration with <a href="https://www.instagram.com/du.mpng/" target="_blank">Du Nghiem</a>, <i>Thresholds</i>
+    is an installation made for Yale University's Center for Collaborative Arts and Media 2025 <a
+      href="https://ccam.yale.edu/programs/ccam-studio-fellowship" target="_blank">Studio
+      Fellowship</a>. The structure is composed of fabric arranged in a maze-like fashion. Motion activates dynamic
+    visual projections — some requiring two participants while others function independently.</p>
+
+  <h2></h2>
+  <p>A series of projectors connected to Raspberry Pis display the projections on the fabric. Ultrasonic distance
+    sensors connectd to ESP32s are placed on the ground to detect motion from participants. Motion data is sent to the
+    Pis over UDP via the OSC protocol.</p>
+
+  <br>
+  <div id="microbiome-flex">
+    <figure>
+      <img src="/static/images/projects/thresholds_sensors.webp">
+      <figcaption>Figure 1: Floor sensor setup</figcaption>
+    </figure>
+
+    <figure>
+      <img src="/static/images/projects/microbiome_1_enabled.webp">
+      <figcaption>Figure 2: Microbiome editor UI with focus on an enabled Colony #1</figcaption>
+    </figure>
+
+    <figure>
+      <img src="/static/images/projects/microbiome_2_enabled.webp">
+      <figcaption>Figure 3: Microbiome editor UI with three enabled colonies at varying resampling seek positions and
+        buffer start/end points</figcaption>
+    </figure>
+  </div>
+
+  <br><br>
+  <p>Project led by <a href="https://www.instagram.com/du.mpng/" target="_blank">Du Nghiem</a></p>
+  <p>Served as Technical Contributor</p>
+  <p class="project-date">Spring 2025</p>
+</div>
+{{end}}
+
+{{ if .ishtmx }}
+{{ template "project-thresholds" .}}
+{{ else }}
+{{ template "root-header" .}}
+{{ template "project-thresholds" .}}
+{{ template "root-footer" .}}
+{{ end }}
