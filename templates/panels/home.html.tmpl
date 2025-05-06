@@ -28,6 +28,20 @@
       </div>
     </div>
 
+    <div class="project-card clickable carousel-item carousel-object" hx-get="/home/work/thresholds" {{
+      template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
+      <video playsinline autoplay loop muted>
+        <source src="/static/video/projects/thresholds_demo.webm" type="video/webm" />
+        <source src="/static/video/projects/thresholds_demo.mp4" type="video/mp4" />
+      </video>
+      <p id="project-title">Thresholds</p>
+      <p>technical contributor for live projection installation</p>
+      <div class="carousel-tooltip">
+        <p>Thresholds is a projection-based installation that invites participants to reshape spatial relationships
+          through movement. Showcased at the Yale University 2025 CCAM Studio Fellowship.</p>
+      </div>
+    </div>
+
     <div class="project-card clickable carousel-item carousel-project" hx-get="/home/work/herodotus" {{
       template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
       <video playsinline autoplay loop muted>
@@ -35,7 +49,7 @@
         <source src="/static/video/projects/herodotus_demo.mp4" type="video/mp4" />
       </video>
       <p id="project-title">Kubernetes Herodotus Scheduler</p>
-      <p>an extension to the Kubernetes Scheduler to increase transparency and observability</p>
+      <p>observability extension to the Kubernetes Scheduler</p>
       <div class="carousel-tooltip">
         <p>The Herodotus scheduler is a custom K8s scheduler and CLI tool that tracks statistics for every pod
           scheduling decision and displays them in an easy-to-read manner in the terminal. Built with Go and Python.</p>
@@ -54,21 +68,6 @@
         <p>Sonderful Transmissions is an installation that explores the idea of communicating messages across arbitrary
           encodings in space. Users use a physical transmission device to encode/decode radio signals across a simulated
           universe. Built with Processing and ESP32s.</p>
-      </div>
-    </div>
-
-    <div class="project-card clickable carousel-item carousel-project" hx-get="/home/work/symphony" {{
-      template "htmx-swap-settings" }} {{ template "tooltip-hover" }}>
-      <video playsinline autoplay loop muted>
-        <source src="/static/video/projects/systemsymphony_demo.webm" type="video/webm" />
-        <source src="/static/video/projects/systemsymphony_demo.mp4" type="video/mp4" />
-      </video>
-      <p id="project-title">System Symphony</p>
-      <p>custom laptop-synthesizer using currently running processes as sonic parameters</p>
-      <div class="carousel-tooltip">
-        <p>System Symphony is program that turns computers into instruments by sonifying the currently running processes
-          into synthesizer parameters. Advertised as an early 2000s CD-ROM software install. Built with SuperCollider
-          and Python.</p>
       </div>
     </div>
 

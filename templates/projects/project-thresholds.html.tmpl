@@ -13,8 +13,12 @@
 
 <div id="nav-content" hx-history-elt>
   <style>
-    #top-flex figure {
+    #demo-installation {
       flex-basis: 50%;
+    }
+
+    #demo-diagram {
+      flex-basis: 30%;
     }
 
     .thresholds-flex {
@@ -67,21 +71,29 @@
     Pis over UDP via the OSC protocol.</p>
 
   <h2></h2>
-  <div class="thresholds-flex" id="top-flex">
-    <figure>
+  <div class="thresholds-flex">
+    <figure id="demo-diagram">
+      <video playsinline autoplay loop muted>
+        <source src="/static/video/extra/thresholds_diagram.webm" type="video/webm" />
+        <source src="/static/video/extra/thresholds_diagram.mp4" type="video/mp4" />
+      </video>
+      <figcaption>Figure 1: Installation diagram</figcaption>
+    </figure>
+    <figure id="demo-installation">
       <img src="/static/images/projects/thresholds_installation.webp">
       <figcaption>Figure 2: Projection on fabric</figcaption>
+    </figure>
   </div>
 
   <div class="thresholds-flex">
     <figure>
       <img src="/static/images/projects/thresholds_sensors.webp">
-      <figcaption>Figure 1: Floor sensor setup</figcaption>
+      <figcaption>Figure 3: Floor sensor setup</figcaption>
     </figure>
 
     <figure>
       <img src="/static/images/projects/thresholds_active.webp">
-      <figcaption>Figure 3: People in the structure</figcaption>
+      <figcaption>Figure 4: People in structure</figcaption>
     </figure>
   </div>
 
