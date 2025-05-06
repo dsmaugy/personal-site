@@ -13,23 +13,21 @@
 
 <div id="nav-content" hx-history-elt>
   <style>
-    #microbiome-flex {
+    #top-flex figure {
+      flex-basis: 50%;
+    }
+
+    .thresholds-flex {
       display: flex;
+      flex-wrap: wrap;
       flex-flow: row;
       align-content: start;
+      justify-content: center;
     }
 
-    #microbiome-flex figure {
-      max-width: 400px;
-      margin: 0 auto 0 auto;
-    }
 
-    #microbiome-flex figure img {
+    .thresholds-flex figure img {
       width: 100%;
-    }
-
-    #iframe-video {
-      max-width: 100%;
     }
 
     .thresholds-main-demo {
@@ -68,22 +66,22 @@
     sensors connectd to ESP32s are placed on the ground to detect motion from participants. Motion data is sent to the
     Pis over UDP via the OSC protocol.</p>
 
-  <br>
-  <div id="microbiome-flex">
+  <h2></h2>
+  <div class="thresholds-flex" id="top-flex">
+    <figure>
+      <img src="/static/images/projects/thresholds_installation.webp">
+      <figcaption>Figure 2: Projection on fabric</figcaption>
+  </div>
+
+  <div class="thresholds-flex">
     <figure>
       <img src="/static/images/projects/thresholds_sensors.webp">
       <figcaption>Figure 1: Floor sensor setup</figcaption>
     </figure>
 
     <figure>
-      <img src="/static/images/projects/microbiome_1_enabled.webp">
-      <figcaption>Figure 2: Microbiome editor UI with focus on an enabled Colony #1</figcaption>
-    </figure>
-
-    <figure>
-      <img src="/static/images/projects/microbiome_2_enabled.webp">
-      <figcaption>Figure 3: Microbiome editor UI with three enabled colonies at varying resampling seek positions and
-        buffer start/end points</figcaption>
+      <img src="/static/images/projects/thresholds_active.webp">
+      <figcaption>Figure 3: People in the structure</figcaption>
     </figure>
   </div>
 
