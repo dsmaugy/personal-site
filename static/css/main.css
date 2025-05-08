@@ -118,6 +118,7 @@ a:active {
 .carousel-showcase {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .carousel-title {
