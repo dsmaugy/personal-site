@@ -11,9 +11,13 @@ WORKDIR /tmp/memcached
 RUN apt-get update && apt-get install -y memcached
 
 WORKDIR /usr/src/app
-COPY go.mod go.sum ./
+COPY main.go go.mod go.sum run.sh ./
+COPY templates/ templates/
+COPY api/ api/
+COPY routes/ routes/
+COPY static/ static/
+
 RUN go mod download && go mod verify
-COPY . .
 RUN go build -v -o site .
 
 CMD ["/usr/src/app/run.sh"]
