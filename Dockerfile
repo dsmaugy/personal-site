@@ -1,18 +1,13 @@
 ARG GO_VERSION=1.24
-FROM golang:${GO_VERSION}-bookworm as builder
 
+FROM debian:bookworm AS memcached
 WORKDIR /tmp/memcached
-# RUN apt-get update && \
-#   apt-get -y install libevent-dev
-# RUN wget https://memcached.org/files/memcached-1.6.38.tar.gz 
-# RUN tar -zxvf memcached-1.6.38.tar.gz && \
-#   cd memcached-1.6.38 && \
-#   ./configure && make && make test && make install
 RUN apt-get update && apt-get install -y memcached
+
+FROM golang:${GO_VERSION}-bookworm AS build
 
 WORKDIR /usr/src/app
 COPY main.go go.mod go.sum run.sh ./
-COPY templates/ templates/
 COPY api/ api/
 COPY routes/ routes/
 COPY static/ static/
@@ -20,4 +15,10 @@ COPY static/ static/
 RUN go mod download && go mod verify
 RUN go build -v -o site .
 
-CMD ["/usr/src/app/run.sh"]
+FROM debian:bookworm-slim AS site
+WORKDIR /usr/src/app
+
+COPY --chmod=0755 --from=build /usr/src/app/site ./site
+COPY templates/ ./templates/
+
+ENTRYPOINT ["./site"]
