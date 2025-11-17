@@ -1,0 +1,17 @@
+services:
+  site:
+    build:
+      context: .
+      target: site
+    environment:
+      PORT: 8080
+      GIN_MODE: release
+    env_file: .env
+    depends_on:
+      cache:
+        condition: service_started
+    ports:
+      - 8321:8080
+
+  cache:
+    image: memcached

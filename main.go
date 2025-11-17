@@ -44,7 +44,14 @@ func init() {
 }
 
 func main() {
-	cache := persistence.NewMemcachedBinaryStore("localhost:11211", "", "", CacheDuration)
+	cache := persistence.NewMemcachedBinaryStore("cache:11211", "", "", CacheDuration)
+	// v, err := cache.Version()
+	// if err != nil {
+	// 	fmt.Printf("Error connecting to memcached: %v\n", err)
+	// 	return
+	// }
+	// fmt.Printf("Cache version: %v\n", v)
+
 	defer cache.Quit()
 	api.InitAPI(cache)
 
