@@ -1,12 +1,13 @@
 package main
 
 import (
-	"darwindo/personal-site/api"
-	"darwindo/personal-site/routes"
 	"html/template"
 	"net/http"
 	"os"
 	"time"
+
+	"darwindo/personal-site/api"
+	"darwindo/personal-site/routes"
 
 	"github.com/gin-contrib/cache/persistence"
 	ginlog "github.com/gin-contrib/logger"
@@ -19,8 +20,6 @@ import (
 
 const CacheDuration = time.Minute
 
-// TODO: deploying: https://devcenter.heroku.com/articles/getting-started-with-go?singlepage=true#prepare-the-app
-
 // adds https/www redirects where needed
 func requestcheck() gin.HandlerFunc {
 	return func(c *gin.Context) {
@@ -29,7 +28,7 @@ func requestcheck() gin.HandlerFunc {
 		log.Info().Msg("Scheme: " + c.Request.URL.Scheme)
 
 		if c.Request.Host == "www.darwindo.com" || c.Request.Host == "darwindo.com" ||
-			c.Request.Host == "www.darwins.cloud" || c.Request.Host == "darwins-cloud.fly.dev" {
+			c.Request.Host == "www.darwins.cloud" || c.Request.Host == "darwin.do" || c.Request.Host == "www.darwin.do" {
 			c.Redirect(http.StatusPermanentRedirect,
 				"https://darwins.cloud"+c.Request.URL.Path)
 			c.Abort()
