@@ -16,8 +16,8 @@ const (
 	CarouselLimit     = 5
 )
 
-func getRandomSamples[listitem spotify.FullTrack | api.VinylInfo](population *[]listitem) *[CarouselLimit]listitem {
-	var returnlist [CarouselLimit]listitem
+func getRandomSamples[listitem spotify.FullTrack | api.VinylInfo](population *[]listitem) []listitem {
+	returnlist := make([]listitem, CarouselLimit)
 	used := make(map[int]bool)
 
 	randomidx := -1
@@ -32,21 +32,21 @@ func getRandomSamples[listitem spotify.FullTrack | api.VinylInfo](population *[]
 		used[randomidx] = true
 	}
 
-	return &returnlist
+	return returnlist
 }
 
 func getHomePanelVars() gin.H {
-	var rVinyls [CarouselLimit]api.VinylInfo
-	var rTracks [CarouselLimit]spotify.FullTrack
+	var rVinyls []api.VinylInfo
+	var rTracks []spotify.FullTrack
 	var rMovies []api.LetterboxdItem
 
 	vinyls, err := api.GetDiscogsRecords(MyDiscogsUsername)
 	if err == nil {
-		rVinyls = *getRandomSamples(vinyls)
+		rVinyls = getRandomSamples(vinyls)
 	}
 	tracks, err := api.GetSpotifyTopTracks(25)
 	if err == nil {
-		rTracks = *getRandomSamples(tracks)
+		rTracks = getRandomSamples(tracks)
 	}
 	movies, err := api.GetLetterboxdData()
 	if err == nil {
