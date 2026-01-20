@@ -16,7 +16,7 @@ const (
 	CarouselLimit     = 5
 )
 
-func getRandomSamples[listitem spotify.FullTrack | api.VinylInfo](population *[]listitem) *[5]listitem {
+func getRandomSamples[listitem spotify.FullTrack | api.VinylInfo](population *[]listitem) *[CarouselLimit]listitem {
 	var returnlist [CarouselLimit]listitem
 	used := make(map[int]bool)
 
@@ -36,14 +36,26 @@ func getRandomSamples[listitem spotify.FullTrack | api.VinylInfo](population *[]
 }
 
 func getHomePanelVars() gin.H {
-	vinyls, _ := api.GetDiscogsRecords(MyDiscogsUsername)
-	tracks, _ := api.GetSpotifyTopTracks(25)
-	movies, _ := api.GetLetterboxdData()
-	// TODO: gracefully handle errors in connectivity
+	var rVinyls [CarouselLimit]api.VinylInfo
+	var rTracks [CarouselLimit]spotify.FullTrack
+	var rMovies []api.LetterboxdItem
+
+	vinyls, err := api.GetDiscogsRecords(MyDiscogsUsername)
+	if err == nil {
+		rVinyls = *getRandomSamples(vinyls)
+	}
+	tracks, err := api.GetSpotifyTopTracks(25)
+	if err == nil {
+		rTracks = *getRandomSamples(tracks)
+	}
+	movies, err := api.GetLetterboxdData()
+	if err == nil {
+		rMovies = movies.Channel.Items[0:CarouselLimit]
+	}
 	return gin.H{
-		"Vinyls": getRandomSamples(vinyls),
-		"Tracks": getRandomSamples(tracks),
-		"Movies": movies.Channel.Items[0:5],
+		"Vinyls": rVinyls,
+		"Tracks": rTracks,
+		"Movies": rMovies,
 	}
 }
 

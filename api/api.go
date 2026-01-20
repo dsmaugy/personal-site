@@ -96,6 +96,7 @@ const CacheDuration = time.Minute * 5
 
 var cache *persistence.MemcachedBinaryStore
 
+// TODO: make this a client of some struct
 func InitAPI(c *persistence.MemcachedBinaryStore) {
 	cache = c
 }
@@ -109,11 +110,19 @@ func GetLetterboxdData() (*LetterboxdRoot, error) {
 
 	movieCacheKey := getCacheKey("movies")
 	err := cache.Get(movieCacheKey, &letterboxd)
+	client := &http.Client{}
 
 	if err != nil {
 		log.Debug().Err(err).Msg("Letterboxd")
 		// cache miss, query form letterboxd directly
-		resp, err := http.Get(LetterboxdURL)
+		req, err := http.NewRequest("GET", LetterboxdURL, nil)
+		if err != nil {
+			log.Info().Msg("Failed to fetch Letterboxd data")
+			return nil, err
+		}
+
+		req.Header.Set("User-Agent", "personal-go-site/1.0 +https://darwindo.com")
+		resp, err := client.Do(req)
 		if err != nil {
 			log.Info().Msg("Failed to fetch Letterboxd data")
 			return nil, err
@@ -129,6 +138,7 @@ func GetLetterboxdData() (*LetterboxdRoot, error) {
 		err = xml.Unmarshal(body, &letterboxd)
 		if err != nil {
 			log.Info().Msg("Error when unmarshalling XML: " + err.Error())
+			log.Info().Msg(string(body))
 			return nil, err
 		}
 
