@@ -121,7 +121,8 @@ func GetLetterboxdData() (*LetterboxdRoot, error) {
 			return nil, err
 		}
 
-		req.Header.Set("User-Agent", "personal-go-site/1.0 +https://darwindo.com")
+		req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
+		req.Header.Set("Accept", "*/*")
 		resp, err := client.Do(req)
 		if err != nil {
 			log.Info().Msg("Failed to fetch Letterboxd data")
