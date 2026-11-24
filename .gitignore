@@ -6,3 +6,5 @@
 raw-resources/
 
 gin-bin
+
+__pycache__
