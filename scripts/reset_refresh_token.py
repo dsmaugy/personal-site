@@ -117,7 +117,7 @@ def main() -> None:
         )
     )
 
-    print("Open this URL to authorize (attempting to open your browser):")
+    print("Opening URL:")
     print(auth_url, flush=True)
     webbrowser.open(auth_url)
 
