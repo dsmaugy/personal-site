@@ -13,40 +13,8 @@
 
 <div id="nav-content" hx-history-elt>
   <style>
-    figure,
-    video,
-    img {
+    video {
       max-width: 100%;
-    }
-
-    .sonderful-images {
-      display: flex;
-      flex-flow: row;
-      align-content: start;
-    }
-
-    .sonderful-images figure {
-      max-width: 400px;
-      margin: 0 auto 0 auto;
-    }
-
-    .sonderful-images figure img {
-      width: 100%;
-    }
-
-    .sonderful-images-full {
-      text-align: center;
-    }
-
-    #sonderful-long-figure {
-      max-height: 350px;
-      text-align: center;
-    }
-
-    #sonderful-long-figure>img {
-      height: calc(100% - 2em);
-      /* try to make the height smaller than the height of the figure + caption */
-      width: auto;
     }
   </style>
   <h1>exploring encryption, communication, and meaning</h1>
@@ -76,17 +44,28 @@
   </p>
 
   <br>
-  <div class="sonderful-images">
-    <figure>
-      <img src="/static/images/projects/sonderful_backdrop.webp">
+  <div class="figure-grid">
+    <figure class="wide native">
+      <a href="/static/images/projects/sonderful_backdrop.webp" target="_blank">
+        <img src="/static/images/projects/sonderful_backdrop.webp" width="600" height="338" loading="lazy"
+          alt="Starfield backdrop of the installation">
+      </a>
       <figcaption>navigable starfield</figcaption>
     </figure>
+
     <figure>
-      <img src="/static/images/projects/sonderful_transmit.webp">
+      <a href="/static/images/projects/sonderful_transmit.webp" target="_blank">
+        <img src="/static/images/projects/sonderful_transmit.webp" width="600" height="338" loading="lazy"
+          alt="Prompt for transmitting a message into the starfield">
+      </a>
       <figcaption>message transmission prompt</figcaption>
     </figure>
+
     <figure>
-      <img src="/static/images/projects/sonderful_receive.webp">
+      <a href="/static/images/projects/sonderful_receive.webp" target="_blank">
+        <img src="/static/images/projects/sonderful_receive.webp" width="600" height="338" loading="lazy"
+          alt="Screen for decoding a received message">
+      </a>
       <figcaption>message decoding screen</figcaption>
     </figure>
   </div>
@@ -97,13 +76,20 @@
     signal frequency).
   </p>
   <br>
-  <div class="sonderful-images">
+  <div class="figure-grid">
     <figure>
-      <img src="/static/images/projects/sonderful_device.webp">
+      <a href="/static/images/projects/sonderful_device.webp" target="_blank">
+        <img src="/static/images/projects/sonderful_device.webp" width="600" height="452" loading="lazy"
+          alt="Transmission device with buttons, a distance sensor and a potentiometer">
+      </a>
       <figcaption>transmission device with adjustable encoding parameters</figcaption>
     </figure>
+
     <figure>
-      <img src="/static/images/projects/sonderful_device_2.webp">
+      <a href="/static/images/projects/sonderful_device_2.webp" target="_blank">
+        <img src="/static/images/projects/sonderful_device_2.webp" width="800" height="603" loading="lazy"
+          alt="Inside the transmission device, showing its wiring">
+      </a>
       <figcaption>transmission device internals</figcaption>
     </figure>
   </div>
@@ -111,22 +97,32 @@
   <p>Upon succesfully decoding a message, users can obtain a physical certificate of the decoded transmission,
     transcribing the encoded digital message into a permanent, human-readable form.</p>
   <br>
-  <div class="sonderful-images">
-    <figure id="sonderful-long-figure">
-      <img src="/static/images/projects/sonderful_receipt_0.webp">
+  <div class="figure-row" style="max-width: 540px;">
+    <figure style="flex: 0.753">
+      <a href="/static/images/projects/sonderful_receipt_0.webp" target="_blank">
+        <img src="/static/images/projects/sonderful_receipt_0.webp" width="797" height="1059" loading="lazy"
+          alt="Printed receipt of a decoded message">
+      </a>
       <figcaption>transmission of an excerpt from <a href="https://www.are.na/editorial/on-motivation"
           target="_blank">Charles Broskoski</a></figcaption>
     </figure>
-    <figure id="sonderful-long-figure">
-      <img src="/static/images/projects/sonderful_receipt_1.webp">
+
+    <figure style="flex: 0.455">
+      <a href="/static/images/projects/sonderful_receipt_1.webp" target="_blank">
+        <img src="/static/images/projects/sonderful_receipt_1.webp" width="600" height="1318" loading="lazy"
+          alt="Printed receipt of a decoded YouTube comment">
+      </a>
       <figcaption>transmission of a YouTube video comment</figcaption>
     </figure>
   </div>
 
   <h2>final</h2>
-  <div class="sonderful-images-full">
-    <figure>
-      <img src="/static/images/projects/sonderful_full.webp">
+  <div class="figure-grid">
+    <figure class="wide native">
+      <a href="/static/images/projects/sonderful_full.webp" target="_blank">
+        <img src="/static/images/projects/sonderful_full.webp" width="600" height="452" loading="lazy"
+          alt="The full Sonderful Transmissions installation setup">
+      </a>
       <figcaption>full installation setup</figcaption>
     </figure>
   </div>

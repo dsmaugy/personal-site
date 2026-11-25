@@ -13,29 +13,8 @@
 
 <div id="nav-content" hx-history-elt>
   <style>
-    #microbiome-flex {
-      display: flex;
-      flex-flow: row;
-      align-content: start;
-    }
-
-    #microbiome-flex figure {
-      max-width: 400px;
-      margin: 0 auto 0 auto;
-    }
-
-    #microbiome-flex figure img {
-      width: 100%;
-    }
-
     #iframe-video {
       max-width: 100%;
-    }
-
-    @media (max-width:480px) {
-      #microbiome-flex {
-        display: block;
-      }
     }
   </style>
   <h1>a VST3/AU/LV2 delay-based audio effects plugin</h1>
@@ -57,21 +36,30 @@
   </p>
 
   <br>
-  <div id="microbiome-flex">
+  <div class="figure-grid">
     <figure>
-      <img src="/static/images/projects/microbiome_0_enabled.webp">
-      <figcaption>Figure 1: Microbiome editor UI with focus on a disabled Colony #1</figcaption>
+      <a href="/static/images/projects/microbiome_0_enabled.webp" target="_blank">
+        <img src="/static/images/projects/microbiome_0_enabled.webp" width="853" height="501" loading="lazy"
+          alt="Microbiome editor with Colony #1 disabled">
+      </a>
+      <figcaption>Figure 1: Colony #1 disabled</figcaption>
     </figure>
 
     <figure>
-      <img src="/static/images/projects/microbiome_1_enabled.webp">
-      <figcaption>Figure 2: Microbiome editor UI with focus on an enabled Colony #1</figcaption>
+      <a href="/static/images/projects/microbiome_1_enabled.webp" target="_blank">
+        <img src="/static/images/projects/microbiome_1_enabled.webp" width="852" height="500" loading="lazy"
+          alt="Microbiome editor with Colony #1 enabled">
+      </a>
+      <figcaption>Figure 2: Colony #1 enabled</figcaption>
     </figure>
 
-    <figure>
-      <img src="/static/images/projects/microbiome_2_enabled.webp">
-      <figcaption>Figure 3: Microbiome editor UI with three enabled colonies at varying resampling seek positions and
-        buffer start/end points</figcaption>
+    <figure class="wide">
+      <a href="/static/images/projects/microbiome_2_enabled.webp" target="_blank">
+        <img src="/static/images/projects/microbiome_2_enabled.webp" width="852" height="501" loading="lazy"
+          alt="Microbiome editor with three enabled colonies">
+      </a>
+      <figcaption>Figure 3: Three enabled colonies at varying resampling seek positions and buffer start/end
+        points</figcaption>
     </figure>
   </div>
 

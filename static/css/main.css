@@ -407,3 +407,78 @@ the contents of the div are copied over so any styling changes here won't be ref
   margin: 0 10px 10px 0;
   font-style: italic;
 }
+
+/* project page figure layouts */
+.figure-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5em;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.figure-grid figure {
+  margin: 0;
+}
+
+.figure-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.figure-grid .wide {
+  grid-column: 1 / -1;
+}
+
+/* don't upscale small images past their native width */
+.figure-grid .wide.native {
+  text-align: center;
+}
+
+.figure-grid .wide.native img {
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .figure-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.figure-row {
+  display: flex;
+  gap: 1.5em;
+  margin: 0 auto;
+}
+
+.figure-row figure {
+  margin: 0;
+  min-width: 0;
+}
+
+.figure-row img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media only screen and (max-width: 600px) {
+  .figure-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .figure-row figure {
+    text-align: center;
+  }
+
+  .figure-row img {
+    width: auto;
+    max-width: 100%;
+    max-height: 70vh;
+    margin: 0 auto;
+  }
+}
